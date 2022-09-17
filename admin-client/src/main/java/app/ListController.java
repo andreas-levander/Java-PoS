@@ -1,27 +1,31 @@
 package app;
 
+import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
+import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.stereotype.Component;
 
-
+@Component
+@FxmlView("/CartList.fxml")
 public class ListController {
-    private final ListView<String> listView;
-    private final Label totalPrice;
+    private final CartModel cartModel;
 
-    public ListController(ListView<String> listView, Label totalPrice) {
-        this.listView = listView;
-        this.totalPrice = totalPrice;
+    public ListController(CartModel cartModel) {
+        this.cartModel = cartModel;
     }
 
-    public void addItem(String item, String price) {
-        listView.getItems().add(item);
-        Integer current = Integer.parseInt(totalPrice.getText());
-        Integer itemPrice = Integer.parseInt(price);
-        totalPrice.setText(Integer.toString(current + itemPrice));
+    @FXML
+    private ListView<String> listView;
+    @FXML
+    private Label totalPrice;
+
+    @FXML
+    public void initialize() {
+        listView.setItems(cartModel.getCart());
+        totalPrice.textProperty().bind(cartModel.getTotalPrice());
     }
 
-    public void clear() {
-        totalPrice.setText("0");
-        listView.getItems().clear();
-    }
 }

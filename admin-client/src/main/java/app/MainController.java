@@ -1,47 +1,40 @@
 package app;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.cell.TextFieldListCell;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
-
 import javafx.scene.control.Button;
 
-import java.util.List;
 
 @Component
 @FxmlView("/MainController.fxml")
 public class MainController {
     private final FxWeaver fxWeaver;
-    private ListController listController;
+
+    private final CartModel cartModel;
 
     @FXML
     private Button openSimpleDialogButton;
     @FXML
     private Button clearButton;
-    @FXML
-    private ListView<String> listView;
 
-    @FXML
-    private Label totalPrice;
-
-    public MainController(FxWeaver fxWeaver) {
+    public MainController(FxWeaver fxWeaver, CartModel cartModel) {
         this.fxWeaver = fxWeaver;
+        this.cartModel = cartModel;
 
     }
 
     @FXML
     public void initialize() {
-        listController = new ListController(listView, totalPrice);
+        fxWeaver.loadController(CustomerScreen.class).show();
 
         openSimpleDialogButton.setOnAction(
-                actionEvent -> fxWeaver.loadController(DialogController.class).show(listController)
+                actionEvent -> fxWeaver.loadController(DialogController.class).show()
         );
 
-        clearButton.setOnAction((actionEvent -> listController.clear()));
+        clearButton.setOnAction((actionEvent -> cartModel.clear()));
     }
+
 
 }

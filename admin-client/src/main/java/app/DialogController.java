@@ -9,12 +9,19 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 
 @FxmlView("/SimpleDialog.fxml")
 @Component
 public class DialogController {
+    private final CartModel cartModel;
+
+    public DialogController(CartModel cartModel) {
+        this.cartModel = cartModel;
+    }
 
     private Stage stage;
 
@@ -29,18 +36,20 @@ public class DialogController {
     @FXML
     private TextField priceField;
 
-    private ListController listController;
-
     @FXML
     public void initialize() {
         this.stage = new Stage();
         stage.setScene(new Scene(dialog));
 
-        addItem.setOnAction(actionEvent -> listController.addItem(textField.getText(), priceField.getText()));
+        addItem.setOnAction(actionEvent -> {
+            //listController.addItem(textField.getText(), priceField.getText());
+            cartModel.addItem(textField.getText(), priceField.getText());
+
+
+        });
     }
 
-    public void show(ListController listController) {
-        this.listController = listController;
+    public void show() {
         stage.show();
     }
 }
