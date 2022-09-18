@@ -19,6 +19,9 @@ public class MainController {
     @FXML
     private Button clearButton;
 
+    @FXML
+    private Button openCustomerScreen;
+
     public MainController(FxWeaver fxWeaver, CartModel cartModel) {
         this.fxWeaver = fxWeaver;
         this.cartModel = cartModel;
@@ -27,7 +30,7 @@ public class MainController {
 
     @FXML
     public void initialize() {
-        fxWeaver.loadController(CustomerScreen.class).show();
+        openCustomerScreen.setOnAction(actionEvent -> fxWeaver.loadController(CustomerController.class).show());
 
         openSimpleDialogButton.setOnAction(
                 actionEvent -> fxWeaver.loadController(DialogController.class).show()

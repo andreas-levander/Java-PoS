@@ -8,9 +8,9 @@
 
 <VBox fx:id="CustomerVBox" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="app.CustomerScreen"
+            fx:controller="app.CustomerController"
             prefHeight="400.0" prefWidth="600.0">
 
-    <fx:include fx:id="CustomerList" source="CartList.fxml"/>
+    <fx:include source="CartList.fxml"/>
 
 </VBox>

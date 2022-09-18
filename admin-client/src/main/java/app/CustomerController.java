@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @FxmlView("/CustomerScreen.fxml")
-public class CustomerScreen {
+public class CustomerController {
     private Stage stage;
 
     @FXML
