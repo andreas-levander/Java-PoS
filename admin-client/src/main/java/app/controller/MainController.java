@@ -1,5 +1,8 @@
-package app;
+package app.controller;
 
+import app.controller.CustomerController;
+import app.controller.DialogController;
+import app.model.CartModel;
 import javafx.fxml.FXML;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;

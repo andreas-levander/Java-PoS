@@ -1,4 +1,4 @@
-package app;
+package app.model;
 
 public class Item {
     private final String name;

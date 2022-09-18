@@ -1,4 +1,4 @@
-package app;
+package app.model;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;

@@ -1,5 +1,6 @@
 package app;
 
+import app.controller.MainController;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;

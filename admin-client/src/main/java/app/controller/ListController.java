@@ -1,5 +1,7 @@
-package app;
+package app.controller;
 
+import app.model.CartModel;
+import app.model.Item;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
