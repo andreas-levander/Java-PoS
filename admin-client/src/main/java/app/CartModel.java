@@ -8,16 +8,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CartModel {
-    private final ObservableList<String> cart;
-    private final SimpleStringProperty totalPrice;
+    private final ObservableList<Item> cart;
+    private SimpleStringProperty totalPrice;
 
     public CartModel() {
         cart = FXCollections.observableArrayList();
         totalPrice = new SimpleStringProperty("0");
     }
 
-    public void addItem(String item, String price) {
-        cart.add(item);
+    public void addItem(String name, String price) {
+        cart.add(new Item(name, price));
         Integer current = Integer.parseInt(totalPrice.get());
         Integer itemPrice = Integer.parseInt(price);
         totalPrice.set( (Integer.toString(current + itemPrice)));
@@ -28,7 +28,7 @@ public class CartModel {
         cart.clear();
     }
 
-    public ObservableList<String> getCart() {
+    public ObservableList<Item> getCart() {
         return cart;
     }
 
