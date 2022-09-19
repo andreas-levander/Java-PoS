@@ -16,15 +16,26 @@ public class Request {
     }
 
     // Perform GET request
+
     public String getRequest() throws IOException, InterruptedException {
-        HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create(this.url)).build();
-        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        return(response.body());
+        try{
+            HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create(this.url)).build();
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            return(response.body());
+        } catch (Exception e){
+            return("ERROR!");
+        }
+
     }
     // Perform POST request
     public String postRequest(String param) throws IOException, InterruptedException {
-        HttpRequest request = HttpRequest.newBuilder().POST(HttpRequest.BodyPublishers.ofString(param)).uri(URI.create(this.url)).build();
-        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        return(response.body());
+        try{
+            HttpRequest request = HttpRequest.newBuilder().POST(HttpRequest.BodyPublishers.ofString(param)).uri(URI.create(this.url)).build();
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            return(response.body());
+        } catch (Exception e){
+            return("ERROR!");
+        }
+
     }
 }
