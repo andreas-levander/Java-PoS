@@ -3,6 +3,7 @@ package app.controller;
 import app.controller.CustomerController;
 import app.controller.DialogController;
 import app.model.CartModel;
+import app.model.Payment;
 import javafx.fxml.FXML;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
@@ -40,6 +41,8 @@ public class MainController {
         );
 
         clearButton.setOnAction((actionEvent -> cartModel.clear()));
+
+
     }
 
 

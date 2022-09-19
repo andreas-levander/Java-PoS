@@ -86,6 +86,11 @@
       <children>
             <fx:include source="CartList.fxml" />
 
+            <AnchorPane layoutX="320.0" prefHeight="285.0" prefWidth="310.0">
+               <children>
+                 <fx:include source="PaymentPanel.fxml" />
+               </children>
+            </AnchorPane>
       </children>
     </AnchorPane>
       <ButtonBar prefHeight="40.0" prefWidth="200.0">
