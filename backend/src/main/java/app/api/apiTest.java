@@ -1,4 +1,4 @@
-package app.api_gRPC_Test;
+package app.api;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
