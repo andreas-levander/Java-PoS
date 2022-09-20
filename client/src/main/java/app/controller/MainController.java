@@ -1,9 +1,9 @@
 package app.controller;
 
-import app.controller.CustomerController;
-import app.controller.DialogController;
-import app.model.CartModel;
-import app.model.Payment;
+import app.model.CurrentCart;
+import app.model.Item;
+import app.model.Sale;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
@@ -16,7 +16,7 @@ import javafx.scene.control.Button;
 public class MainController {
     private final FxWeaver fxWeaver;
 
-    private final CartModel cartModel;
+    private final CurrentCart currentCart;
 
     @FXML
     private Button openSimpleDialogButton;
@@ -25,10 +25,12 @@ public class MainController {
 
     @FXML
     private Button openCustomerScreen;
+    @FXML
+    private Button changeCart;
 
-    public MainController(FxWeaver fxWeaver, CartModel cartModel) {
+    public MainController(FxWeaver fxWeaver, CurrentCart currentCart) {
         this.fxWeaver = fxWeaver;
-        this.cartModel = cartModel;
+        this.currentCart = currentCart;
 
     }
 
@@ -39,8 +41,12 @@ public class MainController {
         openSimpleDialogButton.setOnAction(
                 actionEvent -> fxWeaver.loadController(DialogController.class).show()
         );
+        //for testing
+        var newSale = new Sale();
+        newSale.addItem(new Item("testitem", 2.3));
+        changeCart.setOnAction(actionEvent -> currentCart.setCart(newSale));
 
-        clearButton.setOnAction((actionEvent -> cartModel.clear()));
+        clearButton.setOnAction((actionEvent -> currentCart.clear()));
 
 
     }

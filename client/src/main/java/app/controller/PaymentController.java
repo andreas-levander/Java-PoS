@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.model.CartModel;
+import app.model.CurrentCart;
 import app.model.Payment;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 @FxmlView("/PaymentPanel.fxml")
 public class PaymentController {
 
-    private final CartModel cartModel;
+    private final CurrentCart currentCart;
     private final Payment payment;
 
     // Payment elements
@@ -39,8 +39,8 @@ public class PaymentController {
     private Button statusButton;
 
 
-    public PaymentController(CartModel cartModel, Payment payment) {
-        this.cartModel = cartModel;
+    public PaymentController(CurrentCart currentCart, Payment payment) {
+        this.currentCart = currentCart;
         this.payment = payment;
 
     }
@@ -59,7 +59,7 @@ public class PaymentController {
 
         cardPaymentButton.setOnAction((actionEvent -> {
             try {
-                payment.send(cartModel.getTotalPrice());
+                payment.send(currentCart.getTotalPrice());
                 payment.result();
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -79,7 +79,7 @@ public class PaymentController {
             try {
                 payment.reset();
                 payment.result();
-                cartModel.clear();
+                currentCart.clear();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

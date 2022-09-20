@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.model.CartModel;
+import app.model.CurrentCart;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
 @FxmlView("/SimpleDialog.fxml")
 @Component
 public class DialogController {
-    private final CartModel cartModel;
+    private final CurrentCart currentCart;
 
-    public DialogController(CartModel cartModel) {
-        this.cartModel = cartModel;
+    public DialogController(CurrentCart currentCart) {
+        this.currentCart = currentCart;
     }
 
     private Stage stage;
@@ -39,8 +39,7 @@ public class DialogController {
         stage.setScene(new Scene(dialog));
 
         addItem.setOnAction(actionEvent -> {
-            //listController.addItem(textField.getText(), priceField.getText());
-            cartModel.addItem(textField.getText(), priceField.getText());
+            currentCart.addItem(textField.getText(), Double.parseDouble(priceField.getText()));
 
 
         });

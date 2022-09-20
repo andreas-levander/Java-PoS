@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.model.CartModel;
+import app.model.CurrentCart;
 import app.model.Item;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
 @Component
 @FxmlView("/CartList.fxml")
 public class ListController {
-    private final CartModel cartModel;
+    private final CurrentCart currentCart;
 
-    public ListController(CartModel cartModel) {
-        this.cartModel = cartModel;
+    public ListController(CurrentCart currentCart) {
+        this.currentCart = currentCart;
     }
 
     @FXML
@@ -24,8 +24,8 @@ public class ListController {
 
     @FXML
     public void initialize() {
-        listView.setItems(cartModel.getCart());
-        totalPrice.textProperty().bind(cartModel.getTotalPrice());
+        listView.setItems(currentCart.getCart());
+        totalPrice.textProperty().bind(currentCart.getTotalPrice());
     }
 
 }
