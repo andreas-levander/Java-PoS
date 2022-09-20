@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="300" prefWidth="300" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.ListController">
+<Pane prefHeight="300" prefWidth="300" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.CashierCartController">
 
     <ListView fx:id="listView" editable="true" prefHeight="300.0" prefWidth="300.0" />
     <Label fx:id="totalPrice" layoutX="260.0" layoutY="271.0" text="0">

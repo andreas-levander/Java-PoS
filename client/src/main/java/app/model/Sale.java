@@ -1,31 +1,40 @@
 package app.model;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.UUID;
+
 public class Sale {
     private final ObservableList<Item> sale;
-    private Double totalPrice;
+    private final UUID id;
+    private final SimpleDoubleProperty totalPrice;
 
     public Sale() {
-        this.sale = FXCollections.observableArrayList();
-        this.totalPrice = 0.0;
+        sale = FXCollections.observableArrayList();
+        totalPrice = new SimpleDoubleProperty(0.0);
+        id = UUID.randomUUID();
     }
 
     public void addItem(Item item) {
         sale.add(item);
-        totalPrice += item.getPrice();
+        totalPrice.set(totalPrice.get() + item.getPrice());
     }
 
     public void removeItem(Integer index) {
         //not yet implemented
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     public ObservableList<Item> getSaleList() {
         return sale;
     }
 
-    public Double getTotalPrice() {
+    public SimpleDoubleProperty getTotalPrice() {
         return totalPrice;
     }
 }

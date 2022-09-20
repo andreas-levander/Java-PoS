@@ -23,6 +23,7 @@ public class StageInitializer implements ApplicationListener<javaFXclass.StageRe
         Stage stage = event.getStage();
 
         stage.setScene(new Scene(fxWeaver.loadView(MainController.class), 800, 600));
+        stage.setTitle("Main/Admin Screen");
         stage.show();
     }
 

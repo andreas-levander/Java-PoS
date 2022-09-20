@@ -1,7 +1,7 @@
 package app.controller;
 
-import app.model.CurrentCart;
 import app.model.Payment;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import net.rgielen.fxweaver.core.FxmlView;
@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 @FxmlView("/PaymentPanel.fxml")
 public class PaymentController {
 
-    private final CurrentCart currentCart;
+    private final SaleController saleController;
     private final Payment payment;
 
     // Payment elements
@@ -39,8 +39,8 @@ public class PaymentController {
     private Button statusButton;
 
 
-    public PaymentController(CurrentCart currentCart, Payment payment) {
-        this.currentCart = currentCart;
+    public PaymentController(SaleController saleController, Payment payment) {
+        this.saleController = saleController;
         this.payment = payment;
 
     }
@@ -59,7 +59,7 @@ public class PaymentController {
 
         cardPaymentButton.setOnAction((actionEvent -> {
             try {
-                payment.send(currentCart.getTotalPrice());
+                payment.send(new SimpleStringProperty(saleController.getCurrentSale().getTotalPrice().toString()));
                 payment.result();
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -79,7 +79,7 @@ public class PaymentController {
             try {
                 payment.reset();
                 payment.result();
-                currentCart.clear();
+                saleController.newSale();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

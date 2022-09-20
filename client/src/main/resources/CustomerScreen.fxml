@@ -11,6 +11,6 @@
             fx:controller="app.controller.CustomerController"
             prefHeight="400.0" prefWidth="600.0">
 
-    <fx:include source="CartList.fxml"/>
+    <fx:include source="CustomerCart.fxml"/>
 
 </VBox>

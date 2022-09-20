@@ -1,9 +1,7 @@
 package app.controller;
 
-import app.model.CurrentCart;
 import app.model.Item;
 import app.model.Sale;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
@@ -14,9 +12,9 @@ import javafx.scene.control.Button;
 @Component
 @FxmlView("/MainController.fxml")
 public class MainController {
-    private final FxWeaver fxWeaver;
+    private final SaleController saleController;
 
-    private final CurrentCart currentCart;
+    private final FxWeaver fxWeaver;
 
     @FXML
     private Button openSimpleDialogButton;
@@ -24,29 +22,31 @@ public class MainController {
     private Button clearButton;
 
     @FXML
-    private Button openCustomerScreen;
+    private Button getSavedCart;
     @FXML
-    private Button changeCart;
+    private Button saveCart;
 
-    public MainController(FxWeaver fxWeaver, CurrentCart currentCart) {
+    public MainController(FxWeaver fxWeaver, SaleController saleController) {
         this.fxWeaver = fxWeaver;
-        this.currentCart = currentCart;
+
+        this.saleController = saleController;
 
     }
 
     @FXML
     public void initialize() {
-        openCustomerScreen.setOnAction(actionEvent -> fxWeaver.loadController(CustomerController.class).show());
-
         openSimpleDialogButton.setOnAction(
-                actionEvent -> fxWeaver.loadController(DialogController.class).show()
+                actionEvent -> fxWeaver.loadController(AddItemDialogController.class).show()
         );
-        //for testing
-        var newSale = new Sale();
-        newSale.addItem(new Item("testitem", 2.3));
-        changeCart.setOnAction(actionEvent -> currentCart.setCart(newSale));
+        fxWeaver.loadController(CustomerController.class).show();
 
-        clearButton.setOnAction((actionEvent -> currentCart.clear()));
+        saleController.newSale();
+
+        getSavedCart.setOnAction(actionEvent -> saleController.setSale(saleController.getSavedSale()));
+        saveCart.setOnAction(actionEvent -> saleController.saveCurrentSale());
+
+
+        clearButton.setOnAction((actionEvent -> saleController.newSale()));
 
 
     }

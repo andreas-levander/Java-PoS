@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 @ExtendWith(ApplicationExtension.class)
 class ListUITest {
 
-    private final FxWeaver fxWeaver;
+    //private final FxWeaver fxWeaver;
 
     public ListUITest() {
         //this.fxWeaver = new FxWeaver();

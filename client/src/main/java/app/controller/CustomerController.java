@@ -19,6 +19,7 @@ public class CustomerController {
     public void initialize() {
         this.stage = new Stage();
         stage.setScene(new Scene(CustomerVBox));
+        stage.setTitle("Customer Screen");
 
     }
 
