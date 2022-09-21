@@ -3,6 +3,7 @@ package app.controller;
 import app.model.Item;
 import app.model.Sale;
 import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
@@ -47,9 +48,6 @@ public class MainController {
 
 
         clearButton.setOnAction((actionEvent -> saleController.newSale()));
-
-
     }
-
 
 }
