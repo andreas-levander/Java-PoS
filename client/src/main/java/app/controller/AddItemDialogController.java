@@ -21,17 +21,12 @@ public class AddItemDialogController {
     }
 
     private Stage stage;
-
     @FXML
     private VBox dialog;
-
     @FXML
     private Button addItem;
-
     @FXML
     private TextField textField;
-    @FXML
-    private TextField priceField;
 
     @FXML
     public void initialize() {
@@ -40,7 +35,12 @@ public class AddItemDialogController {
         stage.setTitle("Add Item Dialog");
 
         addItem.setOnAction(actionEvent -> {
-            saleController.getCurrentSale().addItem(new Item(textField.getText(), Double.parseDouble(priceField.getText())));
+            try {
+                saleController.addProductToSale(textField.getText());
+            } catch (Exception e) {
+                // show error in ui ?
+                throw new RuntimeException(e);
+            }
 
         });
     }
