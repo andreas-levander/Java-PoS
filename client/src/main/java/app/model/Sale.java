@@ -22,8 +22,11 @@ public class Sale {
         totalPrice.set(totalPrice.get() + item.getPrice());
     }
 
-    public void removeItem(Integer index) {
-        //not yet implemented
+    public void removeItem(int index) {
+        if (index >= 0 && index < sale.size()) {
+            totalPrice.set(totalPrice.get() - sale.get(index).getPrice());
+            sale.remove(index);
+        }
     }
 
     public UUID getId() {

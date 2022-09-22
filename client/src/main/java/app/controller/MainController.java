@@ -26,6 +26,8 @@ public class MainController {
     private Button getSavedCart;
     @FXML
     private Button saveCart;
+    @FXML
+    private Button removeItem;
 
     public MainController(FxWeaver fxWeaver, SaleController saleController) {
         this.fxWeaver = fxWeaver;
@@ -43,9 +45,10 @@ public class MainController {
 
         saleController.newSale();
 
-        getSavedCart.setOnAction(actionEvent -> saleController.setSale(saleController.getSavedSale()));
+        getSavedCart.setOnAction(actionEvent -> saleController.showSavedSale());
         saveCart.setOnAction(actionEvent -> saleController.saveCurrentSale());
 
+        removeItem.setOnAction(actionEvent -> saleController.removeItem());
 
         clearButton.setOnAction((actionEvent -> saleController.newSale()));
     }

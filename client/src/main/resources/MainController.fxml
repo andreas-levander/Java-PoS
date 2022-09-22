@@ -41,7 +41,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.MainController" fx:id="mainVbox">
+<VBox fx:id="mainVbox" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.MainController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -96,7 +96,8 @@
       <ButtonBar prefHeight="40.0" prefWidth="200.0">
         <buttons>
             <Button fx:id="openSimpleDialogButton" layoutX="127.0" layoutY="18.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" text="Add Product" />
-          <Button fx:id="clearButton" mnemonicParsing="false" text="Clear" />
+            <Button fx:id="removeItem" mnemonicParsing="false" text="Remove Product" />
+          <Button fx:id="clearButton" mnemonicParsing="false" text="New Sale" />
           <Button fx:id="saveCart" mnemonicParsing="false" text="Save Cart(NYI for testing)" />
           <Button fx:id="getSavedCart" mnemonicParsing="false" text="Show saved Cart(NYI for testing)" />
         </buttons>

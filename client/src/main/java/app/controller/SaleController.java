@@ -20,19 +20,21 @@ public class SaleController {
     }
 
     public void newSale() {
-        currentSale = new Sale();
-        customerCartController.bind(currentSale);
-        cashierCartController.bind(currentSale);
+        setSale(new Sale());
     }
 
     public Sale getCurrentSale() {
         return currentSale;
     }
 
-    public void setSale(Sale sale) {
+    private void setSale(Sale sale) {
         currentSale = sale;
         customerCartController.bind(currentSale);
         cashierCartController.bind(currentSale);
+    }
+
+    public void removeItem() {
+        currentSale.removeItem(cashierCartController.getListView().getSelectionModel().getSelectedIndex());
     }
 
     public void addProductToSale(String barCode) throws Exception {
@@ -45,8 +47,8 @@ public class SaleController {
 
     }
 
-    public Sale getSavedSale() {
-        return savedSale;
+    public void showSavedSale() {
+        setSale(savedSale);
     }
 
     public void saveCurrentSale() {
