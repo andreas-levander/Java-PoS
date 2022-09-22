@@ -1,12 +1,13 @@
 package app.model;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Payment {
 
-    private SimpleStringProperty totalPrice;
+    private SimpleDoubleProperty totalPrice;
     private SimpleStringProperty paymentStatus;
     private SimpleStringProperty cardNumber;
     private SimpleStringProperty cardType;
@@ -24,7 +25,7 @@ public class Payment {
 
 
     public Payment(){
-        totalPrice = new SimpleStringProperty((String) "0");
+        totalPrice = new SimpleDoubleProperty((Double) 0.0);
         paymentStatus = new SimpleStringProperty((String) "Status: ");
         cardNumber = new SimpleStringProperty((String) "Card: ");
         cardType = new SimpleStringProperty((String) "Type: ");
@@ -33,7 +34,7 @@ public class Payment {
         bonusResult = new SimpleStringProperty((String) "Bonus Result");
     }
 
-    public void send(SimpleStringProperty totalPrice) throws Exception{
+    public void send(SimpleDoubleProperty totalPrice) throws Exception{
         this.totalPrice = totalPrice;
         System.out.println("amount="+ totalPrice.getValue());
         waitForPaymentEndpoint.postRequest("amount=" + totalPrice.getValue());

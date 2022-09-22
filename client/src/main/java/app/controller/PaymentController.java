@@ -1,7 +1,7 @@
 package app.controller;
 
 import app.model.Payment;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import net.rgielen.fxweaver.core.FxmlView;
@@ -59,7 +59,7 @@ public class PaymentController {
 
         cardPaymentButton.setOnAction((actionEvent -> {
             try {
-                payment.send(new SimpleStringProperty(saleController.getCurrentSale().getTotalPrice().toString()));
+                payment.send(new SimpleDoubleProperty(saleController.getCurrentSale().getTotalPrice().get()));
                 payment.result();
             } catch (Exception e) {
                 throw new RuntimeException(e);
