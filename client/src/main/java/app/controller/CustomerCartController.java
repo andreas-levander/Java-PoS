@@ -2,12 +2,9 @@ package app.controller;
 
 import app.model.Item;
 import app.model.Sale;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 

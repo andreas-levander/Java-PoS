@@ -1,9 +1,6 @@
 package app.controller;
 
-import app.model.Item;
-import app.model.Sale;
 import javafx.fxml.FXML;
-import javafx.scene.layout.VBox;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
@@ -29,9 +26,8 @@ public class MainController {
     @FXML
     private Button removeItem;
 
-    public MainController(FxWeaver fxWeaver, SaleController saleController) {
+    public MainController(FxWeaver fxWeaver, SaleController saleController, SavedSalesDialogController savedSalesDialogController) {
         this.fxWeaver = fxWeaver;
-
         this.saleController = saleController;
 
     }
@@ -45,7 +41,7 @@ public class MainController {
 
         saleController.newSale();
 
-        getSavedCart.setOnAction(actionEvent -> saleController.showSavedSale());
+        getSavedCart.setOnAction(actionEvent -> fxWeaver.loadController(SavedSalesDialogController.class).show());
         saveCart.setOnAction(actionEvent -> saleController.saveCurrentSale());
 
         removeItem.setOnAction(actionEvent -> saleController.removeItem());

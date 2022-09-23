@@ -98,8 +98,8 @@
             <Button fx:id="openSimpleDialogButton" layoutX="127.0" layoutY="18.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" text="Add Product" />
             <Button fx:id="removeItem" mnemonicParsing="false" text="Remove Product" />
           <Button fx:id="clearButton" mnemonicParsing="false" text="New Sale" />
-          <Button fx:id="saveCart" mnemonicParsing="false" text="Save Cart(NYI for testing)" />
-          <Button fx:id="getSavedCart" mnemonicParsing="false" text="Show saved Cart(NYI for testing)" />
+          <Button fx:id="saveCart" mnemonicParsing="false" text="Save Sale" />
+          <Button fx:id="getSavedCart" mnemonicParsing="false" text="Show Saved Sales" />
         </buttons>
       </ButtonBar>
   </children>

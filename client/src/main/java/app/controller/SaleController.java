@@ -2,7 +2,8 @@ package app.controller;
 
 import app.model.Sale;
 import app.service.ItemService;
-import javafx.fxml.FXML;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,12 +12,12 @@ public class SaleController {
     private final CustomerCartController customerCartController;
     private final ItemService itemService;
     private Sale currentSale;
-    private Sale savedSale;
+    private ObservableList<Sale> savedSales;
     public SaleController(CashierCartController cashierCartController, CustomerCartController customerCartController, ItemService itemService) {
         this.cashierCartController = cashierCartController;
         this.customerCartController = customerCartController;
         this.itemService = itemService;
-        savedSale = new Sale();
+        savedSales = FXCollections.observableArrayList();
     }
 
     public void newSale() {
@@ -47,11 +48,22 @@ public class SaleController {
 
     }
 
-    public void showSavedSale() {
-        setSale(savedSale);
+    public void showSavedSale(int index) {
+        if (index >= 0 && index < savedSales.size()) {
+            setSale(savedSales.get(index));
+        }
+    }
+    public void removeSavedSale(int index) {
+        if (index >= 0 && index < savedSales.size()) {
+            savedSales.remove(index);
+        }
+    }
+
+    public ObservableList<Sale> getSavedSales() {
+        return savedSales;
     }
 
     public void saveCurrentSale() {
-        this.savedSale = currentSale;
+        savedSales.add(currentSale);
     }
 }

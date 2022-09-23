@@ -29,6 +29,11 @@ public class Sale {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Sale id: " + id.toString();
+    }
+
     public UUID getId() {
         return id;
     }
