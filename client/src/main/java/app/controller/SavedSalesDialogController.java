@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
 @FxmlView("/SavedSalesDialog.fxml")
 @Component
 public class SavedSalesDialogController {
-    private final SaleController saleController;
+    private final SavedSalesController savedSalesController;
 
-    public SavedSalesDialogController(SaleController saleController) {
-        this.saleController = saleController;
+    public SavedSalesDialogController(SavedSalesController savedSalesController) {
+        this.savedSalesController = savedSalesController;
     }
 
     private Stage stage;
@@ -35,12 +35,12 @@ public class SavedSalesDialogController {
         this.stage = new Stage();
         stage.setScene(new Scene(savedSalesVBox));
         stage.setTitle("Saved sales");
-        savedSalesListView.setItems(saleController.getSavedSales());
+        savedSalesListView.setItems(savedSalesController.getSavedSales());
         getSale.setDisable(true);
         removeSale.setDisable(true);
 
         getSale.setOnAction(actionEvent -> {
-            saleController.showSavedSale(savedSalesListView.getSelectionModel().getSelectedIndex());
+            savedSalesController.show(savedSalesListView.getSelectionModel().getSelectedIndex());
             stage.close();
         });
 
@@ -49,7 +49,7 @@ public class SavedSalesDialogController {
             removeSale.setDisable(t1 == null);
         });
 
-        removeSale.setOnAction(actionEvent -> saleController.removeSavedSale(savedSalesListView.getSelectionModel().getSelectedIndex()));
+        removeSale.setOnAction(actionEvent -> savedSalesController.remove(savedSalesListView.getSelectionModel().getSelectedIndex()));
     }
 
     public void show() {

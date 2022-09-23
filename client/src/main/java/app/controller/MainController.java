@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 @FxmlView("/MainController.fxml")
 public class MainController {
     private final SaleController saleController;
+    private final SavedSalesController savedSalesController;
 
     private final FxWeaver fxWeaver;
 
@@ -26,9 +27,10 @@ public class MainController {
     @FXML
     private Button removeItem;
 
-    public MainController(FxWeaver fxWeaver, SaleController saleController, SavedSalesDialogController savedSalesDialogController) {
+    public MainController(FxWeaver fxWeaver, SaleController saleController, SavedSalesController savedSalesController) {
         this.fxWeaver = fxWeaver;
         this.saleController = saleController;
+        this.savedSalesController = savedSalesController;
 
     }
 
@@ -42,9 +44,9 @@ public class MainController {
         saleController.newSale();
 
         getSavedCart.setOnAction(actionEvent -> fxWeaver.loadController(SavedSalesDialogController.class).show());
-        saveCart.setOnAction(actionEvent -> saleController.saveCurrentSale());
+        saveCart.setOnAction(actionEvent -> savedSalesController.save(saleController.getCurrentSale()));
 
-        removeItem.setOnAction(actionEvent -> saleController.removeItem());
+        removeItem.setOnAction(actionEvent -> saleController.removeSelectedItem());
 
         clearButton.setOnAction((actionEvent -> saleController.newSale()));
     }
