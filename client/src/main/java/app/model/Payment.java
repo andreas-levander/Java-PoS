@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Payment {
 
-    private SimpleDoubleProperty totalPrice;
+    private SimpleDoubleProperty change;
     private SimpleStringProperty paymentStatus;
     private SimpleStringProperty cardNumber;
     private SimpleStringProperty cardType;
@@ -25,7 +25,7 @@ public class Payment {
 
 
     public Payment(){
-        totalPrice = new SimpleDoubleProperty((Double) 0.0);
+        change = new SimpleDoubleProperty((Double) 0.0);
         paymentStatus = new SimpleStringProperty((String) "Status: ");
         cardNumber = new SimpleStringProperty((String) "Card: ");
         cardType = new SimpleStringProperty((String) "Type: ");
@@ -35,7 +35,6 @@ public class Payment {
     }
 
     public void send(SimpleDoubleProperty totalPrice) throws Exception{
-        this.totalPrice = totalPrice;
         System.out.println("amount="+ totalPrice.getValue());
         waitForPaymentEndpoint.postRequest("amount=" + totalPrice.getValue());
     }
@@ -50,6 +49,7 @@ public class Payment {
 
     public void reset() throws Exception{
         resetEndpoint.postRequest("");
+        change.set(0.0);
     }
 
     public void result() throws Exception{
@@ -66,6 +66,21 @@ public class Payment {
         int i1 = ret.indexOf("<" + name + ">");
         int i2 = ret.indexOf("</" + name + ">");
         return (i1 > -1 && i2 > -1) ? ret.substring(i1 + name.length() + 2, i2) : "";
+    }
+
+    public Boolean calculateChange(String amountReceivedString, Double totalPrice){
+        try{
+            Double amountReceived = Double.parseDouble(amountReceivedString);
+            if((amountReceived - totalPrice) < 0 ){
+                return false;
+            } else {
+                change.set(amountReceived - totalPrice);
+                return true;
+            }
+        } catch (Exception e){
+            return false;
+        }
+
     }
 
     public SimpleStringProperty getPaymentStatus() {
@@ -86,5 +101,6 @@ public class Payment {
     public SimpleStringProperty getBonusResult() {
         return bonusResult;
     }
+    public SimpleDoubleProperty getChange(){return change;}
 
 }

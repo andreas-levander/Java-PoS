@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="278.0" prefWidth="311.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.PaymentController">
+<AnchorPane prefHeight="279.0" prefWidth="319.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.PaymentController">
    <children>
       <Label fx:id="paymentStatusLabel" layoutX="14.0" layoutY="39.0" text="Status: " />
       <Label fx:id="cardLabel" layoutX="14.0" layoutY="56.0" text="Card: " />
@@ -19,17 +19,21 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <ButtonBar layoutY="209.0" prefHeight="40.0" prefWidth="316.0">
+      <ButtonBar layoutX="-8.0" layoutY="225.0" prefHeight="40.0" prefWidth="316.0">
         <buttons>
           <Button fx:id="abortButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="163.0" text="Abort" />
             <Button fx:id="resetButton" mnemonicParsing="false" text="Reset" />
+            <Button fx:id="statusButton" mnemonicParsing="false" text="Check" />
         </buttons>
       </ButtonBar>
-      <ButtonBar layoutY="169.0" prefHeight="40.0" prefWidth="316.0">
+      <ButtonBar layoutX="-8.0" layoutY="185.0" prefHeight="40.0" prefWidth="316.0">
          <buttons>
-            <Button fx:id="cardPaymentButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="163.0" text="Card Payment" />
-            <Button fx:id="statusButton" mnemonicParsing="false" text="Check Payment" />
+            <Button fx:id="cardPaymentButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="163.0" text="Card" />
+            <Button fx:id="cashPaymentButton" mnemonicParsing="false" text="Cash" />
+            <Button mnemonicParsing="false" text="Split" />
          </buttons>
       </ButtonBar>
+      <Label fx:id="changeLabel" layoutX="67.0" layoutY="154.0" prefHeight="17.0" prefWidth="67.0" />
+      <Label layoutX="20.0" layoutY="154.0" text="Change: " />
    </children>
 </AnchorPane>
