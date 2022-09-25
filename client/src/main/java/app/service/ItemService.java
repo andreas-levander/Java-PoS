@@ -16,7 +16,7 @@ public class ItemService {
 //
 //        Item responseBody = responseSpec.bodyToMono(Item.class).block();
 //        System.out.println(responseBody);
-//        //return responseBody;
+//        return responseBody;
         return new Item(barCode, (double) Math.round(((Math.random() * 100) * 1000) / 1000));
     }
 }
