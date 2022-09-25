@@ -4,6 +4,7 @@ import app.model.Payment;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 import javafx.scene.control.Button;
@@ -15,6 +16,7 @@ public class PaymentController {
 
     private final SaleController saleController;
     private final Payment payment;
+    private final FxWeaver fxWeaver;
 
     // Payment elements
     @FXML
@@ -30,7 +32,15 @@ public class PaymentController {
     @FXML
     private Label bonusResultLabel;
     @FXML
+    private Label changeLabel;
+    @FXML
+    private Label cashTotalLabel;
+    @FXML
     private Button cardPaymentButton;
+    @FXML
+    private Button cashPaymentButton;
+    @FXML
+    private Button splitPaymentButton;
     @FXML
     private Button abortButton;
     @FXML
@@ -39,9 +49,10 @@ public class PaymentController {
     private Button statusButton;
 
 
-    public PaymentController(SaleController saleController, Payment payment) {
+    public PaymentController(SaleController saleController, Payment payment, FxWeaver fxWeaver) {
         this.saleController = saleController;
         this.payment = payment;
+        this.fxWeaver = fxWeaver;
 
     }
 
@@ -56,14 +67,25 @@ public class PaymentController {
         typeLabel.textProperty().bind(payment.getCardType());
         bonusCardLabel.textProperty().bind(payment.getBonusNumber());
         bonusResultLabel.textProperty().bind(payment.getBonusResult());
+        changeLabel.textProperty().bind(payment.getChange().asString());
+        cashTotalLabel.textProperty().bind(payment.getCashTotal().asString());
 
         cardPaymentButton.setOnAction((actionEvent -> {
             try {
-                payment.send(new SimpleDoubleProperty(saleController.getCurrentSale().getTotalPrice().get()));
+                payment.send(saleController.getCurrentSale().getTotalPrice().get());
                 payment.result();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
+        }));
+
+        cashPaymentButton.setOnAction((actionEvent -> {
+            payment.setCashTotal(saleController.getCurrentSale().getTotalPrice().get());
+            fxWeaver.loadController(CashPaymentDialogController.class).show();
+        }));
+
+        splitPaymentButton.setOnAction((actionEvent -> {
+            fxWeaver.loadController(SplitPaymentDialogController.class).show();
         }));
 
         abortButton.setOnAction((actionEvent -> {
@@ -96,6 +118,5 @@ public class PaymentController {
 
 
     }
-
 
 }

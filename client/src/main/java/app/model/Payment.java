@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Payment {
 
-    private SimpleDoubleProperty totalPrice;
+    private SimpleDoubleProperty change;
+    private SimpleDoubleProperty cashTotal;
     private SimpleStringProperty paymentStatus;
     private SimpleStringProperty cardNumber;
     private SimpleStringProperty cardType;
@@ -23,9 +24,11 @@ public class Payment {
     private final Request resetEndpoint = new Request("http://localhost:9002/cardreader/reset");
     private final Request resultEndpoint = new Request("http://localhost:9002/cardreader/result");
 
+    private final Request openCashBoxEndpoint = new Request("http://localhost:9001/cashbox/open");
 
     public Payment(){
-        totalPrice = new SimpleDoubleProperty((Double) 0.0);
+        cashTotal = new SimpleDoubleProperty((Double) 0.0);
+        change = new SimpleDoubleProperty((Double) 0.0);
         paymentStatus = new SimpleStringProperty((String) "Status: ");
         cardNumber = new SimpleStringProperty((String) "Card: ");
         cardType = new SimpleStringProperty((String) "Type: ");
@@ -34,10 +37,9 @@ public class Payment {
         bonusResult = new SimpleStringProperty((String) "Bonus Result");
     }
 
-    public void send(SimpleDoubleProperty totalPrice) throws Exception{
-        this.totalPrice = totalPrice;
-        System.out.println("amount="+ totalPrice.getValue());
-        waitForPaymentEndpoint.postRequest("amount=" + totalPrice.getValue());
+    public void send(Double totalPrice) throws Exception{
+        System.out.println("amount="+ totalPrice);
+        waitForPaymentEndpoint.postRequest("amount=" + totalPrice);
     }
 
     public SimpleStringProperty status() throws Exception{
@@ -46,10 +48,13 @@ public class Payment {
 
     public void abort() throws Exception{
         abortEndpoint.postRequest("");
+        cashTotal.set(0.0);
     }
 
     public void reset() throws Exception{
         resetEndpoint.postRequest("");
+        change.set(0.0);
+        cashTotal.set(0.0);
     }
 
     public void result() throws Exception{
@@ -62,10 +67,29 @@ public class Payment {
         bonusNumber.set("Bonus Card: " + extractXmlValue(resultXML, "bonusCardNumber"));
         bonusResult.set("Bonus Result: " + extractXmlValue(resultXML, "bonusState"));
     }
+
+    public void open() throws Exception{
+        openCashBoxEndpoint.postRequest("");
+    }
     private String extractXmlValue(String ret, String name) {
         int i1 = ret.indexOf("<" + name + ">");
         int i2 = ret.indexOf("</" + name + ">");
         return (i1 > -1 && i2 > -1) ? ret.substring(i1 + name.length() + 2, i2) : "";
+    }
+
+    public Boolean calculateChange(String amountReceivedString){
+        try{
+            Double amountReceived = Double.parseDouble(amountReceivedString);
+            if((amountReceived - cashTotal.get()) < 0 ){
+                return false;
+            } else {
+                change.set(amountReceived - cashTotal.get());
+                return true;
+            }
+        } catch (Exception e){
+            return false;
+        }
+
     }
 
     public SimpleStringProperty getPaymentStatus() {
@@ -85,6 +109,12 @@ public class Payment {
     }
     public SimpleStringProperty getBonusResult() {
         return bonusResult;
+    }
+    public SimpleDoubleProperty getChange(){return change;}
+
+    public SimpleDoubleProperty getCashTotal(){return cashTotal;}
+    public void setCashTotal(Double amount){
+        cashTotal.set(amount);
     }
 
 }
