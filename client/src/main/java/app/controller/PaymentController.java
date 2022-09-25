@@ -34,9 +34,13 @@ public class PaymentController {
     @FXML
     private Label changeLabel;
     @FXML
+    private Label cashTotalLabel;
+    @FXML
     private Button cardPaymentButton;
     @FXML
     private Button cashPaymentButton;
+    @FXML
+    private Button splitPaymentButton;
     @FXML
     private Button abortButton;
     @FXML
@@ -64,10 +68,11 @@ public class PaymentController {
         bonusCardLabel.textProperty().bind(payment.getBonusNumber());
         bonusResultLabel.textProperty().bind(payment.getBonusResult());
         changeLabel.textProperty().bind(payment.getChange().asString());
+        cashTotalLabel.textProperty().bind(payment.getCashTotal().asString());
 
         cardPaymentButton.setOnAction((actionEvent -> {
             try {
-                payment.send(new SimpleDoubleProperty(saleController.getCurrentSale().getTotalPrice().get()));
+                payment.send(saleController.getCurrentSale().getTotalPrice().get());
                 payment.result();
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -75,7 +80,12 @@ public class PaymentController {
         }));
 
         cashPaymentButton.setOnAction((actionEvent -> {
+            payment.setCashTotal(saleController.getCurrentSale().getTotalPrice().get());
             fxWeaver.loadController(CashPaymentDialogController.class).show();
+        }));
+
+        splitPaymentButton.setOnAction((actionEvent -> {
+            fxWeaver.loadController(SplitPaymentDialogController.class).show();
         }));
 
         abortButton.setOnAction((actionEvent -> {
@@ -108,6 +118,5 @@ public class PaymentController {
 
 
     }
-
 
 }

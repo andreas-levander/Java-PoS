@@ -2,6 +2,7 @@ package app.controller;
 
 import app.model.Item;
 import app.model.Payment;
+import app.model.Request;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -14,6 +15,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 
 @FxmlView("/CashPaymentDialog.fxml")
@@ -52,16 +55,21 @@ public class CashPaymentDialogController {
         stage.setScene(new Scene(dialog));
         stage.setTitle("Cash Payment");
 
-        totalLabel.textProperty().bind(saleController.getCurrentSale().getTotalPrice().asString());
+        totalLabel.textProperty().bind(payment.getCashTotal().asString());
 
         cancelButton.setOnAction((actionEvent -> {
             stage.close();
         }));
 
         confirmButton.setOnAction((actionEvent -> {
-            Boolean isValid = payment.calculateChange(amountReceivedField.getText(), saleController.getCurrentSale().getTotalPrice().getValue());
+            Boolean isValid = payment.calculateChange(amountReceivedField.getText());
             if(isValid){
                 stage.close();
+                try {
+                    payment.open();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             } else {
                 errorLabel.setText("ERROR: INCORRECT INPUT");
             }
