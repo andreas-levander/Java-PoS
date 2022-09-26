@@ -10,11 +10,9 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 
-import java.util.concurrent.TimeUnit;
-
 
 @Configuration
-public class SimpleWebClientConfiguration {
+public class WebClientConfiguration {
 
     @Bean
     public WebClient webClientFromScratch(WebClient.Builder webClientBuilder) {

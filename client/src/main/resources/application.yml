@@ -4,3 +4,6 @@ server:
 spring:
   main:
     web-application-type: none
+
+backend:
+  baseurl: http://localhost:8081

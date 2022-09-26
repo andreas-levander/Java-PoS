@@ -6,10 +6,15 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.jackson.Jacksonized;
 
+import java.util.List;
+
 @AllArgsConstructor @Setter @Getter
 @Jacksonized @Builder
 public class Item {
-    private String name;
+    private final String name;
+    private final String id;
+    private final String barCode;
+    private final List<String> keywords;
     private Double price;
 
     @Override

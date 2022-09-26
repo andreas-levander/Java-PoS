@@ -36,12 +36,9 @@ public class SaleController {
     }
 
     public void addProductToSale(String barCode) throws Exception {
-        try {
-            var item = itemService.getByBarcode(barCode);
+            //var item = itemService.getByBarcode(barCode);
+            var item = itemService.getByBarcodeForTest(barCode);
             currentSale.addItem(item);
-        } catch (Exception e) {
-            throw new Exception("item not found or such: " + e);
-        }
 
     }
 
