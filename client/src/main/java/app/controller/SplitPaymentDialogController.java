@@ -38,7 +38,7 @@ public class SplitPaymentDialogController {
     @FXML
     private Button payWithCashButton;
     @FXML
-    private ListView itemList;
+    private ListView<Item> itemList;
 
     @FXML
     public void initialize() {

@@ -1,13 +1,19 @@
 package app.controller;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
+
 
 
 @FxmlView("/AddItemDialog.fxml")
@@ -26,6 +32,8 @@ public class AddItemDialogController {
     private Button addItem;
     @FXML
     private TextField textField;
+    @FXML
+    private Label notif;
 
     @FXML
     public void initialize() {
@@ -36,8 +44,10 @@ public class AddItemDialogController {
         addItem.setOnAction(actionEvent -> {
             try {
                 saleController.addProductToSale(textField.getText());
+                showNotification("added product", Color.GREEN);
             } catch (Exception e) {
                 // show error in ui ?
+                showNotification("product not found", Color.RED);
                 throw new RuntimeException(e);
             }
 
@@ -47,4 +57,14 @@ public class AddItemDialogController {
     public void show() {
         stage.show();
     }
+
+    private void showNotification(String message, Color color) {
+        notif.setTextFill(color);
+        notif.setText(message);
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(e -> notif.setText(""));
+        delay.play();
+
+    }
+
 }

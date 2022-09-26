@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "api/v1/hello")
 public class apiTest {
 
-
-
     @GetMapping
     public String sayHello() {
         return "hello";

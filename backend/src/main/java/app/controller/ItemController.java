@@ -24,7 +24,7 @@ public class ItemController {
         try {
             var productCatalogItem = mapper.readValue(response, ProductCatalogItem.class);
             System.out.println(productCatalogItem);
-            // fetch price from database
+            // fetch price from database here probably
             return new Item(productCatalogItem.getName(), productCatalogItem.getId(), productCatalogItem.getBarCode(),
                     productCatalogItem.getKeyword(),Math.random() * 100);
         } catch (JsonProcessingException e) {
