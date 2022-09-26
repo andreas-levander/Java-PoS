@@ -1,29 +1,40 @@
 package app.service;
 
-import app.model.ProductCatalogItem;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import app.errors.NoItemInProductCatalog;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import java.util.ArrayList;
+import reactor.core.publisher.Mono;
 
 @Service
 public class ItemService {
+    @Value("${productCatalog.baseurl}")
+    private String baseUrl;
+    private final WebClient client;
 
-    public ProductCatalogItem findProduct(String barCode) throws JsonProcessingException {
-        WebClient client = WebClient.create();
+    public ItemService(WebClient client) {
+        this.client = client;
+    }
 
-        WebClient.ResponseSpec responseSpec = client.get()
-                .uri("http://localhost:9003/rest/findByBarCode/" + barCode)
+    public String findProduct(String barCode) {
+        return client.get()
+                .uri(baseUrl +"/rest/findByBarCode/" + barCode)
                 .accept(MediaType.APPLICATION_XML)
-                .retrieve();
-
-        var resp = responseSpec.bodyToMono(String.class).block();
-        var xmlmapper = new XmlMapper();
-        var test = xmlmapper.readValue(resp, ProductCatalogItem.class);
-        System.out.println(test);
-        return new ProductCatalogItem("asd","asd","asd","asd","asd", new ArrayList<>());
+                .exchangeToMono(clientResponse -> {
+                    if (clientResponse.statusCode().equals(HttpStatus.OK)) {
+                        return clientResponse.bodyToMono(String.class);
+                    } else if (clientResponse.statusCode().is4xxClientError()) {
+                        //return Mono.just("");
+                        throw new NoItemInProductCatalog("Item with barcode: " + barCode +  " not found in ProductCatalog");
+                    } else {
+                        return clientResponse.createException()
+                                .flatMap(Mono::error);
+                    }
+                }).block();
     }
 
 }

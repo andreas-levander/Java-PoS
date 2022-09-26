@@ -1,2 +1,5 @@
 server:
   port: 8081
+
+productCatalog:
+  baseurl: http://localhost:9003
