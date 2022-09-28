@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="CustomerVBox" xmlns="http://javafx.com/javafx"
+<VBox fx:id="customerVBox" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="app.controller.CustomerController"
             prefHeight="400.0" prefWidth="600.0">

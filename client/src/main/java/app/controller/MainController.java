@@ -16,7 +16,7 @@ public class MainController {
     private final FxWeaver fxWeaver;
 
     @FXML
-    private Button openSimpleDialogButton;
+    private Button addItemByBarcode;
     @FXML
     private Button clearButton;
 
@@ -36,7 +36,7 @@ public class MainController {
 
     @FXML
     public void initialize() {
-        openSimpleDialogButton.setOnAction(
+        addItemByBarcode.setOnAction(
                 actionEvent -> fxWeaver.loadController(AddItemDialogController.class).show()
         );
         fxWeaver.loadController(CustomerController.class).show();

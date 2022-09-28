@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 @FxmlView("/CustomerCart.fxml")
 public class CustomerCartController {
     @FXML
-    private ListView<Item> listView;
+    private ListView<Item> customerListView;
     @FXML
-    private Label totalPrice;
+    private Label customerTotalPrice;
 
 
     @FXML
@@ -24,7 +24,7 @@ public class CustomerCartController {
 
 
     public void bind(Sale sale) {
-        listView.setItems(sale.getSaleList());
-        totalPrice.textProperty().bind(sale.getTotalPrice().asString());
+        customerListView.setItems(sale.getSaleList());
+        customerTotalPrice.textProperty().bind(sale.getTotalPrice().asString());
     }
 }

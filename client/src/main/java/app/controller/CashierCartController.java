@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
 public class CashierCartController {
 
     @FXML
-    private ListView<Item> listView;
+    private ListView<Item> cashierCartListView;
     @FXML
-    private Label totalPrice;
+    private Label cashierTotalPrice;
 
     @FXML
     public void initialize() {
@@ -26,11 +26,11 @@ public class CashierCartController {
     }
 
     public void bind(Sale sale) {
-        listView.setItems(sale.getSaleList());
-        totalPrice.textProperty().bind(sale.getTotalPrice().asString());
+        cashierCartListView.setItems(sale.getSaleList());
+        cashierTotalPrice.textProperty().bind(sale.getTotalPrice().asString());
     }
 
     public ListView<Item> getListView() {
-        return listView;
+        return cashierCartListView;
     }
 }

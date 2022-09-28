@@ -13,12 +13,12 @@ public class CustomerController {
     private Stage stage;
 
     @FXML
-    private Pane CustomerVBox;
+    private Pane customerVBox;
 
     @FXML
     public void initialize() {
         this.stage = new Stage();
-        stage.setScene(new Scene(CustomerVBox));
+        stage.setScene(new Scene(customerVBox));
         stage.setTitle("Customer Screen");
 
     }
