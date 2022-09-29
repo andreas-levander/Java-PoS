@@ -1,7 +1,7 @@
 package app.controller;
 
+import app.model.Cart;
 import app.model.Item;
-import app.model.Sale;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -25,9 +25,9 @@ public class CashierCartController {
 //        }));
     }
 
-    public void bind(Sale sale) {
-        cashierCartListView.setItems(sale.getSaleList());
-        cashierTotalPrice.textProperty().bind(sale.getTotalPrice().asString());
+    public void bind(Cart cart) {
+        cashierCartListView.setItems(cart.getSaleList());
+        cashierTotalPrice.textProperty().bind(cart.getTotalPrice().asString());
     }
 
     public ListView<Item> getListView() {

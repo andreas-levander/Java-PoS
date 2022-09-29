@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.model.Sale;
+import app.model.Cart;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -28,7 +28,7 @@ public class SavedSalesDialogController {
     @FXML
     private Button removeSale;
     @FXML
-    private ListView<Sale> savedSalesListView;
+    private ListView<Cart> savedSalesListView;
 
     @FXML
     public void initialize() {

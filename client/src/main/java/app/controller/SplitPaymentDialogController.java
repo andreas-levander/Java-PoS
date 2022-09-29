@@ -2,7 +2,6 @@ package app.controller;
 
 import app.model.Payment;
 import app.model.Item;
-import javafx.beans.Observable;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,12 +16,12 @@ import org.springframework.stereotype.Component;
 @FxmlView("/SplitPaymentDialog.fxml")
 @Component
 public class SplitPaymentDialogController {
-    private final SaleController saleController;
+    private final CartController cartController;
     private Payment payment;
     private final FxWeaver fxWeaver;
 
-    public SplitPaymentDialogController(SaleController saleController, Payment payment, FxWeaver fxWeaver) {
-        this.saleController = saleController;
+    public SplitPaymentDialogController(CartController cartController, Payment payment, FxWeaver fxWeaver) {
+        this.cartController = cartController;
         this.payment = payment;
         this.fxWeaver = fxWeaver;
     }
@@ -54,7 +53,7 @@ public class SplitPaymentDialogController {
 
         payWithCardButton.setOnAction((actionEvent -> {
             Double cardTotal = calcSelectedTotal(itemList.getSelectionModel().getSelectedItems());
-            Double total = saleController.getCurrentSale().getTotalPrice().get();
+            Double total = cartController.getCurrentCart().getTotalPrice().get();
             try {
                 payment.send(cardTotal);
                 payment.result();
@@ -68,7 +67,7 @@ public class SplitPaymentDialogController {
 
         payWithCashButton.setOnAction((actionEvent -> {
             Double cashTotal = calcSelectedTotal(itemList.getSelectionModel().getSelectedItems());
-            Double total = saleController.getCurrentSale().getTotalPrice().get();
+            Double total = cartController.getCurrentCart().getTotalPrice().get();
             try {
                 payment.send(total - cashTotal);
                 payment.result();
@@ -92,7 +91,7 @@ public class SplitPaymentDialogController {
 
     public void show() {
         stage.show();
-        itemList.setItems(saleController.getCurrentSale().getSaleList());
+        itemList.setItems(cartController.getCurrentCart().getSaleList());
         itemList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 }

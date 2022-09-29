@@ -7,3 +7,9 @@ spring:
 
 backend:
   baseurl: http://localhost:8081
+
+cardreader:
+  baseurl: http://localhost:9002
+
+cashbox:
+  baseurl: http://localhost:9001

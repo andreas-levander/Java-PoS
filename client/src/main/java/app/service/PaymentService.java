@@ -9,35 +9,30 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
-
 @Service
-public class ItemService {
+public class PaymentService {
     private final WebClient webClient;
-    @Value("${backend.baseurl}")
-    private String backendBaseUrl;
 
-    public ItemService(WebClient webClient) {
+    @Value("${cardreader.baseurl}")
+    private String cardReaderBaseUrl;
+
+    public PaymentService(WebClient webClient) {
         this.webClient = webClient;
     }
 
-    public Item getByBarcode(String barCode) throws Exception {
+    public String waitForPayment(String amount) {
         return webClient.get()
-                .uri(backendBaseUrl +"/api/v1/item/" + barCode)
+                .uri(cardReaderBaseUrl +"/api/v1/item/")
                 .accept(MediaType.APPLICATION_JSON)
                 .exchangeToMono(clientResponse -> {
                     if (clientResponse.statusCode().equals(HttpStatus.OK)) {
-                        return clientResponse.bodyToMono(Item.class);
+                        return clientResponse.bodyToMono(String.class);
                     } else if (clientResponse.statusCode().is4xxClientError()) {
-                        throw new ItemNotFoundException("Item with barcode: " + barCode +  " not found");
+                        throw new ItemNotFoundException("Item with barcode: " +  " not found");
                     } else {
                         return clientResponse.createException()
                                 .flatMap(Mono::error);
                     }
                 }).block();
-    }
-
-    public Item getByBarcodeForTest(String barCode) {
-        return new Item(barCode,"1","123",new ArrayList<>(),(double) Math.round(((Math.random() * 100) * 1000) / 1000));
     }
 }

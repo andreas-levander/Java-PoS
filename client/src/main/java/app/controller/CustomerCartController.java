@@ -1,7 +1,7 @@
 package app.controller;
 
+import app.model.Cart;
 import app.model.Item;
-import app.model.Sale;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -23,8 +23,8 @@ public class CustomerCartController {
     }
 
 
-    public void bind(Sale sale) {
-        customerListView.setItems(sale.getSaleList());
-        customerTotalPrice.textProperty().bind(sale.getTotalPrice().asString());
+    public void bind(Cart cart) {
+        customerListView.setItems(cart.getSaleList());
+        customerTotalPrice.textProperty().bind(cart.getTotalPrice().asString());
     }
 }

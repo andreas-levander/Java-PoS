@@ -1,32 +1,26 @@
 package app.controller;
 
-import app.model.Item;
 import app.model.Payment;
-import app.model.Request;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
 
 
 @FxmlView("/CashPaymentDialog.fxml")
 @Component
 public class CashPaymentDialogController {
-    private final SaleController saleController;
+    private final CartController cartController;
     private Payment payment;
 
-    public CashPaymentDialogController(SaleController saleController, Payment payment) {
-        this.saleController = saleController;
+    public CashPaymentDialogController(CartController cartController, Payment payment) {
+        this.cartController = cartController;
         this.payment = payment;
     }
 

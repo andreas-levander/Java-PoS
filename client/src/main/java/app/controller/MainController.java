@@ -1,6 +1,7 @@
 package app.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.BorderPane;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
@@ -10,7 +11,7 @@ import javafx.scene.control.Button;
 @Component
 @FxmlView("/MainController.fxml")
 public class MainController {
-    private final SaleController saleController;
+    private final CartController cartController;
     private final SavedSalesController savedSalesController;
 
     private final FxWeaver fxWeaver;
@@ -26,10 +27,12 @@ public class MainController {
     private Button saveCart;
     @FXML
     private Button removeItem;
+    @FXML
+    private BorderPane borderPane;
 
-    public MainController(FxWeaver fxWeaver, SaleController saleController, SavedSalesController savedSalesController) {
+    public MainController(FxWeaver fxWeaver, CartController cartController, SavedSalesController savedSalesController) {
         this.fxWeaver = fxWeaver;
-        this.saleController = saleController;
+        this.cartController = cartController;
         this.savedSalesController = savedSalesController;
 
     }
@@ -41,14 +44,20 @@ public class MainController {
         );
         fxWeaver.loadController(CustomerController.class).show();
 
-        saleController.newSale();
+        cartController.newCart();
 
         getSavedCart.setOnAction(actionEvent -> fxWeaver.loadController(SavedSalesDialogController.class).show());
-        saveCart.setOnAction(actionEvent -> savedSalesController.save(saleController.getCurrentSale()));
+        saveCart.setOnAction(actionEvent -> savedSalesController.save(cartController.getCurrentCart()));
 
-        removeItem.setOnAction(actionEvent -> saleController.removeSelectedItem());
+        removeItem.setOnAction(actionEvent -> cartController.removeSelectedItem());
 
-        clearButton.setOnAction((actionEvent -> saleController.newSale()));
+        clearButton.setOnAction((actionEvent -> cartController.newCart()));
+
+        var test = fxWeaver.loadView(TestController.class);
+        borderPane.setCenter(test);
     }
 
+    public BorderPane getBorderPane() {
+        return borderPane;
+    }
 }

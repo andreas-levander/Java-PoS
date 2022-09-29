@@ -1,45 +1,34 @@
 package app.controller;
 
+import app.model.Cart;
 import app.model.Sale;
-import app.service.ItemService;
-import org.springframework.stereotype.Component;
+import app.model.SaleStatus;
+import org.springframework.stereotype.Controller;
 
-@Component
+@Controller
 public class SaleController {
-    private final CashierCartController cashierCartController;
-    private final CustomerCartController customerCartController;
-    private final ItemService itemService;
+    private final PaymentController paymentController;
+
+    public SaleController(PaymentController paymentController) {
+        this.paymentController = paymentController;
+    }
+
     private Sale currentSale;
 
-    public SaleController(CashierCartController cashierCartController, CustomerCartController customerCartController, ItemService itemService) {
-        this.cashierCartController = cashierCartController;
-        this.customerCartController = customerCartController;
-        this.itemService = itemService;
+    public void newSale(Cart cart) {
+        // create new sale
+        currentSale = new Sale(cart, SaleStatus.WAITING_FOR_CUSTOMER);
+        // call customer view to let customer choose payment method
+        // set buttons interactable
     }
 
-    public void newSale() {
-        showSale(new Sale());
-    }
-
-    public Sale getCurrentSale() {
-        return currentSale;
-    }
-
-    public void showSale(Sale sale) {
-        currentSale = sale;
-        customerCartController.bind(currentSale);
-        cashierCartController.bind(currentSale);
-    }
-
-    public void removeSelectedItem() {
-        currentSale.removeItem(cashierCartController.getListView().getSelectionModel().getSelectedIndex());
-    }
-
-    public void addProductToSale(String barCode) throws Exception {
-            //var item = itemService.getByBarcode(barCode);
-            var item = itemService.getByBarcodeForTest(barCode);
-            currentSale.addItem(item);
+    public void payWithCash(String amount) {
+        paymentController.payWithCash(amount);
+        currentSale.setSaleStatus(SaleStatus.DONE);
 
     }
 
+    public void payWithCard(String amount) {
+        paymentController.payWithCard(amount);
+    }
 }

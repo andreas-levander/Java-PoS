@@ -1,35 +1,35 @@
 package app.controller;
 
-import app.model.Sale;
+import app.model.Cart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SavedSalesController {
-    private final SaleController saleController;
-    private final ObservableList<Sale> savedSales;
+    private final CartController cartController;
+    private final ObservableList<Cart> savedCarts;
 
-    public SavedSalesController(SaleController saleController) {
-        this.saleController = saleController;
-        this.savedSales = FXCollections.observableArrayList();
+    public SavedSalesController(CartController cartController) {
+        this.cartController = cartController;
+        this.savedCarts = FXCollections.observableArrayList();
     }
 
-    public void save(Sale sale) {
-        savedSales.add(sale);
+    public void save(Cart cart) {
+        savedCarts.add(cart);
     }
 
     public void remove(int index) {
-        savedSales.remove(index);
+        savedCarts.remove(index);
     }
 
     public void show(int index) {
-        if (index >= 0 && index < savedSales.size()) {
-            saleController.showSale(savedSales.get(index));
+        if (index >= 0 && index < savedCarts.size()) {
+            cartController.showCart(savedCarts.get(index));
         }
     }
 
-    public ObservableList<Sale> getSavedSales() {
-        return savedSales;
+    public ObservableList<Cart> getSavedSales() {
+        return savedCarts;
     }
 }

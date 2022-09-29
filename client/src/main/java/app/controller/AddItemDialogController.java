@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import net.rgielen.fxweaver.core.FxmlView;
@@ -19,10 +18,10 @@ import org.springframework.stereotype.Component;
 @FxmlView("/AddItemDialog.fxml")
 @Component
 public class AddItemDialogController {
-    private final SaleController saleController;
+    private final CartController cartController;
 
-    public AddItemDialogController(SaleController saleController) {
-        this.saleController = saleController;
+    public AddItemDialogController(CartController cartController) {
+        this.cartController = cartController;
     }
 
     private Stage stage;
@@ -43,7 +42,7 @@ public class AddItemDialogController {
 
         addItem.setOnAction(actionEvent -> {
             try {
-                saleController.addProductToSale(textField.getText());
+                cartController.addProductToCart(textField.getText());
                 showNotification("added product", Color.GREEN);
             } catch (Exception e) {
                 // show error in ui ?
