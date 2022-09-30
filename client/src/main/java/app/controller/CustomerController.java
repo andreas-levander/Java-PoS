@@ -41,8 +41,14 @@ public class CustomerController {
         cardButton.setDisable(true);
         cashButton.setDisable(true);
 
-        cardButton.setOnAction(actionEvent -> saleController.payWithCard());
-        cashButton.setOnAction(actionEvent -> saleController.payWithCash());
+        cardButton.setOnAction(actionEvent -> {
+            toggleSaleButtons();
+            saleController.payWithCard();
+        });
+        cashButton.setOnAction(actionEvent -> {
+            toggleSaleButtons();
+            saleController.payWithCash();
+        });
     }
 
     public void show() {

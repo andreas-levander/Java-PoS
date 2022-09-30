@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -16,11 +17,9 @@ import org.springframework.stereotype.Component;
 @FxmlView("/SalesUi.fxml")
 public class SalesUiController {
     private final FxWeaver fxWeaver;
-    private final ApplicationContext applicationContext;
 
-    public SalesUiController(FxWeaver fxWeaver, ApplicationContext applicationContext) {
+    public SalesUiController(FxWeaver fxWeaver) {
         this.fxWeaver = fxWeaver;
-        this.applicationContext = applicationContext;
     }
 
     @FXML
@@ -55,7 +54,6 @@ public class SalesUiController {
     }
 
     public void reset() {
-        applicationContext.getBean(CustomerController.class).toggleSaleButtons();
         label.setVisible(false);
         pane.getChildren().setAll(label);
     }

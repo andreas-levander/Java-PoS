@@ -42,7 +42,11 @@ public class PaymentController {
     }
 
     public void abort() {
+        // TODO call abort enpoint on cardreader
+        // paymentservice.abort()
 
+        salesUiController.reset();
+        timeline.stop();
     }
 
     private void updateStatus() {
@@ -50,11 +54,12 @@ public class PaymentController {
         System.out.println(resp);
         if (Objects.equals(resp, "DONE")) {
             timeline.stop();
+            // showResultOfCardTransaction() ?
         }
         currentPayment.setStatus(resp);
     }
 
-    private void getResultOfCardTransaction() {
+    private void showResultOfCardTransaction() {
         // TODO get result
         // TODO show result
     }
