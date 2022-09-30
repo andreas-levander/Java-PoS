@@ -42,10 +42,7 @@ public class CustomerController {
         cashButton.setDisable(true);
 
         cardButton.setOnAction(actionEvent -> saleController.payWithCard());
-        cashButton.setOnAction(actionEvent ->
-        {
-            fxWeaver.loadController(CashPaymentDialog_new_Controller.class).show();
-        });
+        cashButton.setOnAction(actionEvent -> saleController.payWithCash());
     }
 
     public void show() {

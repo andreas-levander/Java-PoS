@@ -26,8 +26,8 @@ public class SaleController {
 
     }
 
-    public void payWithCash(Double amountReceived) {
-        paymentController.payWithCash(currentSale, amountReceived);
+    public void payWithCash() {
+        paymentController.payWithCash(currentSale);
         currentSale.setSaleStatus(SaleStatus.DONE);
 
     }

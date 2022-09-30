@@ -1,5 +1,6 @@
 package app.controller.sale;
 
+import app.controller.CustomerController;
 import app.model.Payment2;
 import app.model.Sale;
 import javafx.fxml.FXML;
@@ -7,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 
@@ -14,9 +16,11 @@ import org.springframework.stereotype.Component;
 @FxmlView("/SalesUi.fxml")
 public class SalesUiController {
     private final FxWeaver fxWeaver;
+    private final ApplicationContext applicationContext;
 
-    public SalesUiController(FxWeaver fxWeaver) {
+    public SalesUiController(FxWeaver fxWeaver, ApplicationContext applicationContext) {
         this.fxWeaver = fxWeaver;
+        this.applicationContext = applicationContext;
     }
 
     @FXML
@@ -31,6 +35,8 @@ public class SalesUiController {
         label.setVisible(false);
         cardUiController = fxWeaver.loadController(CardUiController.class);
         cashUiController = fxWeaver.loadController(CashUiController.class);
+
+        cashUiController.getCancelButton().setOnAction(e -> reset());
     }
 
     public void setStatusLabel(String s) {
@@ -43,13 +49,13 @@ public class SalesUiController {
         pane.getChildren().setAll(cardUiController.getCardUiAnchorPane());
     }
 
-    public void showCashWindow(Sale sale, Double toGiveBack) {
-        cashUiController.bindCashTotalLabel(sale.getCart().getTotalPrice().asString());
-        cashUiController.setChangeLabel(toGiveBack.toString());
+    public void showCashWindow(Sale sale) {
+        cashUiController.bind(sale);
         pane.getChildren().setAll(cashUiController.getAnchorPane());
     }
 
     public void reset() {
+        applicationContext.getBean(CustomerController.class).toggleSaleButtons();
         label.setVisible(false);
         pane.getChildren().setAll(label);
     }

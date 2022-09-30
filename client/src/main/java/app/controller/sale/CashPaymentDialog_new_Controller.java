@@ -2,6 +2,7 @@ package app.controller.sale;
 
 import app.controller.cart.CartController;
 import app.model.Payment;
+import app.model.Sale;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -17,13 +18,7 @@ import org.springframework.stereotype.Component;
 @FxmlView("/CashPaymentDialog_new.fxml")
 @Component
 public class CashPaymentDialog_new_Controller {
-    private final SaleController saleController;
 
-    public CashPaymentDialog_new_Controller(SaleController saleController) {
-        this.saleController = saleController;
-    }
-
-    private Stage stage;
     @FXML
     private TextField amountReceivedField;
 
@@ -43,26 +38,26 @@ public class CashPaymentDialog_new_Controller {
 
     @FXML
     public void initialize() {
-        this.stage = new Stage();
-        stage.setScene(new Scene(dialog));
-        stage.setTitle("Cash Payment");
 
-        totalLabel.textProperty().bind(saleController.getCurrentSale().getCart().getTotalPrice().asString());
-
-        cancelButton.setOnAction((actionEvent -> {
-            stage.close();
-        }));
-
-        confirmButton.setOnAction((actionEvent -> {
-            // TODO Input validation
-            var amount = Double.parseDouble(amountReceivedField.getText());
-            saleController.payWithCash(amount);
-            stage.close();
-
-        }));
     }
 
-    public void show() {
-        stage.show();
+    public void bind(Sale sale) {
+        totalLabel.textProperty().bind(sale.getCart().getTotalPrice().asString());
+    }
+
+    public AnchorPane getDialog() {
+        return dialog;
+    }
+
+    public TextField getAmountReceivedField() {
+        return amountReceivedField;
+    }
+
+    public Button getCancelButton() {
+        return cancelButton;
+    }
+
+    public Button getConfirmButton() {
+        return confirmButton;
     }
 }

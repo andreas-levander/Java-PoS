@@ -27,9 +27,8 @@ public class PaymentController {
         timeline.setCycleCount(100);
     }
 
-    public void payWithCash(Sale sale, Double amountReceived) {
-        var toGiveBack = amountReceived - sale.getCart().getTotalPrice().get();
-        salesUiController.showCashWindow(sale, toGiveBack);
+    public void payWithCash(Sale sale) {
+        salesUiController.showCashWindow(sale);
     }
 
     public void payWithCard(Sale sale) {

@@ -63,7 +63,6 @@ public class MainController {
         clearButton.setOnAction((actionEvent -> {
             cartController.newCart();
             saleController.resetUI();
-            customerController.toggleSaleButtons();
         }));
 
         checkout.setOnAction(actionEvent -> {
