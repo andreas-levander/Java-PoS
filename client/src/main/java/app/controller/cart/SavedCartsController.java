@@ -1,16 +1,17 @@
-package app.controller;
+package app.controller.cart;
 
+import app.controller.cart.CartController;
 import app.model.Cart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SavedSalesController {
+public class SavedCartsController {
     private final CartController cartController;
     private final ObservableList<Cart> savedCarts;
 
-    public SavedSalesController(CartController cartController) {
+    public SavedCartsController(CartController cartController) {
         this.cartController = cartController;
         this.savedCarts = FXCollections.observableArrayList();
     }

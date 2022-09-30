@@ -1,4 +1,4 @@
-package app.controller;
+package app.controller.sale;
 
 import app.controller.cart.CartController;
 import app.model.Payment;
@@ -14,15 +14,13 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 
 
-@FxmlView("/CashPaymentDialog.fxml")
+@FxmlView("/CashPaymentDialog_new.fxml")
 @Component
-public class CashPaymentDialogController {
-    private final CartController cartController;
-    private Payment payment;
+public class CashPaymentDialog_new_Controller {
+    private final SaleController saleController;
 
-    public CashPaymentDialogController(CartController cartController, Payment payment) {
-        this.cartController = cartController;
-        this.payment = payment;
+    public CashPaymentDialog_new_Controller(SaleController saleController) {
+        this.saleController = saleController;
     }
 
     private Stage stage;
@@ -50,24 +48,17 @@ public class CashPaymentDialogController {
         stage.setScene(new Scene(dialog));
         stage.setTitle("Cash Payment");
 
-        totalLabel.textProperty().bind(payment.getCashTotal().asString());
+        totalLabel.textProperty().bind(saleController.getCurrentSale().getCart().getTotalPrice().asString());
 
         cancelButton.setOnAction((actionEvent -> {
             stage.close();
         }));
 
         confirmButton.setOnAction((actionEvent -> {
-            Boolean isValid = payment.calculateChange(amountReceivedField.getText());
-            if(isValid){
-                stage.close();
-                try {
-                    payment.open();
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            } else {
-                errorLabel.setText("ERROR: INCORRECT INPUT");
-            }
+            // TODO Input validation
+            var amount = Double.parseDouble(amountReceivedField.getText());
+            saleController.payWithCash(amount);
+            stage.close();
 
         }));
     }

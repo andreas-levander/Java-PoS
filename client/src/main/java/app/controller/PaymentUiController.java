@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.controller.cart.CartController;
 import app.model.Payment;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

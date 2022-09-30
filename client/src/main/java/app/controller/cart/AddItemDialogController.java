@@ -1,5 +1,6 @@
-package app.controller;
+package app.controller.cart;
 
+import app.controller.cart.CartController;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;

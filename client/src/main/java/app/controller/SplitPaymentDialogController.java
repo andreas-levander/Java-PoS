@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.controller.cart.CartController;
 import app.model.Payment;
 import app.model.Item;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -91,7 +92,7 @@ public class SplitPaymentDialogController {
 
     public void show() {
         stage.show();
-        itemList.setItems(cartController.getCurrentCart().getSaleList());
+        itemList.setItems(cartController.getCurrentCart().getCart());
         itemList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 }

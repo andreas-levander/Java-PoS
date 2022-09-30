@@ -1,4 +1,4 @@
-package app.controller;
+package app.controller.cart;
 
 import app.model.Cart;
 import app.model.Item;
@@ -24,7 +24,7 @@ public class CustomerCartController {
 
 
     public void bind(Cart cart) {
-        customerListView.setItems(cart.getSaleList());
+        customerListView.setItems(cart.getCart());
         customerTotalPrice.textProperty().bind(cart.getTotalPrice().asString());
     }
 }

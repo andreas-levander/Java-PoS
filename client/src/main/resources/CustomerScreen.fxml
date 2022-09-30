@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="customerVBox" xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="app.controller.CustomerController"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox fx:id="customerVBox" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.CustomerController">
 
-    <fx:include source="CustomerCart.fxml"/>
+    <fx:include source="CustomerCart.fxml" />
+   <ButtonBar prefHeight="40.0" prefWidth="200.0">
+     <buttons>
+       <Button fx:id="cashButton" mnemonicParsing="false" text="Cash" />
+         <Button fx:id="cardButton" layoutX="535.0" layoutY="10.0" mnemonicParsing="false" text="Card" />
+     </buttons>
+   </ButtonBar>
 
 </VBox>

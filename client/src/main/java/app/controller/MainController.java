@@ -1,7 +1,11 @@
 package app.controller;
 
+import app.controller.cart.AddItemDialogController;
+import app.controller.cart.CartController;
+import app.controller.cart.SavedCartsController;
+import app.controller.cart.SavedCartsDialogController;
+import app.controller.sale.SaleController;
 import javafx.fxml.FXML;
-import javafx.scene.layout.BorderPane;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
@@ -12,7 +16,8 @@ import javafx.scene.control.Button;
 @FxmlView("/MainController.fxml")
 public class MainController {
     private final CartController cartController;
-    private final SavedSalesController savedSalesController;
+    private final SavedCartsController savedCartsController;
+    private final SaleController saleController;
 
     private final FxWeaver fxWeaver;
 
@@ -28,12 +33,14 @@ public class MainController {
     @FXML
     private Button removeItem;
     @FXML
-    private BorderPane borderPane;
+    private Button checkout;
 
-    public MainController(FxWeaver fxWeaver, CartController cartController, SavedSalesController savedSalesController) {
+    public MainController(FxWeaver fxWeaver, CartController cartController, SavedCartsController savedCartsController,
+                          SaleController saleController) {
         this.fxWeaver = fxWeaver;
         this.cartController = cartController;
-        this.savedSalesController = savedSalesController;
+        this.savedCartsController = savedCartsController;
+        this.saleController = saleController;
 
     }
 
@@ -42,22 +49,28 @@ public class MainController {
         addItemByBarcode.setOnAction(
                 actionEvent -> fxWeaver.loadController(AddItemDialogController.class).show()
         );
-        fxWeaver.loadController(CustomerController.class).show();
+        var customerController = fxWeaver.loadController(CustomerController.class);
+        customerController.show();
+
 
         cartController.newCart();
 
-        getSavedCart.setOnAction(actionEvent -> fxWeaver.loadController(SavedSalesDialogController.class).show());
-        saveCart.setOnAction(actionEvent -> savedSalesController.save(cartController.getCurrentCart()));
+        getSavedCart.setOnAction(actionEvent -> fxWeaver.loadController(SavedCartsDialogController.class).show());
+        saveCart.setOnAction(actionEvent -> savedCartsController.save(cartController.getCurrentCart()));
 
         removeItem.setOnAction(actionEvent -> cartController.removeSelectedItem());
 
-        clearButton.setOnAction((actionEvent -> cartController.newCart()));
+        clearButton.setOnAction((actionEvent -> {
+            cartController.newCart();
+            saleController.resetUI();
+            customerController.toggleSaleButtons();
+        }));
 
-        var test = fxWeaver.loadView(TestController.class);
-        borderPane.setCenter(test);
+        checkout.setOnAction(actionEvent -> {
+            saleController.newSale(cartController.getCurrentCart());
+            customerController.toggleSaleButtons();
+        });
+
     }
 
-    public BorderPane getBorderPane() {
-        return borderPane;
-    }
 }

@@ -1,4 +1,4 @@
-package app.controller;
+package app.controller.cart;
 
 import app.model.Cart;
 import app.service.ItemService;

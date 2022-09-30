@@ -22,8 +22,24 @@ public class PaymentService {
 
     public String waitForPayment(String amount) {
         return webClient.get()
-                .uri(cardReaderBaseUrl +"/api/v1/item/")
+                .uri(cardReaderBaseUrl +"/c/")
                 .accept(MediaType.APPLICATION_JSON)
+                .exchangeToMono(clientResponse -> {
+                    if (clientResponse.statusCode().equals(HttpStatus.OK)) {
+                        return clientResponse.bodyToMono(String.class);
+                    } else if (clientResponse.statusCode().is4xxClientError()) {
+                        throw new ItemNotFoundException("Item with barcode: " +  " not found");
+                    } else {
+                        return clientResponse.createException()
+                                .flatMap(Mono::error);
+                    }
+                }).block();
+    }
+
+    public String getStatus() {
+        return webClient.get()
+                .uri(cardReaderBaseUrl +"/cardreader/status")
+                .accept(MediaType.TEXT_PLAIN)
                 .exchangeToMono(clientResponse -> {
                     if (clientResponse.statusCode().equals(HttpStatus.OK)) {
                         return clientResponse.bodyToMono(String.class);
