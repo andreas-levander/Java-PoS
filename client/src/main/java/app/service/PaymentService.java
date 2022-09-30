@@ -43,8 +43,6 @@ public class PaymentService {
                 .exchangeToMono(clientResponse -> {
                     if (clientResponse.statusCode().equals(HttpStatus.OK)) {
                         return clientResponse.bodyToMono(String.class);
-                    } else if (clientResponse.statusCode().is4xxClientError()) {
-                        throw new ItemNotFoundException("Item with barcode: " +  " not found");
                     } else {
                         return clientResponse.createException()
                                 .flatMap(Mono::error);

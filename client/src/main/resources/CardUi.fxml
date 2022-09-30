@@ -7,7 +7,7 @@
 
 <AnchorPane fx:id="cardUiAnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.sale.CardUiController">
 
-    <Button fx:id="button" layoutX="235.0" layoutY="188.0" mnemonicParsing="false" text="reset" />
+    <Button fx:id="abort" layoutX="235.0" layoutY="188.0" mnemonicParsing="false" text="abort" />
    <Label fx:id="label" layoutX="205.0" layoutY="82.0" text="testtss">
       <font>
          <Font size="58.0" />

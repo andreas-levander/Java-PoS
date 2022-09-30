@@ -1,6 +1,9 @@
 package app.service;
 
 import app.errors.NoItemInProductCatalog;
+import app.model.ProductCatalogItem;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,13 +18,15 @@ public class ItemService {
     @Value("${productCatalog.baseurl}")
     private String baseUrl;
     private final WebClient client;
+    private final XmlMapper xmlMapper;
 
     public ItemService(WebClient client) {
         this.client = client;
+        xmlMapper = new XmlMapper();
     }
 
-    public String findProduct(String barCode) {
-        return client.get()
+    public ProductCatalogItem findProduct(String barCode) {
+        var response = client.get()
                 .uri(baseUrl +"/rest/findByBarCode/" + barCode)
                 .accept(MediaType.APPLICATION_XML)
                 .exchangeToMono(clientResponse -> {
@@ -35,6 +40,12 @@ public class ItemService {
                                 .flatMap(Mono::error);
                     }
                 }).block();
+
+        try {
+            return xmlMapper.readValue(response, ProductCatalogItem.class);
+        } catch (RuntimeException | JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
