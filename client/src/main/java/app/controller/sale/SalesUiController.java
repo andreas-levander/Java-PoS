@@ -19,7 +19,6 @@ public class SalesUiController {
         this.fxWeaver = fxWeaver;
     }
 
-
     @FXML
     private Pane pane;
     @FXML
@@ -39,18 +38,15 @@ public class SalesUiController {
         label.setVisible(true);
     }
 
-    public void showCardWindow() {
+    public void showCardWindow(Payment2 payment) {
+        cardUiController.getLabel().textProperty().bind(payment.getStatus());
         pane.getChildren().setAll(cardUiController.getCardUiAnchorPane());
     }
 
     public void showCashWindow(Sale sale, Double toGiveBack) {
-        cashUiController.setCashTotalLabel(sale.getCart().getTotalPrice().asString());
+        cashUiController.bindCashTotalLabel(sale.getCart().getTotalPrice().asString());
         cashUiController.setChangeLabel(toGiveBack.toString());
         pane.getChildren().setAll(cashUiController.getAnchorPane());
-    }
-
-    public void bindCardText(Payment2 payment) {
-        cardUiController.getLabel().textProperty().bind(payment.getStatus());
     }
 
     public void reset() {

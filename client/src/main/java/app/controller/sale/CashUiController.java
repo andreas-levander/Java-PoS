@@ -1,15 +1,9 @@
 package app.controller.sale;
 
-import app.controller.CashPaymentDialogController;
-import app.controller.SplitPaymentDialogController;
-import app.controller.cart.CartController;
-import app.model.Payment;
 import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 
@@ -24,12 +18,8 @@ public class CashUiController {
     @FXML
     private Label cashTotalLabel;
 
-
-
     @FXML
     public void initialize() throws Exception {
-
-
 
     }
 
@@ -37,7 +27,7 @@ public class CashUiController {
         return anchorPane;
     }
 
-    public void setCashTotalLabel(StringBinding s) {
+    public void bindCashTotalLabel(StringBinding s) {
         cashTotalLabel.textProperty().bind(s);
     }
 

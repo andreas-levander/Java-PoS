@@ -3,6 +3,7 @@ package app.service;
 import app.errors.NoItemInProductCatalog;
 import app.model.ProductCatalogItem;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,7 +34,6 @@ public class ItemService {
                     if (clientResponse.statusCode().equals(HttpStatus.OK)) {
                         return clientResponse.bodyToMono(String.class);
                     } else if (clientResponse.statusCode().is4xxClientError()) {
-                        //return Mono.just("");
                         throw new NoItemInProductCatalog("Item with barcode: " + barCode +  " not found in ProductCatalog");
                     } else {
                         return clientResponse.createException()
@@ -43,7 +43,7 @@ public class ItemService {
 
         try {
             return xmlMapper.readValue(response, ProductCatalogItem.class);
-        } catch (RuntimeException | JsonProcessingException e) {
+        } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }

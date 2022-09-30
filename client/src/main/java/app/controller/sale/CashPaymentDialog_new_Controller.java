@@ -24,7 +24,6 @@ public class CashPaymentDialog_new_Controller {
     }
 
     private Stage stage;
-    private SimpleDoubleProperty change;
     @FXML
     private TextField amountReceivedField;
 

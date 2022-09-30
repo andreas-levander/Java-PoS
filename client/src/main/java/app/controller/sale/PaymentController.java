@@ -35,8 +35,7 @@ public class PaymentController {
     public void payWithCard(Sale sale) {
         currentPayment = new Payment2(sale.getCart().getTotalPrice(),"Pending");
 
-        salesUiController.bindCardText(currentPayment);
-        salesUiController.showCardWindow();
+        salesUiController.showCardWindow(currentPayment);
 
         //var response = paymentService.waitForPayment(amount);
 
