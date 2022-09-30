@@ -1,8 +1,12 @@
 package app.controller.cart;
 
 import app.model.Cart;
+import app.model.Item;
 import app.service.ItemService;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class CartController {
@@ -35,11 +39,23 @@ public class CartController {
         currentCart.removeItem(cashierCartController.getListView().getSelectionModel().getSelectedIndex());
     }
 
-    public void addProductToCart(String barCode) throws Exception {
-            //var item = itemService.getByBarcode(barCode);
-            var item = itemService.getByBarcodeForTest(barCode);
-            currentCart.addItem(item);
+    public List<Item> searchForProduct(String searchString) throws Exception {
+            List<Item> items;
+            if(NumberUtils.isParsable(searchString)) {
+                items = itemService.getByBarcodeForTest(searchString);
+                //items = itemService.getByBarcode(searchString);
+            } else {
+                // search by name
+                items = itemService.getByBarcodeForTest(searchString);
+                //items = itemService.getByName(searchString);
+            }
 
+            return items;
+
+    }
+
+    public void addToCart(Item item) {
+        currentCart.addItem(item);
     }
 
 }

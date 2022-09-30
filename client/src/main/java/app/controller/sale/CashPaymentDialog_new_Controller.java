@@ -21,16 +21,12 @@ public class CashPaymentDialog_new_Controller {
 
     @FXML
     private TextField amountReceivedField;
-
     @FXML
     private Button cancelButton;
-
     @FXML
     private Button confirmButton;
-
     @FXML
     private AnchorPane dialog;
-
     @FXML
     private Label totalLabel;
     @FXML

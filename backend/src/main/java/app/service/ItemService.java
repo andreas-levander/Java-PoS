@@ -2,11 +2,10 @@ package app.service;
 
 import app.errors.NoItemInProductCatalog;
 import app.model.ProductCatalogItem;
+import app.model.ProductCatalogItemList;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,9 +23,10 @@ public class ItemService {
     public ItemService(WebClient client) {
         this.client = client;
         xmlMapper = new XmlMapper();
+        xmlMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
     }
 
-    public ProductCatalogItem findProduct(String barCode) {
+    public ProductCatalogItem findProductByBarcode(String barCode) {
         var response = client.get()
                 .uri(baseUrl +"/rest/findByBarCode/" + barCode)
                 .accept(MediaType.APPLICATION_XML)
@@ -44,6 +44,29 @@ public class ItemService {
         try {
             return xmlMapper.readValue(response, ProductCatalogItem.class);
         } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ProductCatalogItemList findProductByName(String name) {
+        var response = client.get()
+                .uri(baseUrl +"/rest/findByName/" + name)
+                .accept(MediaType.APPLICATION_XML)
+                .exchangeToMono(clientResponse -> {
+                    if (clientResponse.statusCode().equals(HttpStatus.OK)) {
+                        return clientResponse.bodyToMono(String.class);
+                    } else if (clientResponse.statusCode().is4xxClientError()) {
+                        throw new NoItemInProductCatalog("Item with name: " + name +  " not found in ProductCatalog");
+                    } else {
+                        return clientResponse.createException()
+                                .flatMap(Mono::error);
+                    }
+                }).block();
+
+        try {
+            return xmlMapper.readValue(response, ProductCatalogItemList.class);
+        } catch (JsonProcessingException e) {
+
             throw new RuntimeException(e);
         }
     }

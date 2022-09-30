@@ -1,11 +1,12 @@
 package app.controller.cart;
 
-import app.controller.cart.CartController;
+import app.model.Item;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -29,11 +30,15 @@ public class AddItemDialogController {
     @FXML
     private VBox dialog;
     @FXML
-    private Button addItem;
+    private Button search;
     @FXML
     private TextField textField;
     @FXML
     private Label notif;
+    @FXML
+    private ListView<Item> searchList;
+    @FXML
+    private Button addToCart;
 
     @FXML
     public void initialize() {
@@ -41,17 +46,21 @@ public class AddItemDialogController {
         stage.setScene(new Scene(dialog));
         stage.setTitle("Add Item Dialog");
 
-        addItem.setOnAction(actionEvent -> {
+        search.setOnAction(actionEvent -> {
             try {
-                cartController.addProductToCart(textField.getText());
-                showNotification("added product", Color.GREEN);
+                var items = cartController.searchForProduct(textField.getText());
+                searchList.getItems().setAll(items);
             } catch (Exception e) {
                 // show error in ui ?
                 showNotification("product not found", Color.RED);
                 throw new RuntimeException(e);
             }
-
         });
+        addToCart.setOnAction(e -> {
+            cartController.addToCart(searchList.getSelectionModel().getSelectedItem());
+            showNotification("added product to cart", Color.GREEN);
+        });
+
     }
 
     public void show() {

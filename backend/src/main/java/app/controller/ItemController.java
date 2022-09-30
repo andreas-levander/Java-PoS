@@ -4,6 +4,9 @@ import app.model.Item;
 import app.service.ItemService;
 import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class ItemController {
     private final ItemService itemService;
@@ -12,11 +15,20 @@ public class ItemController {
         this.itemService = itemService;
     }
 
-    public Item getItem(String barCode) {
-        var productCatalogItem = itemService.findProduct(barCode);
+    public List<Item> getItemByBarcode(String barCode) {
+        var productCatalogItem = itemService.findProductByBarcode(barCode);
+        var list = new ArrayList<Item>();
+        list.add(new Item(productCatalogItem.getName(), productCatalogItem.getId(), productCatalogItem.getBarCode(),
+                productCatalogItem.getKeyword(),Math.random() * 100));
 
-        return new Item(productCatalogItem.getName(), productCatalogItem.getId(), productCatalogItem.getBarCode(),
-                    productCatalogItem.getKeyword(),Math.random() * 100);
+        return list;
+
+    }
+
+    public List<Item> getItemByName(String name) {
+        var productCatalogItems = itemService.findProductByName(name).getProducts();
+        return productCatalogItems.stream().map(productCatalogItem -> new Item(productCatalogItem.getName(), productCatalogItem.getId(),
+                productCatalogItem.getBarCode(), productCatalogItem.getKeyword(), Math.random() * 100)).toList();
 
     }
 }
