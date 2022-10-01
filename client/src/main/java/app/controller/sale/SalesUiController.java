@@ -1,8 +1,10 @@
 package app.controller.sale;
 
 import app.controller.CustomerController;
+import app.model.CardTransactionResult;
 import app.model.Payment2;
 import app.model.Sale;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -44,7 +46,7 @@ public class SalesUiController {
     }
 
     public void showCardWindow(Payment2 payment) {
-        cardUiController.getLabel().textProperty().bind(payment.getStatus());
+        //cardUiController.getLabel().textProperty().bind(payment.getStatus());
         pane.getChildren().setAll(cardUiController.getCardUiAnchorPane());
     }
 
@@ -53,8 +55,18 @@ public class SalesUiController {
         pane.getChildren().setAll(cashUiController.getAnchorPane());
     }
 
+    public void setCardReaderStatus(String status) {
+        cardUiController.setCardReaderStatus(status);
+    }
+
+    public void showCardTransactionResult(CardTransactionResult cardTransactionResult) {
+        cardUiController.showCardTransactionResult(cardTransactionResult);
+    }
+
     public void reset() {
         label.setVisible(false);
+        cardUiController.setCardReaderStatus("");
+        cardUiController.hideCardTransactionResult();
         pane.getChildren().setAll(label);
     }
 }

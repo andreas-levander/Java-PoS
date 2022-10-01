@@ -56,6 +56,10 @@ public class AddItemDialogController {
                 throw new RuntimeException(e);
             }
         });
+        searchList.getSelectionModel().selectedItemProperty().addListener((observableValue, sale, t1) -> {
+            addToCart.setDisable(t1 == null);
+        });
+        addToCart.setDisable(true);
         addToCart.setOnAction(e -> {
             cartController.addToCart(searchList.getSelectionModel().getSelectedItem());
             showNotification("added product to cart", Color.GREEN);

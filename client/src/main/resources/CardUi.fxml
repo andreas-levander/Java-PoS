@@ -7,15 +7,40 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="cardUiAnchorPane" prefHeight="154.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.sale.CardUiController">
-   <Label fx:id="label" layoutX="105.0" layoutY="14.0" text="testtss">
+   <Label fx:id="cardReaderStatus" layoutX="77.0" layoutY="4.0" text="Card reader status: ">
       <font>
-         <Font size="58.0" />
+         <Font size="15.0" />
       </font>
    </Label>
-   <ButtonBar layoutX="87.0" layoutY="99.0" prefHeight="40.0" prefWidth="200.0">
+   <ButtonBar layoutX="93.0" layoutY="114.0" prefHeight="40.0" prefWidth="200.0">
      <buttons>
       
           <Button fx:id="abort" mnemonicParsing="false" text="abort" />
      </buttons>
    </ButtonBar>
+   <Label fx:id="bonusCardNumber" layoutX="77.0" layoutY="25.0" prefHeight="21.0" prefWidth="182.0">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label fx:id="bonusState" layoutX="76.0" layoutY="46.0" prefHeight="21.0" prefWidth="233.0" text="asd">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label fx:id="paymentCardNumber" layoutX="76.0" layoutY="67.0" prefHeight="21.0" prefWidth="233.0" text="asd">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label fx:id="paymentState" layoutX="76.0" layoutY="88.0" prefHeight="21.0" prefWidth="233.0" text="asd">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Label fx:id="paymentCardType" layoutX="76.0" layoutY="104.0" prefHeight="21.0" prefWidth="233.0" text="asd">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
 </AnchorPane>
