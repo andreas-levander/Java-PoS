@@ -7,8 +7,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 
-
-
+/** Class responsible for setting up JavaFX/Spring integration */
 public class javaFXclass extends Application {
     private ConfigurableApplicationContext applicationContext;
 

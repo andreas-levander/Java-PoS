@@ -8,12 +8,11 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
+/** Class responsible for calling the backend for Items */
 @Service
 public class ItemService {
     private final WebClient webClient;
@@ -24,7 +23,7 @@ public class ItemService {
         this.webClient = webClient;
     }
 
-    public List<Item> getByBarcode(String barCode) throws Exception {
+    public List<Item> getByBarcode(String barCode) {
         var response = webClient.get()
                 .uri(backendBaseUrl +"/api/v1/item/barcode/" + barCode)
                 .accept(MediaType.APPLICATION_JSON)
@@ -41,7 +40,7 @@ public class ItemService {
         return Arrays.asList(response);
     }
 
-    public List<Item> getByName(String name) throws Exception {
+    public List<Item> getByName(String name) {
         var response = webClient.get()
                 .uri(backendBaseUrl +"/api/v1/item/name/" + name)
                 .accept(MediaType.APPLICATION_JSON)

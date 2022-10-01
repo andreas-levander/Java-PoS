@@ -1,11 +1,11 @@
 package app.controller.cart;
 
-import app.controller.cart.CartController;
 import app.model.Cart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.springframework.stereotype.Component;
 
+/** Class responsible for managing the saved carts */
 @Component
 public class SavedCartsController {
     private final CartController cartController;
@@ -30,7 +30,7 @@ public class SavedCartsController {
         }
     }
 
-    public ObservableList<Cart> getSavedSales() {
+    public ObservableList<Cart> getSavedCarts() {
         return savedCarts;
     }
 }

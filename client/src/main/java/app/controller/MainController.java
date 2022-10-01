@@ -11,7 +11,7 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 import javafx.scene.control.Button;
 
-
+/** Class responsible for managing the main screen (cashier UI) elements */
 @Component
 @FxmlView("/MainController.fxml")
 public class MainController {

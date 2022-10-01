@@ -8,6 +8,7 @@ import javafx.scene.control.ListView;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 
+/** Class responsible for managing the cashier cart UI elements */
 @Component
 @FxmlView("/CashierCart.fxml")
 public class CashierCartController {
@@ -28,6 +29,10 @@ public class CashierCartController {
     public void bind(Cart cart) {
         cashierCartListView.setItems(cart.getCart());
         cashierTotalPrice.textProperty().bind(cart.getTotalPrice().asString());
+    }
+
+    public int getSelectedIndex() {
+        return cashierCartListView.getSelectionModel().getSelectedIndex();
     }
 
     public ListView<Item> getListView() {

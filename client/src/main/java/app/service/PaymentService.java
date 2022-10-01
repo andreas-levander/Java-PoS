@@ -1,7 +1,6 @@
 package app.service;
 
 import app.errors.ItemNotFoundException;
-import app.model.Item;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -9,10 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+/** Class responsible for calling the CardReader and CashBox */
 @Service
 public class PaymentService {
     private final WebClient webClient;
-
     @Value("${cardreader.baseurl}")
     private String cardReaderBaseUrl;
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/** Class responsible for managing the currently shown cart */
 @Component
 public class CartController {
     private final CashierCartController cashierCartController;
@@ -36,14 +37,14 @@ public class CartController {
     }
 
     public void removeSelectedItem() {
-        currentCart.removeItem(cashierCartController.getListView().getSelectionModel().getSelectedIndex());
+        currentCart.removeItem(cashierCartController.getSelectedIndex());
     }
 
-    public List<Item> searchForProduct(String searchString) throws Exception {
+    public List<Item> searchForProduct(String searchString) {
             List<Item> items;
             if(NumberUtils.isParsable(searchString)) {
-                items = itemService.getByBarcodeForTest(searchString);
-                //items = itemService.getByBarcode(searchString);
+                //items = itemService.getByBarcodeForTest(searchString);
+                items = itemService.getByBarcode(searchString);
             } else {
                 // search by name
                 items = itemService.getByBarcodeForTest(searchString);

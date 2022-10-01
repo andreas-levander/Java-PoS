@@ -8,6 +8,7 @@ import javafx.scene.control.ListView;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 
+/** Class responsible for managing the customer cart UI elements */
 @Component
 @FxmlView("/CustomerCart.fxml")
 public class CustomerCartController {

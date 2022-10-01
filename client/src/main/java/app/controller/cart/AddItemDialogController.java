@@ -16,7 +16,7 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 
 
-
+/** Class responsible for managing the UI element for searching and adding new Items to the currently shown cart */
 @FxmlView("/AddItemDialog.fxml")
 @Component
 public class AddItemDialogController {
@@ -72,8 +72,7 @@ public class AddItemDialogController {
         notif.setText(message);
         PauseTransition delay = new PauseTransition(Duration.seconds(2));
         delay.setOnFinished(e -> notif.setText(""));
-        delay.play();
-
+        delay.playFromStart();
     }
 
 }

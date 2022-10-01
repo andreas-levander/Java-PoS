@@ -5,12 +5,9 @@ import app.controller.MainController;
 import app.model.Item;
 import app.service.ItemService;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import net.rgielen.fxweaver.core.FxWeaver;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,15 +18,14 @@ import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.List;
 
-/* Not yet Implemented, JUnit5AssertJ */
 @SpringBootTest(classes = AdminClientApplication.class)
 @ExtendWith(ApplicationExtension.class)
-class ListUITest {
+class CartIntegrationTest {
     @Autowired
     private ApplicationContext applicationContext;
     @MockBean
@@ -43,10 +39,10 @@ class ListUITest {
      */
     @Start
     private void start(Stage stage) {
-        Mockito.when(itemService.getByBarcodeForTest(Mockito.anyString())).thenAnswer(i ->
+        Mockito.when(itemService.getByBarcode(Mockito.anyString())).thenAnswer(i ->
         {
             var arg = i.getArguments()[0].toString();
-            return new Item(arg, arg, arg, new ArrayList<>(), 2.0);
+            return new ArrayList<>((List.of(new Item(arg, arg, arg, new ArrayList<>(), 2.0))));
         });
         FxWeaver fxWeaver = applicationContext.getBean(FxWeaver.class);
         stage.setScene(new Scene(fxWeaver.loadView(MainController.class), 600, 400));
@@ -58,14 +54,6 @@ class ListUITest {
      */
     @Test
     void main_and_customer_screen_visible(FxRobot robot) {
-        //Assertions.assertThat(button).hasText("click me!");
-        // or (lookup by css id):
-        //Assertions.assertThat(robot.lookup("#myButton").queryAs(Button.class)).hasText("click me!");
-        // or (lookup by css class):
-        //Assertions.assertThat(robot.lookup(".button").queryAs(Button.class)).hasText("click me!");
-        // or (query specific type):
-        //Assertions.assertThat(robot.lookup(".clearButton").queryButton()).hasText("clear");
-
         var mainScreen = robot.lookup("#mainVbox").query();
         Assertions.assertThat(mainScreen).isVisible();
 
@@ -97,15 +85,19 @@ class ListUITest {
         // when:
         robot.clickOn("#addItemByBarcode");
         robot.clickOn("#textField").write("123");
-        robot.clickOn("#addItem");
+        robot.clickOn("#search");
+
+        var searchList = robot.lookup("#searchList").queryListView();
+        Assertions.assertThat(searchList.getItems()).isNotEmpty();
+        searchList.getSelectionModel().selectFirst();
+        robot.clickOn("#addToCart");
 
         //then item is shown in cashier cart
-        var cashierCart = robot.lookup("#cashierCartListView").query();
-        Assertions.assertThat(cashierCart).isInstanceOf(ListView.class);
-        var listView = (ListView<Item>) cashierCart;
-        Assertions.assertThat(listView.getItems()).isNotEmpty();
-        var addedItem = listView.getItems().get(0);
-        Assertions.assertThat(addedItem).isInstanceOf(Item.class);
+        var cashierCart = robot.lookup("#cashierCartListView").queryListView();
+        Assertions.assertThat(cashierCart.getItems()).isNotEmpty();
+        var addedObject = cashierCart.getItems().get(0);
+        Assertions.assertThat(addedObject).isInstanceOf(Item.class);
+        var addedItem = (Item) addedObject;
         Assertions.assertThat(addedItem.getBarCode()).isEqualTo("123");
 
         //cashier total price is updated
@@ -115,12 +107,11 @@ class ListUITest {
         Assertions.assertThat(cashierTotalPriceLabel).hasText("2.0");
 
         //then item is shown in customer cart
-        var customerCart = robot.lookup("#customerListView").query();
-        Assertions.assertThat(customerCart).isInstanceOf(ListView.class);
-        var customerListView = (ListView<Item>) customerCart;
-        Assertions.assertThat(customerListView.getItems()).isNotEmpty();
-        var customerAddedItem = customerListView.getItems().get(0);
-        Assertions.assertThat(customerAddedItem).isInstanceOf(Item.class);
+        var customerCart = robot.lookup("#customerListView").queryListView();
+        Assertions.assertThat(customerCart.getItems()).isNotEmpty();
+        var customerAddedObject = customerCart.getItems().get(0);
+        Assertions.assertThat(customerAddedObject).isInstanceOf(Item.class);
+        var customerAddedItem = (Item) customerAddedObject;
         Assertions.assertThat(customerAddedItem.getBarCode()).isEqualTo("123");
 
         //customer total price is updated

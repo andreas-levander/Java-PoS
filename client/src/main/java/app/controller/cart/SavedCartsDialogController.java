@@ -1,6 +1,5 @@
 package app.controller.cart;
 
-import app.controller.cart.SavedCartsController;
 import app.model.Cart;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -12,6 +11,7 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 
 
+/** Class responsible for managing the saved carts UI elements */
 @FxmlView("/SavedSalesDialog.fxml")
 @Component
 public class SavedCartsDialogController {
@@ -36,7 +36,7 @@ public class SavedCartsDialogController {
         this.stage = new Stage();
         stage.setScene(new Scene(savedSalesVBox));
         stage.setTitle("Saved sales");
-        savedSalesListView.setItems(savedCartsController.getSavedSales());
+        savedSalesListView.setItems(savedCartsController.getSavedCarts());
         getSale.setDisable(true);
         removeSale.setDisable(true);
 

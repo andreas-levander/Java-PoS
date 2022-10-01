@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
-
+/** Class responsible for showing the main UI on startup */
 @Component
 public class StageInitializer implements ApplicationListener<javaFXclass.StageReadyEvent> {
     private final FxWeaver fxWeaver;
