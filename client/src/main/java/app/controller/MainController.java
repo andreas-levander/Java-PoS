@@ -50,7 +50,12 @@ public class MainController {
                 actionEvent -> fxWeaver.loadController(AddItemDialogController.class).show()
         );
         var customerController = fxWeaver.loadController(CustomerController.class);
+
         customerController.show();
+
+        var salesMarketingController = fxWeaver.loadController(SalesMarketingController.class);
+
+        salesMarketingController.show();
 
 
         cartController.newCart();
