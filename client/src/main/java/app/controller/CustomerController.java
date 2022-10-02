@@ -1,13 +1,17 @@
 package app.controller;
 
 import app.controller.sale.SaleController;
+import app.controller.sale.SalesUiController;
+import app.model.CardPayment;
+import app.model.CashPayment;
+import app.service.PaymentService;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 /** Class responsible for managing the main customer UI element */
@@ -15,9 +19,11 @@ import org.springframework.stereotype.Component;
 @FxmlView("/CustomerScreen.fxml")
 public class CustomerController {
     private final SaleController saleController;
+    private final ApplicationContext applicationContext;
 
-    public CustomerController(SaleController saleController) {
+    public CustomerController(SaleController saleController, ApplicationContext applicationContext) {
         this.saleController = saleController;
+        this.applicationContext = applicationContext;
     }
 
     private Stage stage;
@@ -39,11 +45,17 @@ public class CustomerController {
 
         cardButton.setOnAction(actionEvent -> {
             toggleSaleButtons();
-            saleController.payWithCard();
+            var paymentService = applicationContext.getBean(PaymentService.class);
+            var salesUiController = applicationContext.getBean(SalesUiController.class);
+            var cardPayment = new CardPayment(salesUiController, paymentService);
+            saleController.pay(cardPayment);
         });
         cashButton.setOnAction(actionEvent -> {
             toggleSaleButtons();
-            saleController.payWithCash();
+            var paymentService = applicationContext.getBean(PaymentService.class);
+            var salesUiController = applicationContext.getBean(SalesUiController.class);
+            var cashPayment = new CashPayment(salesUiController, paymentService);
+            saleController.pay(cashPayment);
         });
     }
 

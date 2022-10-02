@@ -1,6 +1,7 @@
 package app.controller.sale;
 
 import app.model.Cart;
+import app.model.PaymentInterface;
 import app.model.Sale;
 import app.model.SaleStatus;
 import lombok.Getter;
@@ -23,18 +24,15 @@ public class SaleController {
         currentSale = new Sale(cart, SaleStatus.WAITING_FOR_CUSTOMER);
 
         salesUiController.setStatusLabel("Waiting for customer to select payment");
-
     }
 
-    public void payWithCash() {
-        paymentController.payWithCash(currentSale);
-        currentSale.setSaleStatus(SaleStatus.DONE);
 
+    public void pay(PaymentInterface payment) {
+        payment.setSale(currentSale);
+        currentSale.setSaleStatus(SaleStatus.PENDING_PAYMENT);
+        paymentController.processPayment(payment);
     }
 
-    public void payWithCard() {
-        paymentController.payWithCard(currentSale);
-    }
 
     public void resetUI() {
         salesUiController.reset();

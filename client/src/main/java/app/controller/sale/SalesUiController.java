@@ -1,22 +1,17 @@
 package app.controller.sale;
 
-import app.controller.CustomerController;
 import app.model.CardTransactionResult;
-import app.model.Payment2;
 import app.model.Sale;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 
 @Component
-@FxmlView("/SalesUi.fxml")
+@FxmlView("/SalesUiBase.fxml")
 public class SalesUiController {
     private final FxWeaver fxWeaver;
 
@@ -27,25 +22,23 @@ public class SalesUiController {
     @FXML
     private Pane pane;
     @FXML
-    private Label label;
+    private Label waitingLabel;
     private CardUiController cardUiController;
     private CashUiController cashUiController;
 
     @FXML
     public void initialize() {
-        label.setVisible(false);
+        waitingLabel.setVisible(false);
         cardUiController = fxWeaver.loadController(CardUiController.class);
         cashUiController = fxWeaver.loadController(CashUiController.class);
-
-        cashUiController.getCancelButton().setOnAction(e -> reset());
     }
 
     public void setStatusLabel(String s) {
-        label.setText(s);
-        label.setVisible(true);
+        waitingLabel.setText(s);
+        waitingLabel.setVisible(true);
     }
 
-    public void showCardWindow(Payment2 payment) {
+    public void showCardWindow(Sale sale) {
         //cardUiController.getLabel().textProperty().bind(payment.getStatus());
         pane.getChildren().setAll(cardUiController.getCardUiAnchorPane());
     }
@@ -64,9 +57,9 @@ public class SalesUiController {
     }
 
     public void reset() {
-        label.setVisible(false);
+        waitingLabel.setVisible(false);
         cardUiController.setCardReaderStatus("");
         cardUiController.hideCardTransactionResult();
-        pane.getChildren().setAll(label);
+        pane.getChildren().setAll(waitingLabel);
     }
 }

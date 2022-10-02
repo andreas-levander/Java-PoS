@@ -60,6 +60,6 @@
             <Button fx:id="checkout" layoutX="426.0" layoutY="10.0" mnemonicParsing="false" text="Checkout" />
         </buttons>
       </ButtonBar>
-      <fx:include source="SalesUi.fxml" />
+      <fx:include source="SalesUiBase.fxml" />
   </children>
 </VBox>
