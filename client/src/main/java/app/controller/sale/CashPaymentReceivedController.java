@@ -1,23 +1,24 @@
 package app.controller.sale;
 
-import app.controller.cart.CartController;
-import app.model.Payment;
 import app.model.Sale;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 
 @FxmlView("/CashPaymentDialog_new.fxml")
 @Component
-public class CashPaymentDialog_new_Controller {
+public class CashPaymentReceivedController {
+    private final ApplicationContext applicationContext;
+
+    public CashPaymentReceivedController(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
 
     @FXML
     private TextField amountReceivedField;
@@ -34,7 +35,7 @@ public class CashPaymentDialog_new_Controller {
 
     @FXML
     public void initialize() {
-
+        cancelButton.setOnAction(actionEvent ->  applicationContext.getBean(PaymentController.class).abort());
     }
 
     public void bind(Sale sale) {

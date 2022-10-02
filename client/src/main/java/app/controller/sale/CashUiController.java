@@ -1,15 +1,12 @@
 package app.controller.sale;
 
 import app.model.Sale;
-import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -31,11 +28,11 @@ public class CashUiController {
     @FXML
     private AnchorPane changePane;
 
-    private CashPaymentDialog_new_Controller cashPaymentDialog;
+    private CashPaymentReceivedController cashPaymentDialog;
     private double total;
     @FXML
     public void initialize() {
-        cashPaymentDialog = fxWeaver.loadController(CashPaymentDialog_new_Controller.class);
+        cashPaymentDialog = fxWeaver.loadController(CashPaymentReceivedController.class);
         anchorPane.getChildren().setAll(cashPaymentDialog.getDialog());
 
         cashPaymentDialog.getConfirmButton().setOnAction(e ->{
