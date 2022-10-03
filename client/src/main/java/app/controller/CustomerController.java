@@ -2,12 +2,13 @@ package app.controller;
 
 import app.controller.sale.SaleController;
 import app.controller.sale.SalesUiController;
-import app.model.CardPayment;
-import app.model.CashPayment;
+import app.model.payment.CardPayment;
+import app.model.payment.CashPayment;
 import app.service.PaymentService;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxmlView;
@@ -28,16 +29,13 @@ public class CustomerController {
 
     private Stage stage;
     @FXML
-    private Pane customerVBox;
+    private BorderPane customerPane;
     @FXML
-    private Button cardButton;
-    @FXML
-    private Button cashButton;
-
+    private Button cardButton, cashButton;
     @FXML
     public void initialize() {
         this.stage = new Stage();
-        stage.setScene(new Scene(customerVBox));
+        stage.setScene(new Scene(customerPane));
         stage.setTitle("Customer Screen");
 
         cardButton.setDisable(true);

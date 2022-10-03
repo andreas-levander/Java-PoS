@@ -67,14 +67,26 @@ public class MainController {
 
         clearButton.setOnAction((actionEvent -> {
             cartController.newCart();
+            toggleCheckoutButton();
             saleController.resetUI();
         }));
 
         checkout.setOnAction(actionEvent -> {
             saleController.newSale(cartController.getCurrentCart());
+            toggleCheckoutButton();
             customerController.toggleSaleButtons();
         });
 
+    }
+
+    private void toggleAddRemoveButtons() {
+        addItemByBarcode.setDisable(!addItemByBarcode.isDisable());
+        removeItem.setDisable(!removeItem.isDisable());
+    }
+
+    public void toggleCheckoutButton() {
+        toggleAddRemoveButtons();
+        checkout.setDisable(!checkout.isDisable());
     }
 
 }

@@ -1,6 +1,7 @@
-package app.model;
+package app.model.payment;
 
 import app.controller.sale.SalesUiController;
+import app.model.Sale;
 import app.service.PaymentService;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -56,17 +57,13 @@ public class CardPayment implements PaymentInterface {
     }
 
     private void showResultOfCardTransaction() {
-        String resp = paymentService.getResult();
-        // TODO maybe use XML parser?
-        salesUiController.showCardTransactionResult(new CardTransactionResult(extractXmlValue(resp, "bonusCardNumber"),
-                extractXmlValue(resp, "bonusState"), extractXmlValue(resp, "paymentCardNumber"), extractXmlValue(resp, "paymentState"),extractXmlValue(resp, "paymentCardType")));
+        var result = paymentService.getResult();
+        salesUiController.showCardTransactionResult(result);
     }
 
-    // Hacky solution, if anyone wants to take a crack at with an XML Parser
-    // feel free :D
-    private String extractXmlValue(String ret, String name) {
-        int i1 = ret.indexOf("<" + name + ">");
-        int i2 = ret.indexOf("</" + name + ">");
-        return (i1 > -1 && i2 > -1) ? ret.substring(i1 + name.length() + 2, i2) : "";
+    @Override
+    public void reset() {
+        paymentService.resetCardReader();
     }
+
 }

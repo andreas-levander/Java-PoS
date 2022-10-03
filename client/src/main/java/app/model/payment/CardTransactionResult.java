@@ -1,4 +1,4 @@
-package app.model;
+package app.model.payment;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.AllArgsConstructor;
@@ -14,4 +14,6 @@ public class CardTransactionResult {
     private String paymentCardNumber;
     private String paymentState;
     private String paymentCardType;
+    private String goodThruMonth;
+    private String goodThruYear;
 }

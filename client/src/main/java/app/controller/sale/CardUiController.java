@@ -1,6 +1,6 @@
 package app.controller.sale;
 
-import app.model.CardTransactionResult;
+import app.model.payment.CardTransactionResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,24 +15,16 @@ import java.util.List;
 @Component
 @FxmlView("/CardUi.fxml")
 public class CardUiController {
-    private final ApplicationContext applicationContext;
-
-    public CardUiController(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
 
     @FXML
     private AnchorPane cardUiAnchorPane;
     @FXML
     private Label cardReaderStatus, bonusCardNumber, bonusState, paymentCardNumber, paymentState, paymentCardType;
-    @FXML
-    private Button abort;
 
     private List<Label> resultLabels;
 
     @FXML
     public void initialize() {
-        abort.setOnAction(actionEvent -> applicationContext.getBean(PaymentController.class).abort());
         resultLabels = new ArrayList<>(List.of(bonusCardNumber, bonusState, paymentCardNumber, paymentState, paymentCardType));
         hideCardTransactionResult();
     }

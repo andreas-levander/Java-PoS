@@ -1,6 +1,6 @@
 package app.controller.sale;
 
-import app.model.PaymentInterface;
+import app.model.payment.PaymentInterface;
 import org.springframework.stereotype.Component;
 
 
@@ -15,6 +15,11 @@ public class PaymentController {
 
     public void abort() {
         currentPayment.abort();
+    }
+
+    public void reset() {
+        if (currentPayment != null)
+            currentPayment.reset();
     }
 
 }

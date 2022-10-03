@@ -6,9 +6,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="189.0" prefWidth="324.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.sale.CashUiController">
+<AnchorPane fx:id="anchorPane" prefHeight="150.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.sale.CashUiController">
    <children>
-      <AnchorPane fx:id="changePane" prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane fx:id="changePane" prefHeight="150.0" prefWidth="200.0">
          <children>
             <Label fx:id="cashTotalLabel" layoutX="163.0" layoutY="72.0" prefHeight="17.0" prefWidth="75.0" />
             <Text layoutX="114.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash Payment">

@@ -14,16 +14,9 @@ import org.springframework.stereotype.Component;
 @FxmlView("/CashPaymentDialog_new.fxml")
 @Component
 public class CashPaymentReceivedController {
-    private final ApplicationContext applicationContext;
-
-    public CashPaymentReceivedController(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
 
     @FXML
     private TextField amountReceivedField;
-    @FXML
-    private Button cancelButton;
     @FXML
     private Button confirmButton;
     @FXML
@@ -35,7 +28,6 @@ public class CashPaymentReceivedController {
 
     @FXML
     public void initialize() {
-        cancelButton.setOnAction(actionEvent ->  applicationContext.getBean(PaymentController.class).abort());
     }
 
     public void bind(Sale sale) {
@@ -48,10 +40,6 @@ public class CashPaymentReceivedController {
 
     public TextField getAmountReceivedField() {
         return amountReceivedField;
-    }
-
-    public Button getCancelButton() {
-        return cancelButton;
     }
 
     public Button getConfirmButton() {

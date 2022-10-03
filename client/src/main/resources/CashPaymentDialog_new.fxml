@@ -20,7 +20,6 @@
       <TextField fx:id="amountReceivedField" layoutX="112.0" layoutY="54.0" prefHeight="25.0" prefWidth="85.0" />
       <ButtonBar layoutX="12.0" layoutY="97.0" prefHeight="40.0" prefWidth="200.0">
          <buttons>
-            <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" />
             <Button fx:id="confirmButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Confirm" />
          </buttons>
       </ButtonBar>

@@ -56,10 +56,6 @@ public class CashUiController {
         cashPaymentDialog.bind(sale);
     }
 
-    public Button getCancelButton() {
-        return cashPaymentDialog.getCancelButton();
-    }
-
     private void showChangePane() {
         anchorPane.getChildren().setAll(changePane);
     }

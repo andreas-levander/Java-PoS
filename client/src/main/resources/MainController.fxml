@@ -37,7 +37,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="mainVbox" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.MainController">
+<VBox fx:id="mainVbox" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.MainController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -54,9 +54,9 @@
         <buttons>
             <Button fx:id="addItemByBarcode" layoutX="127.0" layoutY="18.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" text="Add Product" />
             <Button fx:id="removeItem" mnemonicParsing="false" text="Remove Product" />
-          <Button fx:id="clearButton" mnemonicParsing="false" text="New Sale" />
-          <Button fx:id="saveCart" mnemonicParsing="false" text="Save Sale" />
-          <Button fx:id="getSavedCart" mnemonicParsing="false" text="Show Saved Sales" />
+          <Button fx:id="clearButton" mnemonicParsing="false" text="New Cart" />
+          <Button fx:id="saveCart" mnemonicParsing="false" text="Save Cart" />
+          <Button fx:id="getSavedCart" mnemonicParsing="false" text="Show Saved Carts" />
             <Button fx:id="checkout" layoutX="426.0" layoutY="10.0" mnemonicParsing="false" text="Checkout" />
         </buttons>
       </ButtonBar>

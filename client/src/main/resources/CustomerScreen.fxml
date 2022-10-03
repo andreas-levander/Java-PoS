@@ -4,14 +4,18 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="customerVBox" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.CustomerController">
-
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane fx:id="customerPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.CustomerController">
+    <left>
     <fx:include source="CustomerCart.fxml" />
+    </left>
+    <bottom>
    <ButtonBar prefHeight="40.0" prefWidth="200.0">
      <buttons>
        <Button fx:id="cashButton" mnemonicParsing="false" text="Cash" />
          <Button fx:id="cardButton" layoutX="535.0" layoutY="10.0" mnemonicParsing="false" text="Card" />
      </buttons>
    </ButtonBar>
+    </bottom>
 
-</VBox>
+</BorderPane>
