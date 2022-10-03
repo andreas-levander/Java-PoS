@@ -23,6 +23,7 @@ public class CashPayment implements PaymentInterface{
     @Override
     public void process() {
         salesUiController.showCashWindow(sale);
+        paymentService.openCashBox();
         sale.setSaleStatus(SaleStatus.DONE);
     }
 

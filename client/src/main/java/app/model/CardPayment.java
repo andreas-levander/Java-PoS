@@ -34,17 +34,13 @@ public class CardPayment implements PaymentInterface {
     @Override
     public void process() {
         salesUiController.showCardWindow(sale);
-
-        //var response = paymentService.waitForPayment(amount);
-
+        paymentService.waitForPayment(String.valueOf(sale.getCart().getTotalPrice().get()));
         timeline.playFromStart();
     }
 
     @Override
     public void abort() {
-        // TODO call abort enpoint on cardreader
-        // paymentservice.abort()
-
+        paymentService.abortCardPayment();
         salesUiController.reset();
         timeline.stop();
     }
@@ -60,9 +56,17 @@ public class CardPayment implements PaymentInterface {
     }
 
     private void showResultOfCardTransaction() {
-        // TODO get result
-        // TODO show result
-        salesUiController.showCardTransactionResult(new CardTransactionResult("12345",
-                "ACCEPTED", "45678", "ACCEPTED","DEBIT"));
+        String resp = paymentService.getResult();
+        // TODO maybe use XML parser?
+        salesUiController.showCardTransactionResult(new CardTransactionResult(extractXmlValue(resp, "bonusCardNumber"),
+                extractXmlValue(resp, "bonusState"), extractXmlValue(resp, "paymentCardNumber"), extractXmlValue(resp, "paymentState"),extractXmlValue(resp, "paymentCardType")));
+    }
+
+    // Hacky solution, if anyone wants to take a crack at with an XML Parser
+    // feel free :D
+    private String extractXmlValue(String ret, String name) {
+        int i1 = ret.indexOf("<" + name + ">");
+        int i2 = ret.indexOf("</" + name + ">");
+        return (i1 > -1 && i2 > -1) ? ret.substring(i1 + name.length() + 2, i2) : "";
     }
 }
