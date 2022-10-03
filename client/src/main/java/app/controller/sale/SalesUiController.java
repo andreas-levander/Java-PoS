@@ -77,6 +77,7 @@ public class SalesUiController {
         abort.setVisible(false);
         cardUiController.setCardReaderStatus("");
         cardUiController.hideCardTransactionResult();
+        cashUiController.showDialogPane();
         pane.setCenter(waitingLabel);
     }
 }

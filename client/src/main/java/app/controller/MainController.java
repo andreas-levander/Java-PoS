@@ -18,22 +18,11 @@ public class MainController {
     private final CartController cartController;
     private final SavedCartsController savedCartsController;
     private final SaleController saleController;
-
     private final FxWeaver fxWeaver;
 
     @FXML
-    private Button addItemByBarcode;
-    @FXML
-    private Button clearButton;
+    private Button addItemByBarcode, clearButton, getSavedCart, saveCart, removeItem, checkout;
 
-    @FXML
-    private Button getSavedCart;
-    @FXML
-    private Button saveCart;
-    @FXML
-    private Button removeItem;
-    @FXML
-    private Button checkout;
 
     public MainController(FxWeaver fxWeaver, CartController cartController, SavedCartsController savedCartsController,
                           SaleController saleController) {
@@ -41,7 +30,6 @@ public class MainController {
         this.cartController = cartController;
         this.savedCartsController = savedCartsController;
         this.saleController = saleController;
-
     }
 
     @FXML

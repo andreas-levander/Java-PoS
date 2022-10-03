@@ -54,12 +54,11 @@ class CartIntegrationTest {
      */
     @Test
     void main_and_customer_screen_visible(FxRobot robot) {
-        var mainScreen = robot.lookup("#mainVbox").query();
+        var mainScreen = robot.lookup("#mainPane").query();
         Assertions.assertThat(mainScreen).isVisible();
 
-        var customerScreen = robot.lookup("#customerVBox").query();
+        var customerScreen = robot.lookup("#customerPane").query();
         Assertions.assertThat(customerScreen).isVisible();
-
 
     }
 

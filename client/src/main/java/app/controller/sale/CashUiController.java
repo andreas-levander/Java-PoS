@@ -59,5 +59,9 @@ public class CashUiController {
     private void showChangePane() {
         anchorPane.getChildren().setAll(changePane);
     }
+
+    public void showDialogPane() {
+        anchorPane.getChildren().setAll(cashPaymentDialog.getDialog());
+    }
 }
 

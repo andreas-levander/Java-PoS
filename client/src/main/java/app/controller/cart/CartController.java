@@ -43,8 +43,8 @@ public class CartController {
     public List<Item> searchForProduct(String searchString) {
             List<Item> items;
             if(NumberUtils.isParsable(searchString)) {
-                //items = itemService.getByBarcodeForTest(searchString);
-                items = itemService.getByBarcode(searchString);
+                items = itemService.getByBarcodeForTest(searchString);
+                //items = itemService.getByBarcode(searchString);
             } else {
                 // search by name
                 items = itemService.getByBarcodeForTest(searchString);

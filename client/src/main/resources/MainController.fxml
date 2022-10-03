@@ -37,19 +37,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="mainVbox" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.MainController">
-  <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <children>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane fx:id="mainPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.MainController">
+    <left>
             <fx:include source="CashierCart.fxml" />
-
-            <AnchorPane layoutX="320.0" prefHeight="285.0" prefWidth="310.0">
-               <children>
-                 <fx:include source="PaymentPanel.fxml" />
-               </children>
-            </AnchorPane>
-      </children>
-    </AnchorPane>
+    </left>
+    <bottom>
       <ButtonBar prefHeight="40.0" prefWidth="200.0">
         <buttons>
             <Button fx:id="addItemByBarcode" layoutX="127.0" layoutY="18.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" text="Add Product" />
@@ -60,6 +53,9 @@
             <Button fx:id="checkout" layoutX="426.0" layoutY="10.0" mnemonicParsing="false" text="Checkout" />
         </buttons>
       </ButtonBar>
+    </bottom>
+    <center>
       <fx:include source="SalesUiBase.fxml" />
-  </children>
-</VBox>
+    </center>
+
+</BorderPane>
