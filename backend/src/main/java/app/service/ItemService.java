@@ -64,7 +64,11 @@ public class ItemService {
                 }).block();
 
         try {
-            return xmlMapper.readValue(response, ProductCatalogItemList.class);
+            var itemlist = xmlMapper.readValue(response, ProductCatalogItemList.class);
+            if (itemlist.getProducts() == null) {
+                throw new NoItemInProductCatalog("Item with name: " + name +  " not found in ProductCatalog");
+            }
+            return itemlist;
         } catch (JsonProcessingException e) {
 
             throw new RuntimeException(e);

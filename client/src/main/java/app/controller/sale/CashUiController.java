@@ -51,8 +51,8 @@ public class CashUiController {
 
 
     public void bind(Sale sale) {
-        total = sale.getCart().getTotalPrice().get();
-        cashTotalLabel.textProperty().bind(sale.getCart().getTotalPrice().asString());
+        total = sale.getCart().getTotalPrice().getNumber().doubleValue();
+        cashTotalLabel.textProperty().bind(sale.getCart().getObservableTotalPrice().asString());
         cashPaymentDialog.bind(sale);
     }
 

@@ -47,8 +47,8 @@ public class CartController {
                 //items = itemService.getByBarcode(searchString);
             } else {
                 // search by name
-                items = itemService.getByBarcodeForTest(searchString);
-                //items = itemService.getByName(searchString);
+                //items = itemService.getByBarcodeForTest(searchString);
+                items = itemService.getByName(searchString);
             }
 
             return items;

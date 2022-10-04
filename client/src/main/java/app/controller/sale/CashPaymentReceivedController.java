@@ -31,7 +31,7 @@ public class CashPaymentReceivedController {
     }
 
     public void bind(Sale sale) {
-        totalLabel.textProperty().bind(sale.getCart().getTotalPrice().asString());
+        totalLabel.textProperty().bind(sale.getCart().getObservableTotalPrice().asString());
     }
 
     public AnchorPane getDialog() {

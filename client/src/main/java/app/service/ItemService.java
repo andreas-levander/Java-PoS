@@ -2,6 +2,7 @@ package app.service;
 
 import app.errors.ItemNotFoundException;
 import app.model.Item;
+import org.javamoney.moneta.Money;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -58,6 +59,6 @@ public class ItemService {
     }
 
     public List<Item> getByBarcodeForTest(String barCode) {
-        return new ArrayList<>(List.of(new Item(barCode, "1", "123", new ArrayList<>(), (double) Math.round(((Math.random() * 100) * 1000) / 1000))));
+        return new ArrayList<>(List.of(new Item(barCode, "1", "123", new ArrayList<>(), Money.of((double) Math.round(((Math.random() * 100) * 1000) / 1000), "EUR"))));
     }
 }

@@ -28,7 +28,7 @@ public class CashierCartController {
 
     public void bind(Cart cart) {
         cashierCartListView.setItems(cart.getCart());
-        cashierTotalPrice.textProperty().bind(cart.getTotalPrice().asString());
+        cashierTotalPrice.textProperty().bind(cart.getObservableTotalPrice().asString());
     }
 
     public int getSelectedIndex() {

@@ -35,7 +35,7 @@ public class CardPayment implements PaymentInterface {
     @Override
     public void process() {
         salesUiController.showCardWindow(sale);
-        paymentService.waitForPayment(String.valueOf(sale.getCart().getTotalPrice().get()));
+        paymentService.waitForPayment(String.valueOf(sale.getCart().getTotalPrice().getNumber().doubleValue()));
         timeline.playFromStart();
     }
 
