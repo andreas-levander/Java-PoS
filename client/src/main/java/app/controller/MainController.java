@@ -41,11 +41,6 @@ public class MainController {
 
         customerController.show();
 
-        var salesMarketingController = fxWeaver.loadController(SalesMarketingController.class);
-
-        salesMarketingController.show();
-
-
         cartController.newCart();
 
         getSavedCart.setOnAction(actionEvent -> fxWeaver.loadController(SavedCartsDialogController.class).show());
@@ -55,7 +50,7 @@ public class MainController {
 
         clearButton.setOnAction((actionEvent -> {
             cartController.newCart();
-            toggleCheckoutButton();
+            if (checkout.isDisable()) toggleCheckoutButton();
             saleController.resetUI();
         }));
 
@@ -72,8 +67,14 @@ public class MainController {
         removeItem.setDisable(!removeItem.isDisable());
     }
 
+    private void toggleSaveCartButtons() {
+        saveCart.setDisable(!saveCart.isDisable());
+        getSavedCart.setDisable(!getSavedCart.isDisable());
+    }
+
     public void toggleCheckoutButton() {
         toggleAddRemoveButtons();
+        toggleSaveCartButtons();
         checkout.setDisable(!checkout.isDisable());
     }
 
