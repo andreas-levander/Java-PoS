@@ -7,6 +7,7 @@ import app.model.Cart;
 import app.model.Item;
 import app.service.ItemService;
 import org.assertj.core.api.Assertions;
+import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,14 +20,13 @@ import java.util.List;
 class CartControllerTest {
     AutoCloseable autoCloseable;
     CartController cartController;
-    @Mock ItemService itemService;
     @Mock CustomerCartController customerCartController;
     @Mock CashierCartController cashierCartController;
 
     @BeforeEach
     void setUp() {
         autoCloseable = MockitoAnnotations.openMocks(this);
-        cartController = new CartController(cashierCartController,customerCartController,itemService);
+        cartController = new CartController(cashierCartController,customerCartController);
     }
 
     @AfterEach
@@ -48,7 +48,7 @@ class CartControllerTest {
         Mockito.when(cashierCartController.getSelectedIndex()).thenReturn(0);
 
         cartController.newCart();
-        var newItem = new Item("test","1","123", List.of("asd"),1.5);
+        var newItem = new Item("test","1","123", List.of("asd"),Money.of(2.5, "EUR"));
         cartController.addToCart(newItem);
 
         Assertions.assertThat(cartController.getCurrentCart().getCart()).contains(newItem);
@@ -59,20 +59,10 @@ class CartControllerTest {
         Assertions.assertThat(cartController.getCurrentCart().getCart()).doesNotContain(newItem);
     }
 
-    @Test
-    void searchForProduct() {
-        var searchStringText = "testing";
-        cartController.searchForProduct(searchStringText);
-        Mockito.verify(itemService).getByName(searchStringText);
-
-        var searchStringNumber = "12345";
-        cartController.searchForProduct(searchStringNumber);
-        Mockito.verify(itemService).getByBarcode(searchStringNumber);
-    }
 
     @Test
     void addToCart() {
-        var newItem = new Item("test","1","123", List.of("asd"),1.5);
+        var newItem = new Item("test","1","123", List.of("asd"), Money.of(2.5, "EUR"));
         cartController.newCart();
         cartController.addToCart(newItem);
         var cart = cartController.getCurrentCart();

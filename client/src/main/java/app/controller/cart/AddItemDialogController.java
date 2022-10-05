@@ -21,9 +21,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class AddItemDialogController {
     private final CartController cartController;
+    private final ItemController itemController;
 
-    public AddItemDialogController(CartController cartController) {
+    public AddItemDialogController(CartController cartController, ItemController itemController) {
         this.cartController = cartController;
+        this.itemController = itemController;
     }
 
     private Stage stage;
@@ -48,7 +50,7 @@ public class AddItemDialogController {
 
         search.setOnAction(actionEvent -> {
             try {
-                var items = cartController.searchForProduct(textField.getText());
+                var items = itemController.searchForItem(textField.getText());
                 searchList.getItems().setAll(items);
             } catch (Exception e) {
                 // show error in ui ?

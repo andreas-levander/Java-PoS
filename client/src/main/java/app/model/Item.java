@@ -6,7 +6,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.jackson.Jacksonized;
 import org.javamoney.moneta.Money;
+import org.javamoney.moneta.format.CurrencyStyle;
+
+import javax.money.format.AmountFormatQueryBuilder;
+import javax.money.format.MonetaryAmountFormat;
+import javax.money.format.MonetaryFormats;
 import java.util.List;
+import java.util.Locale;
 
 @AllArgsConstructor @Setter @Getter
 @Jacksonized @Builder
@@ -19,6 +25,10 @@ public class Item {
 
     @Override
     public String toString() {
-        return name + " - " + price.toString();
+        return name + " - " + formatMoney().format(price);
+    }
+
+    private MonetaryAmountFormat formatMoney() {
+        return MonetaryFormats.getAmountFormat(AmountFormatQueryBuilder.of(Locale.US).set(CurrencyStyle.SYMBOL).build());
     }
 }

@@ -13,13 +13,11 @@ import java.util.List;
 public class CartController {
     private final CashierCartController cashierCartController;
     private final CustomerCartController customerCartController;
-    private final ItemService itemService;
     private Cart currentCart;
 
-    public CartController(CashierCartController cashierCartController, CustomerCartController customerCartController, ItemService itemService) {
+    public CartController(CashierCartController cashierCartController, CustomerCartController customerCartController) {
         this.cashierCartController = cashierCartController;
         this.customerCartController = customerCartController;
-        this.itemService = itemService;
     }
 
     public void newCart() {
@@ -38,21 +36,6 @@ public class CartController {
 
     public void removeSelectedItem() {
         currentCart.removeItem(cashierCartController.getSelectedIndex());
-    }
-
-    public List<Item> searchForProduct(String searchString) {
-            List<Item> items;
-            if(NumberUtils.isParsable(searchString)) {
-                items = itemService.getByBarcodeForTest(searchString);
-                //items = itemService.getByBarcode(searchString);
-            } else {
-                // search by name
-                //items = itemService.getByBarcodeForTest(searchString);
-                items = itemService.getByName(searchString);
-            }
-
-            return items;
-
     }
 
     public void addToCart(Item item) {

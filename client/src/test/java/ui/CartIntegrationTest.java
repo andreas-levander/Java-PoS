@@ -6,6 +6,7 @@ import app.model.Item;
 import app.service.ItemService;
 import javafx.scene.control.Label;
 import net.rgielen.fxweaver.core.FxWeaver;
+import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -42,7 +43,7 @@ class CartIntegrationTest {
         Mockito.when(itemService.getByBarcode(Mockito.anyString())).thenAnswer(i ->
         {
             var arg = i.getArguments()[0].toString();
-            return new ArrayList<>((List.of(new Item(arg, arg, arg, new ArrayList<>(), 2.0))));
+            return new ArrayList<>((List.of(new Item(arg, arg, arg, new ArrayList<>(), Money.of(2.0, "EUR")))));
         });
         FxWeaver fxWeaver = applicationContext.getBean(FxWeaver.class);
         stage.setScene(new Scene(fxWeaver.loadView(MainController.class), 600, 400));

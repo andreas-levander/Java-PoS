@@ -34,7 +34,7 @@ public class SalesMarketingController {
         stage.setScene(new Scene(smBorderPane));
         stage.setTitle("Sales/Marketing");
 
-        ObservableList<String> availableChoices = FXCollections.observableArrayList("","MOST SOLD", "LEAST SOLD");
+        ObservableList<String> availableChoices = FXCollections.observableArrayList("MOST SOLD", "LEAST SOLD");
         choiceBox.setItems(availableChoices);
 
         searchButton.setOnAction(actionEvent -> getSelectedChoice());

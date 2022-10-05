@@ -8,6 +8,7 @@ import app.service.PaymentService;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -33,6 +34,8 @@ public class CustomerController {
     @FXML
     private Button cardButton, cashButton;
     @FXML
+    private Label paymentLabel;
+    @FXML
     public void initialize() {
         this.stage = new Stage();
         stage.setScene(new Scene(customerPane));
@@ -40,6 +43,7 @@ public class CustomerController {
 
         cardButton.setDisable(true);
         cashButton.setDisable(true);
+        paymentLabel.setVisible(false);
 
         cardButton.setOnAction(actionEvent -> {
             toggleSaleButtons();
@@ -62,6 +66,7 @@ public class CustomerController {
     }
 
     public void toggleSaleButtons() {
+        paymentLabel.setVisible(!paymentLabel.isVisible());
         cashButton.setDisable(!cashButton.isDisable());
         cardButton.setDisable(!cardButton.isDisable());
     }
