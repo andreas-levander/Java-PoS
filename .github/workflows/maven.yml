@@ -23,4 +23,4 @@ jobs:
         distribution: 'corretto'
         cache: maven
     - name: Build Client with Maven
-      run: mvn -B package --file ./client/pom.xml
+      run: xvfb-run mvn -B package --file ./client/pom.xml
