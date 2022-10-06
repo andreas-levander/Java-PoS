@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 
 /** Class responsible for managing the saved carts UI elements */
-@FxmlView("/SavedSalesDialog.fxml")
+@FxmlView("/SavedCartsDialog.fxml")
 @Component
 public class SavedCartsDialogController {
     private final SavedCartsController savedCartsController;
@@ -35,7 +35,7 @@ public class SavedCartsDialogController {
     public void initialize() {
         this.stage = new Stage();
         stage.setScene(new Scene(savedSalesVBox));
-        stage.setTitle("Saved sales");
+        stage.setTitle("Saved carts");
         savedSalesListView.setItems(savedCartsController.getSavedCarts());
         getSale.setDisable(true);
         removeSale.setDisable(true);

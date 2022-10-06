@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 /** Class responsible for managing the main customer UI element */
@@ -49,7 +50,7 @@ public class CustomerController {
             toggleSaleButtons();
             var paymentService = applicationContext.getBean(PaymentService.class);
             var salesUiController = applicationContext.getBean(SalesUiController.class);
-            var cardPayment = new CardPayment(salesUiController, paymentService);
+            var cardPayment = new CardPayment(salesUiController, paymentService, applicationContext);
             saleController.pay(cardPayment);
         });
         cashButton.setOnAction(actionEvent -> {

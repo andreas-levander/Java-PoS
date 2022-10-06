@@ -1,12 +1,10 @@
 package app.model;
 
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ObservableNumberValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
 import org.javamoney.moneta.Money;
-
 import java.util.UUID;
 
 @Getter
@@ -15,12 +13,13 @@ public class Cart {
     private final UUID id;
     private final SimpleDoubleProperty observableTotalPrice;
     private Money totalPrice;
+    private final String currency = "EUR";
 
     public Cart() {
         cart = FXCollections.observableArrayList();
         observableTotalPrice = new SimpleDoubleProperty(0.0);
         id = UUID.randomUUID();
-        totalPrice = Money.of(0, "EUR");
+        totalPrice = Money.of(0,  currency);
     }
 
     public void addItem(Item item) {

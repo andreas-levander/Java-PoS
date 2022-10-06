@@ -73,7 +73,6 @@ class CartIntegrationTest {
 
         // then:
         var test = robot.lookup("#dialog").query();
-        System.out.println(test);
         Assertions.assertThat(test).isVisible();
     }
 

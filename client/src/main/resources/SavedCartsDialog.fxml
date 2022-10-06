@@ -9,9 +9,9 @@
 
 <VBox fx:id="savedSalesVBox" alignment="CENTER" prefHeight="255.0" prefWidth="323.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.cart.SavedCartsDialogController">
 
-    <Label prefHeight="17.0" prefWidth="71.0" text="Saved sales">
+    <Label prefHeight="17.0" prefWidth="71.0" text="Saved carts">
       <font>
-         <Font size="13.0" />
+         <Font name="System Bold" size="13.0" />
       </font></Label>
    <ListView fx:id="savedSalesListView" prefHeight="200.0" prefWidth="200.0" />
    <ButtonBar maxWidth="-Infinity" prefHeight="37.0" prefWidth="196.0">
