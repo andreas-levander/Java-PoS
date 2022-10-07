@@ -1,5 +1,6 @@
 package app.controller.sale;
 
+import app.controller.CustomerController;
 import app.controller.MainController;
 import app.model.payment.CardTransactionResult;
 import app.model.Sale;
@@ -73,6 +74,7 @@ public class SalesUiController {
     }
 
     public void reset() {
+        applicationContext.getBean(CustomerController.class).disableSaleButtons();
         waitingLabel.setVisible(false);
         abort.setVisible(false);
         cardUiController.setCardReaderStatus("");

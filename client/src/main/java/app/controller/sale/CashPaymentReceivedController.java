@@ -1,17 +1,19 @@
 package app.controller.sale;
 
 import app.model.Sale;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import net.rgielen.fxweaver.core.FxmlView;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 
-@FxmlView("/CashPaymentDialog_new.fxml")
+@FxmlView("/CashPaymentDialog.fxml")
 @Component
 public class CashPaymentReceivedController {
 
@@ -22,9 +24,7 @@ public class CashPaymentReceivedController {
     @FXML
     private AnchorPane dialog;
     @FXML
-    private Label totalLabel;
-    @FXML
-    private Label errorLabel;
+    private Label totalLabel, errorLabel;
 
     @FXML
     public void initialize() {
@@ -44,5 +44,13 @@ public class CashPaymentReceivedController {
 
     public Button getConfirmButton() {
         return confirmButton;
+    }
+
+    public void showNotification(String message, Color color) {
+        errorLabel.setTextFill(color);
+        errorLabel.setText(message);
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(e -> errorLabel.setText(""));
+        delay.playFromStart();
     }
 }

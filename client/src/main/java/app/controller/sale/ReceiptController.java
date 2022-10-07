@@ -1,7 +1,9 @@
 package app.controller.sale;
 
+import app.controller.CustomerController;
 import app.model.Sale;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -11,17 +13,28 @@ import java.io.File;
 import java.io.IOException;
 
 @Component
-public class ReceiptListener {
+public class ReceiptController {
+    private final ApplicationContext ctx;
     @Value("./receipts/")
     private String receiptLocation;
+    private Sale sale;
+
+    public ReceiptController(ApplicationContext ctx) {
+        this.ctx = ctx;
+    }
 
     @EventListener
     public void handler(SaleFinishedEvent event) {
 
         System.out.println("sale finished from receipt listener");
+        sale = event.sale();
+        ctx.getBean(CustomerController.class).toggleReceiptButton();
 
-        var receipt = createReceipt(event.sale());
-        saveImage(event.sale().getId().toString(), receipt);
+    }
+
+    public void printReceipt() {
+        var receipt = createReceipt(sale);
+        saveImage(sale.getId().toString(), receipt);
     }
 
     private BufferedImage createReceipt(Sale sale) {
