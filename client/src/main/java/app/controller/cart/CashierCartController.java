@@ -27,7 +27,7 @@ public class CashierCartController {
     }
 
     public void bind(Cart cart) {
-        cashierCartListView.setItems(cart.getCart());
+        cashierCartListView.setItems(cart.getItems());
         cashierTotalPrice.textProperty().bind(cart.getObservableTotalPrice().asString());
     }
 

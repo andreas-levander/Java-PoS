@@ -1,5 +1,6 @@
-package app.model;
+package app.repository;
 
+import app.model.tables.Price;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

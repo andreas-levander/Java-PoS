@@ -1,5 +1,6 @@
 package app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,30 +10,32 @@ import java.util.UUID;
 
 @Getter
 public class Cart {
-    private final ObservableList<Item> cart;
+    private final ObservableList<Item> items;
     private final UUID id;
+    @JsonIgnore
     private final SimpleDoubleProperty observableTotalPrice;
     private Money totalPrice;
+    @JsonIgnore
     private final String currency = "EUR";
 
     public Cart() {
-        cart = FXCollections.observableArrayList();
+        items = FXCollections.observableArrayList();
         observableTotalPrice = new SimpleDoubleProperty(0.0);
         id = UUID.randomUUID();
         totalPrice = Money.of(0,  currency);
     }
 
     public void addItem(Item item) {
-        cart.add(item);
+        items.add(item);
         totalPrice = totalPrice.add(item.getPrice());
         observableTotalPrice.set(totalPrice.getNumber().doubleValue());
     }
 
     public void removeItem(int index) {
-        if (index >= 0 && index < cart.size()) {
-            totalPrice = totalPrice.subtract(cart.get(index).getPrice());
+        if (index >= 0 && index < items.size()) {
+            totalPrice = totalPrice.subtract(items.get(index).getPrice());
             observableTotalPrice.set(totalPrice.getNumber().doubleValue());
-            cart.remove(index);
+            items.remove(index);
         }
     }
 

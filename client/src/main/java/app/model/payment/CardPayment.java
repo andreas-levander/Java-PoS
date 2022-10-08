@@ -1,6 +1,6 @@
 package app.model.payment;
 
-import app.controller.sale.SaleFinishedEvent;
+import app.model.SaleFinishedEvent;
 import app.controller.sale.SalesUiController;
 import app.model.Sale;
 import app.model.SaleStatus;

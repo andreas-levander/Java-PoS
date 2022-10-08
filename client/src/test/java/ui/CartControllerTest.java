@@ -5,7 +5,6 @@ import app.controller.cart.CashierCartController;
 import app.controller.cart.CustomerCartController;
 import app.model.Cart;
 import app.model.Item;
-import app.service.ItemService;
 import org.assertj.core.api.Assertions;
 import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.AfterEach;
@@ -51,12 +50,12 @@ class CartControllerTest {
         var newItem = new Item("test","1","123", List.of("asd"),Money.of(2.5, "EUR"));
         cartController.addToCart(newItem);
 
-        Assertions.assertThat(cartController.getCurrentCart().getCart()).contains(newItem);
+        Assertions.assertThat(cartController.getCurrentCart().getItems()).contains(newItem);
 
         cartController.removeSelectedItem();
         Mockito.verify(cashierCartController).getSelectedIndex();
 
-        Assertions.assertThat(cartController.getCurrentCart().getCart()).doesNotContain(newItem);
+        Assertions.assertThat(cartController.getCurrentCart().getItems()).doesNotContain(newItem);
     }
 
 
@@ -66,6 +65,6 @@ class CartControllerTest {
         cartController.newCart();
         cartController.addToCart(newItem);
         var cart = cartController.getCurrentCart();
-        Assertions.assertThat(cart.getCart()).contains(newItem);
+        Assertions.assertThat(cart.getItems()).contains(newItem);
     }
 }

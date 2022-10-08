@@ -2,6 +2,7 @@ package app.controller.sale;
 
 import app.controller.CustomerController;
 import app.model.Sale;
+import app.model.SaleFinishedEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;
@@ -49,7 +50,7 @@ public class ReceiptController {
         g.drawString("Receipt for sale: " + sale.getId().toString(), x, y);
         y += 20;
         // draw items in cart
-        for (var item : cart.getCart()) {
+        for (var item : cart.getItems()) {
             g.drawString(item.toString(),x,y);
             y += 20;
         }

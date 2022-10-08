@@ -25,7 +25,7 @@ public class CustomerCartController {
 
 
     public void bind(Cart cart) {
-        customerListView.setItems(cart.getCart());
+        customerListView.setItems(cart.getItems());
         customerTotalPrice.textProperty().bind(cart.getObservableTotalPrice().asString());
     }
 }

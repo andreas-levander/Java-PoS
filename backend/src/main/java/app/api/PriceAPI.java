@@ -1,12 +1,9 @@
 package app.api;
-import app.controller.ItemController;
 import app.model.Item;
-import app.model.Price;
+import app.model.tables.Price;
 import app.service.PriceService;
 import org.javamoney.moneta.Money;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController
@@ -29,7 +26,7 @@ public class PriceAPI {
         return price.getPrice();
     }
 
-    @GetMapping(path = "/save/")
+    @PostMapping(path = "/save/")
     public void savePrice(@RequestBody Item item) {
         var price = new Price();
         price.setProductId(Integer.parseInt(item.getId()));

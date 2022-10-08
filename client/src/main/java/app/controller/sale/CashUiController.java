@@ -1,6 +1,7 @@
 package app.controller.sale;
 
 import app.model.Sale;
+import app.model.SaleFinishedEvent;
 import app.model.SaleStatus;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
