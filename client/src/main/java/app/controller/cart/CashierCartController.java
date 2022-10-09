@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 /** Class responsible for managing the cashier cart UI elements */
 @Component
-@FxmlView("/CashierCart.fxml")
+@FxmlView("/adminUI/cart/CashierCart.fxml")
 public class CashierCartController {
 
     @FXML

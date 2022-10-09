@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 
 /** Class responsible for managing the UI element for searching and adding new Items to the currently shown cart */
-@FxmlView("/AddItemDialog.fxml")
+@FxmlView("/adminUI/cart/AddItemDialog.fxml")
 @Component
 public class AddItemDialogController {
     private final CartController cartController;
@@ -58,9 +58,7 @@ public class AddItemDialogController {
                 throw new RuntimeException(e);
             }
         });
-        searchList.getSelectionModel().selectedItemProperty().addListener((observableValue, sale, t1) -> {
-            addToCart.setDisable(t1 == null);
-        });
+        searchList.getSelectionModel().selectedItemProperty().addListener((observableValue, sale, t1) -> addToCart.setDisable(t1 == null));
         addToCart.setDisable(true);
         addToCart.setOnAction(e -> {
             cartController.addToCart(searchList.getSelectionModel().getSelectedItem());

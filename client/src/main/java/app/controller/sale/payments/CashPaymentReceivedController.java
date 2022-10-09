@@ -1,6 +1,6 @@
-package app.controller.sale;
+package app.controller.sale.payments;
 
-import app.model.Sale;
+import app.model.sale.Sale;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,7 +13,7 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 
 
-@FxmlView("/CashPaymentDialog.fxml")
+@FxmlView("/adminUI/payments/CashPaymentDialog.fxml")
 @Component
 public class CashPaymentReceivedController {
 

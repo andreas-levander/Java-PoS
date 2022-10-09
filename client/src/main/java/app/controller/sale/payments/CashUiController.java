@@ -1,8 +1,8 @@
-package app.controller.sale;
+package app.controller.sale.payments;
 
-import app.model.Sale;
-import app.model.SaleFinishedEvent;
-import app.model.SaleStatus;
+import app.model.sale.Sale;
+import app.model.sale.SaleFinishedEvent;
+import app.model.sale.SaleStatus;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -14,7 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
-@FxmlView("/CashPaymentUi.fxml")
+@FxmlView("/adminUI/payments/CashPaymentUi.fxml")
 public class CashUiController {
     private final FxWeaver fxWeaver;
     private final ApplicationContext ctx;
@@ -43,20 +43,20 @@ public class CashUiController {
 
         cashPaymentDialog.getConfirmButton().setOnAction(e ->{
             var amountReceived = cashPaymentDialog.getAmountReceivedField().textProperty().get();
-            if (NumberUtils.isParsable(amountReceived)) {
-                var x = Double.parseDouble(amountReceived);
-                var change = x - sale.getCart().getTotalPrice().getNumber().doubleValue();
-                if (change >= 0) {
-                    changeLabel.setText(String.valueOf(change));
-                    showChangePane();
-                    sale.setSaleStatus(SaleStatus.DONE);
-                    ctx.publishEvent(new SaleFinishedEvent(sale));
-                } else {
-                    cashPaymentDialog.showNotification("Amount received need to be >= total", Color.RED);
-                }
-            } else {
+            if (!NumberUtils.isParsable(amountReceived)) {
                 cashPaymentDialog.showNotification("Amount not a number", Color.RED);
+                return;
             }
+            var x = Double.parseDouble(amountReceived);
+            var change = x - sale.getCart().getTotalPrice().getNumber().doubleValue();
+            if (change < 0) {
+                cashPaymentDialog.showNotification("Amount received need to be >= total", Color.RED);
+                return;
+            }
+            changeLabel.setText(String.valueOf(change));
+            showChangePane();
+            sale.setSaleStatus(SaleStatus.DONE);
+            ctx.publishEvent(new SaleFinishedEvent(sale));
 
         });
     }

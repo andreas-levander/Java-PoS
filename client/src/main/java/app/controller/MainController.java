@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 
 /** Class responsible for managing the main screen (cashier UI) elements */
 @Component
-@FxmlView("/MainController.fxml")
+@FxmlView("/adminUI/MainController.fxml")
 public class MainController {
     private final CartController cartController;
     private final SavedCartsController savedCartsController;

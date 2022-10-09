@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 /** Class responsible for managing the customer cart UI elements */
 @Component
-@FxmlView("/CustomerCart.fxml")
+@FxmlView("/customerUI/CustomerCart.fxml")
 public class CustomerCartController {
     @FXML
     private ListView<Item> customerListView;
@@ -20,7 +20,9 @@ public class CustomerCartController {
 
     @FXML
     public void initialize() {
-
+        // sets list not selectable
+        customerListView.setMouseTransparent(true);
+        customerListView.setFocusTraversable(false);
     }
 
 

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 
 /** Class responsible for managing the saved carts UI elements */
-@FxmlView("/SavedCartsDialog.fxml")
+@FxmlView("/adminUI/cart/SavedCartsDialog.fxml")
 @Component
 public class SavedCartsDialogController {
     private final SavedCartsController savedCartsController;

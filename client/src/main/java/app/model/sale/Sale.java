@@ -1,11 +1,9 @@
-package app.model;
+package app.model.sale;
 
+import app.model.Cart;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.jackson.Jacksonized;
 
 import java.util.Date;
 import java.util.UUID;

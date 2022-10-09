@@ -1,9 +1,9 @@
 package app.model.payment;
 
-import app.model.SaleFinishedEvent;
-import app.controller.sale.SalesUiController;
-import app.model.Sale;
-import app.model.SaleStatus;
+import app.model.sale.SaleFinishedEvent;
+import app.controller.sale.payments.PaymentsUiController;
+import app.model.sale.Sale;
+import app.model.sale.SaleStatus;
 import app.service.PaymentService;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -18,28 +18,26 @@ import java.util.UUID;
 @Setter @Getter
 public class CardPayment implements PaymentInterface {
     private Sale sale;
-    private final SalesUiController salesUiController;
+    private final PaymentsUiController paymentsUiController;
     private final PaymentService paymentService;
     private final Timeline timeline;
     private final UUID id;
     private final ApplicationEventPublisher publisher;
 
-    public CardPayment(SalesUiController salesUiController, PaymentService paymentService, ApplicationEventPublisher publisher) {
-        this.salesUiController = salesUiController;
+    public CardPayment(PaymentsUiController paymentsUiController, PaymentService paymentService, ApplicationEventPublisher publisher) {
+        this.paymentsUiController = paymentsUiController;
         this.paymentService = paymentService;
         this.publisher = publisher;
 
         id = UUID.randomUUID();
 
-        timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
-            updateStatus();
-        }));
+        timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> updateStatus()));
         timeline.setCycleCount(100);
     }
 
     @Override
     public void process() {
-        salesUiController.showCardWindow(sale);
+        paymentsUiController.showCardWindow(sale);
         paymentService.waitForPayment(String.valueOf(sale.getCart().getTotalPrice().getNumber().doubleValue()));
         timeline.playFromStart();
     }
@@ -47,14 +45,14 @@ public class CardPayment implements PaymentInterface {
     @Override
     public void abort() {
         paymentService.abortCardPayment();
-        salesUiController.reset();
+        paymentsUiController.reset();
         timeline.stop();
     }
 
     private void updateStatus() {
         var resp = paymentService.getStatus();
         System.out.println(resp);
-        salesUiController.setCardReaderStatus(resp);
+        paymentsUiController.setCardReaderStatus(resp);
         if (Objects.equals(resp, "DONE")) {
             timeline.stop();
             showResultOfCardTransaction();
@@ -67,7 +65,7 @@ public class CardPayment implements PaymentInterface {
             sale.setSaleStatus(SaleStatus.DONE);
             publisher.publishEvent(new SaleFinishedEvent(sale));
         }
-        salesUiController.showCardTransactionResult(result);
+        paymentsUiController.showCardTransactionResult(result);
     }
 
     @Override

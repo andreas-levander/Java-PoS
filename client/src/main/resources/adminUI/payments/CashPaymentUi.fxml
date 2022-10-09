@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="150.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/18"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.sale.payments.CashUiController">
+   <AnchorPane fx:id="changePane" prefHeight="150.0" prefWidth="200.0">
+      <Label fx:id="cashTotalLabel" layoutX="163.0" layoutY="72.0" prefHeight="17.0" prefWidth="75.0"/>
+      <Text layoutX="114.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash Payment">
+         <font>
+            <Font size="14.0"/>
+         </font>
+      </Text>
+      <Separator layoutX="52.0" layoutY="38.0" prefHeight="3.0" prefWidth="446.0"/>
+      <Label fx:id="changeLabel" layoutX="163.0" layoutY="48.0" prefHeight="17.0" prefWidth="67.0"/>
+      <Label layoutX="116.0" layoutY="48.0" text="Change: "/>
+      <Text layoutX="121.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total:"
+            wrappingWidth="36.998046875"/>
+   </AnchorPane>
+</AnchorPane>

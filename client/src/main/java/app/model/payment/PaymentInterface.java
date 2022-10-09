@@ -1,6 +1,6 @@
 package app.model.payment;
 
-import app.model.Sale;
+import app.model.sale.Sale;
 
 public interface PaymentInterface {
     void process();

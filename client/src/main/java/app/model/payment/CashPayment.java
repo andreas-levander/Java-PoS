@@ -1,8 +1,8 @@
 package app.model.payment;
 
-import app.controller.sale.SalesUiController;
-import app.model.Sale;
-import app.model.SaleStatus;
+import app.controller.sale.payments.PaymentsUiController;
+import app.model.sale.Sale;
+import app.model.sale.SaleStatus;
 import app.service.PaymentService;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,25 +12,25 @@ import java.util.UUID;
 @Setter @Getter
 public class CashPayment implements PaymentInterface {
     private Sale sale;
-    private final SalesUiController salesUiController;
+    private final PaymentsUiController paymentsUiController;
     private final PaymentService paymentService;
     private final UUID id;
 
-    public CashPayment(SalesUiController salesUiController, PaymentService paymentService) {
-        this.salesUiController = salesUiController;
+    public CashPayment(PaymentsUiController paymentsUiController, PaymentService paymentService) {
+        this.paymentsUiController = paymentsUiController;
         this.paymentService = paymentService;
         id = UUID.randomUUID();
     }
 
     @Override
     public void process() {
-        salesUiController.showCashWindow(sale);
+        paymentsUiController.showCashWindow(sale);
         paymentService.openCashBox();
     }
 
     @Override
     public void abort() {
-        salesUiController.reset();
+        paymentsUiController.reset();
         sale.setSaleStatus(SaleStatus.ABORTED);
     }
 

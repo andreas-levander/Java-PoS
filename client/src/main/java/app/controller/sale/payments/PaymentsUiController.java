@@ -1,14 +1,13 @@
-package app.controller.sale;
+package app.controller.sale.payments;
 
 import app.controller.CustomerController;
 import app.controller.MainController;
 import app.model.payment.CardTransactionResult;
-import app.model.Sale;
+import app.model.sale.Sale;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.context.ApplicationContext;
@@ -16,12 +15,12 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-@FxmlView("/SalesUiBase.fxml")
-public class SalesUiController {
+@FxmlView("/adminUI/payments/PaymentsUiBase.fxml")
+public class PaymentsUiController {
     private final FxWeaver fxWeaver;
     private final ApplicationContext applicationContext;
 
-    public SalesUiController(FxWeaver fxWeaver, ApplicationContext applicationContext) {
+    public PaymentsUiController(FxWeaver fxWeaver, ApplicationContext applicationContext) {
         this.fxWeaver = fxWeaver;
         this.applicationContext = applicationContext;
     }

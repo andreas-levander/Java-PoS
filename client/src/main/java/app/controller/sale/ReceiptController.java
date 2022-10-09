@@ -1,8 +1,8 @@
 package app.controller.sale;
 
 import app.controller.CustomerController;
-import app.model.Sale;
-import app.model.SaleFinishedEvent;
+import app.model.sale.Sale;
+import app.model.sale.SaleFinishedEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;

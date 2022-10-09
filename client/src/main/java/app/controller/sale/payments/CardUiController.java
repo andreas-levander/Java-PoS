@@ -1,19 +1,17 @@
-package app.controller.sale;
+package app.controller.sale.payments;
 
 import app.model.payment.CardTransactionResult;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import net.rgielen.fxweaver.core.FxmlView;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@FxmlView("/CardUi.fxml")
+@FxmlView("/adminUI/payments/CardUi.fxml")
 public class CardUiController {
 
     @FXML

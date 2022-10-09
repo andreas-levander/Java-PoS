@@ -2,7 +2,7 @@ package app.controller;
 
 import app.controller.sale.ReceiptController;
 import app.controller.sale.SaleController;
-import app.controller.sale.SalesUiController;
+import app.controller.sale.payments.PaymentsUiController;
 import app.model.payment.CardPayment;
 import app.model.payment.CashPayment;
 import app.service.PaymentService;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 /** Class responsible for managing the main customer UI element */
 @Component
-@FxmlView("/CustomerScreen.fxml")
+@FxmlView("/customerUI/CustomerScreen.fxml")
 public class CustomerController {
     private final SaleController saleController;
     private final ApplicationContext applicationContext;
@@ -51,14 +51,14 @@ public class CustomerController {
         cardButton.setOnAction(actionEvent -> {
             toggleSaleButtons();
             var paymentService = applicationContext.getBean(PaymentService.class);
-            var salesUiController = applicationContext.getBean(SalesUiController.class);
+            var salesUiController = applicationContext.getBean(PaymentsUiController.class);
             var cardPayment = new CardPayment(salesUiController, paymentService, applicationContext);
             saleController.pay(cardPayment);
         });
         cashButton.setOnAction(actionEvent -> {
             toggleSaleButtons();
             var paymentService = applicationContext.getBean(PaymentService.class);
-            var salesUiController = applicationContext.getBean(SalesUiController.class);
+            var salesUiController = applicationContext.getBean(PaymentsUiController.class);
             var cashPayment = new CashPayment(salesUiController, paymentService);
             saleController.pay(cashPayment);
         });

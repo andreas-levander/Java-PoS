@@ -1,4 +1,4 @@
-package app.controller.sale;
+package app.controller.sale.payments;
 
 import app.model.payment.PaymentInterface;
 import org.springframework.stereotype.Component;

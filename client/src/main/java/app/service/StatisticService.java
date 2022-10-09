@@ -1,6 +1,6 @@
 package app.service;
 
-import app.model.Sale;
+import app.model.sale.Sale;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

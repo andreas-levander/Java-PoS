@@ -1,4 +1,4 @@
-package app.model;
+package app.model.sale;
 
 public enum SaleStatus {
     WAITING_FOR_CUSTOMER,

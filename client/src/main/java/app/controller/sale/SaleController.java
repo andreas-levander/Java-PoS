@@ -1,20 +1,22 @@
 package app.controller.sale;
 
+import app.controller.sale.payments.PaymentController;
+import app.controller.sale.payments.PaymentsUiController;
 import app.model.Cart;
 import app.model.payment.PaymentInterface;
-import app.model.Sale;
-import app.model.SaleStatus;
+import app.model.sale.Sale;
+import app.model.sale.SaleStatus;
 import lombok.Getter;
 import org.springframework.stereotype.Controller;
 
 @Controller @Getter
 public class SaleController {
     private final PaymentController paymentController;
-    private final SalesUiController salesUiController;
+    private final PaymentsUiController paymentsUiController;
 
-    public SaleController(PaymentController paymentController, SalesUiController salesUiController) {
+    public SaleController(PaymentController paymentController, PaymentsUiController paymentsUiController) {
         this.paymentController = paymentController;
-        this.salesUiController = salesUiController;
+        this.paymentsUiController = paymentsUiController;
     }
 
     private Sale currentSale;
@@ -23,7 +25,7 @@ public class SaleController {
         // create new sale
         currentSale = new Sale(cart, SaleStatus.WAITING_FOR_CUSTOMER);
         paymentController.reset();
-        salesUiController.setStatusLabel("Waiting for customer to select payment");
+        paymentsUiController.setStatusLabel("Waiting for customer to select payment");
     }
 
 
@@ -35,6 +37,6 @@ public class SaleController {
 
 
     public void resetUI() {
-        salesUiController.reset();
+        paymentsUiController.reset();
     }
 }
