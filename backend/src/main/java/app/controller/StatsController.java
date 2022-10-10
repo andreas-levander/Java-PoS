@@ -28,4 +28,8 @@ public class StatsController {
     public List<ProductStat> getTopProducts(LocalDate start, LocalDate end) {
         return statsService.getTopProducts(start, end);
     }
+
+    public List<ProductStat> getLeastSoldProducts(LocalDate start, LocalDate end) {
+        return statsService.getLeastSoldProducts(start, end);
+    }
 }

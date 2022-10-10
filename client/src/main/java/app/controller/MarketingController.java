@@ -58,9 +58,12 @@ public class MarketingController {
                 case "MOST SOLD" -> {
                     var mostSold = statisticsController.getTopProducts(startDate, endDate);
                     marketingList.getItems().setAll(mostSold);
+                    if (mostSold.isEmpty()) showNotification("No Items sold in that time period", Color.YELLOW);
                 }
                 case "LEAST SOLD" -> {
-                    // NYI
+                    var leastSold = statisticsController.getLeastSoldProducts(startDate, endDate);
+                    marketingList.getItems().setAll(leastSold);
+                    if (leastSold.isEmpty()) showNotification("No Items sold in that time period", Color.YELLOW);
                 }
             }
         });

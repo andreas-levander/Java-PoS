@@ -19,4 +19,13 @@ public interface SoldProductsRepository extends JpaRepository<SoldProduct, Integ
             "DESC"
             )
     List<ProductStat> findTopProducts(Date start, Date end, Pageable page);
+
+    @Query(value = "SELECT new app.model.ProductStat(s.name, s.barCode, count(s)) " +
+            "FROM SoldProduct s " +
+            "WHERE s.date BETWEEN :start AND :end " +
+            "group by s.name, s.barCode " +
+            "order by count(s) " +
+            "ASC "
+    )
+    List<ProductStat> findWorstProducts(Date start, Date end, Pageable page);
 }

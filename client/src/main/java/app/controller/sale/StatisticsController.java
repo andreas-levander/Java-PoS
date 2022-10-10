@@ -27,4 +27,8 @@ public class StatisticsController {
     public List<ProductStatistic> getTopProducts(LocalDate start, LocalDate end) {
         return statisticService.getMostSoldProducts(start,end);
     }
+
+    public List<ProductStatistic> getLeastSoldProducts(LocalDate start, LocalDate end) {
+        return statisticService.getLeastSoldProducts(start,end);
+    }
 }

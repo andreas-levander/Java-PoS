@@ -27,4 +27,9 @@ public class StatsService {
         // adding one day to include end day in result
         return soldRepository.findTopProducts(Date.valueOf(start), Date.valueOf(end.plusDays(1)), PageRequest.of(0, 10));
     }
+
+    public List<ProductStat> getLeastSoldProducts(LocalDate start, LocalDate end) {
+        // adding one day to include end day in result
+        return soldRepository.findWorstProducts(Date.valueOf(start), Date.valueOf(end.plusDays(1)), PageRequest.of(0, 10));
+    }
 }

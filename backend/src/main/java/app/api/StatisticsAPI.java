@@ -27,9 +27,15 @@ public class StatisticsAPI {
 
     @GetMapping(path = "/mostSold")
     public List<ProductStat> getTopProducts(@RequestParam String start, @RequestParam String end) {
-        System.out.println(start + " - " + end);
         var startDate = LocalDate.parse(start);
         var endDate = LocalDate.parse(end);
         return statsController.getTopProducts(startDate, endDate);
+    }
+
+    @GetMapping(path = "/leastSold")
+    public List<ProductStat> getLeastSoldProducts(@RequestParam String start, @RequestParam String end) {
+        var startDate = LocalDate.parse(start);
+        var endDate = LocalDate.parse(end);
+        return statsController.getLeastSoldProducts(startDate, endDate);
     }
 }

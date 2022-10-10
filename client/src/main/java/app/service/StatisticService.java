@@ -56,4 +56,21 @@ public class StatisticService {
         assert response != null;
         return Arrays.asList(response);
     }
+
+    public List<ProductStatistic> getLeastSoldProducts(LocalDate start, LocalDate end) {
+        var response = webClient.get()
+                .uri(backendBaseUrl +"/api/v1/stats/leastSold" + "?start=" + start +"&end=" + end)
+                .accept(MediaType.APPLICATION_JSON)
+                .exchangeToMono(clientResponse -> {
+                    if (clientResponse.statusCode().equals(HttpStatus.OK)) {
+                        return clientResponse.bodyToMono(ProductStatistic[].class);
+                    } else {
+                        return clientResponse.createException()
+                                .flatMap(Mono::error);
+                    }
+                }).block();
+
+        assert response != null;
+        return Arrays.asList(response);
+    }
 }
