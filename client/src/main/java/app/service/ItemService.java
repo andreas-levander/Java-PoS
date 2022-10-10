@@ -38,6 +38,7 @@ public class ItemService {
                                 .flatMap(Mono::error);
                     }
                 }).block();
+        assert response != null;
         return Arrays.asList(response);
     }
 
@@ -55,6 +56,7 @@ public class ItemService {
                                 .flatMap(Mono::error);
                     }
                 }).block();
+        assert response != null;
         return Arrays.asList(response);
     }
 

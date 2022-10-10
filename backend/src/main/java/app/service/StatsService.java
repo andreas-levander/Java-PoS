@@ -1,11 +1,15 @@
 package app.service;
 
+import app.model.ProductStat;
 import app.repository.SoldProductsRepository;
 import app.model.tables.SoldProduct;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
+
+import java.util.List;
 
 @Service
 public class StatsService {
@@ -19,9 +23,8 @@ public class StatsService {
         soldRepository.saveAll(products);
     }
 
-    public void getTopProducts(Date start, Date end) {
-        System.out.println(start.toString() + " " + end.toString());
-        var top = soldRepository.findTopProducts(start, end, PageRequest.of(0, 10));
-        System.out.println(top.toString());
+    public List<ProductStat> getTopProducts(LocalDate start, LocalDate end) {
+        // adding one day to include end day in result
+        return soldRepository.findTopProducts(Date.valueOf(start), Date.valueOf(end.plusDays(1)), PageRequest.of(0, 10));
     }
 }

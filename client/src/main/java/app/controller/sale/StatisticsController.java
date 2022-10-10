@@ -6,6 +6,7 @@ import app.service.StatisticService;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Controller;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class StatisticsController {
         statisticService.saveSale(event.sale());
     }
 
-    public List<ProductStatistic> getTopProducts(Date start, Date end) {
-        return List.of(new ProductStatistic("Potato", 200L), new ProductStatistic("Tomato", 150L));
+    public List<ProductStatistic> getTopProducts(LocalDate start, LocalDate end) {
+        return statisticService.getMostSoldProducts(start,end);
     }
 }

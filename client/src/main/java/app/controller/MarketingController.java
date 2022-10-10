@@ -56,7 +56,7 @@ public class MarketingController {
             }
             switch (selected) {
                 case "MOST SOLD" -> {
-                    var mostSold = statisticsController.getTopProducts(Date.valueOf(startDate), Date.valueOf(endDate));
+                    var mostSold = statisticsController.getTopProducts(startDate, endDate);
                     marketingList.getItems().setAll(mostSold);
                 }
                 case "LEAST SOLD" -> {

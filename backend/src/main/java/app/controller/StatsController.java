@@ -1,11 +1,14 @@
 package app.controller;
 
+import app.model.ProductStat;
 import app.model.Sale;
 import app.model.tables.SoldProduct;
 import app.service.StatsService;
 import org.springframework.stereotype.Controller;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class StatsController {
@@ -22,9 +25,7 @@ public class StatsController {
 
     }
 
-    public void getTopProducts() {
-        var s = new Date(2323223232L);
-        var e = new Date();
-        statsService.getTopProducts(s, e);
+    public List<ProductStat> getTopProducts(LocalDate start, LocalDate end) {
+        return statsService.getTopProducts(start, end);
     }
 }
