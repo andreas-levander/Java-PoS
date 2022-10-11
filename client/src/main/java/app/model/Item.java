@@ -31,4 +31,8 @@ public class Item {
     private MonetaryAmountFormat formatMoney() {
         return MonetaryFormats.getAmountFormat(AmountFormatQueryBuilder.of(Locale.US).set(CurrencyStyle.SYMBOL).build());
     }
+
+    public void discount(Double percentage){
+        this.setPrice(this.getPrice().multiply(percentage));
+    }
 }

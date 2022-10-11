@@ -42,4 +42,8 @@ public class CartController {
         currentCart.addItem(item);
     }
 
+    public void recalculateTotalValue(){
+        currentCart.recalculateTotalValue();
+    }
+
 }

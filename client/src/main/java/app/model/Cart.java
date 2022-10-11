@@ -39,6 +39,15 @@ public class Cart {
         }
     }
 
+    public void recalculateTotalValue(){
+        Money newPrice = Money.of(0,  currency);
+        for(int i = 0; i < items.size(); i++){
+            newPrice = newPrice.add(items.get(i).getPrice());
+        }
+        totalPrice = newPrice;
+        observableTotalPrice.set(totalPrice.getNumber().doubleValue());
+    }
+
     @Override
     public String toString() {
         return "Sale id: " + id.toString();
