@@ -11,17 +11,20 @@
 
 <BorderPane fx:id="smBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="632.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.MarketingController">
    <top>
-      <VBox fx:id="salesMarketingVbox" prefHeight="22.0" prefWidth="632.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="salesMarketingVbox" prefHeight="31.0" prefWidth="632.0" BorderPane.alignment="CENTER">
          <HBox prefHeight="23.0" prefWidth="600.0">
-            <DatePicker fx:id="startDateBox" promptText="START DATE"/>
-            <DatePicker fx:id="endDateBox" promptText="END DATE"/>
-            <ChoiceBox fx:id="choiceBox" prefHeight="25.0" prefWidth="150.0"/>
-            <Button fx:id="searchButton" mnemonicParsing="false" text="GET"/>
+            <DatePicker fx:id="startDateBox" promptText="START DATE" />
+            <DatePicker fx:id="endDateBox" promptText="END DATE" />
+            <ChoiceBox fx:id="choiceBox" prefHeight="25.0" prefWidth="150.0" />
+            <Button fx:id="searchButton" mnemonicParsing="false" text="GET" />
          </HBox>
-         <Label fx:id="notification" layoutX="500.0"/>
+         <Label fx:id="notification" layoutX="500.0" />
       </VBox>
    </top>
    <center>
-      <ListView fx:id="marketingList" prefHeight="77.0" prefWidth="632.0" BorderPane.alignment="CENTER" />
+      <ListView fx:id="salesList" prefHeight="353.0" prefWidth="632.0" BorderPane.alignment="CENTER" />
    </center>
+   <bottom>
+      <Button mnemonicParsing="false" text="Browse product catalog" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

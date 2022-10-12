@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="dialog" alignment="CENTER" prefHeight="288.0" prefWidth="346.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.cart.AddItemDialogController">
+   <Label fx:id="notif" textFill="#f50606">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
+
+    <Label prefHeight="17.0" prefWidth="242.0" text="Search item by entering barcode or name" />
+   <TextField fx:id="textField" prefHeight="25.0" prefWidth="81.0" promptText="enter barcode or name" />
+   <Button fx:id="search" mnemonicParsing="false" text="search" />
+   <ListView fx:id="searchList" prefHeight="200.0" prefWidth="200.0" />
+   <ButtonBar prefHeight="41.0" prefWidth="346.0">
+      <buttons>
+       <Button fx:id="changePrice" contentDisplay="CENTER" minWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="133.0" text="Change price" />
+         <Button mnemonicParsing="false" prefHeight="25.0" text="Add special offer" />
+      </buttons>
+   </ButtonBar>
+
+</VBox>
