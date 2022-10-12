@@ -74,34 +74,6 @@
         <fx:include source="marketing/MarketingUi.fxml" />
     </Tab>
    <Tab text="sales">
-     <content>
-       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-            <children>
-               <BorderPane layoutY="14.0" prefHeight="543.0" prefWidth="800.0">
-                  <top>
-                     <VBox fx:id="dialog" alignment="CENTER" prefHeight="288.0" prefWidth="346.0" BorderPane.alignment="CENTER">
-                        <children>
-                           <Label fx:id="notif" textFill="#f50606">
-                              <font>
-                                 <Font size="18.0" />
-                              </font>
-                           </Label>
-                           <Label prefHeight="17.0" prefWidth="242.0" text="Search item by entering barcode or name" />
-                           <TextField fx:id="textField" prefHeight="25.0" prefWidth="81.0" promptText="enter barcode or name" />
-                           <Button fx:id="search" mnemonicParsing="false" text="search" />
-                           <ListView fx:id="searchList" prefHeight="229.0" prefWidth="800.0" />
-                        </children>
-                     </VBox>
-                  </top>
-                  <bottom>
-                     <ButtonBar prefHeight="25.0" prefWidth="647.0" BorderPane.alignment="CENTER">
-                        <buttons>
-                           <Button fx:id="addToCart" minWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" />
-                        </buttons>
-                     </ButtonBar>
-                  </bottom></BorderPane>
-            </children>
-         </AnchorPane>
-     </content>
+       <fx:include source="sales/SalesUI.fxml" />
    </Tab>
 </TabPane>
