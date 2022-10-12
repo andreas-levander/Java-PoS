@@ -14,12 +14,12 @@ import java.util.Locale;
 public class CartCell extends ListCell<Item> {
 
     // Here we create the reusable layout for each cell. We will use an HBox for the root and labels
-    // for the name of the Sample and it's encryption status
+    // for info about the item
     final HBox root = new HBox(5);
     final Label sampleNameLabel = new Label();
     final Label discountLabel = new Label();
 
-    // Set the style for the encryptedLabel in a static block
+    // Set the style for the discountlabel in a static block
     {
         discountLabel.setStyle("-fx-text-fill: green; " +
                 "-fx-font-style: italic;");
@@ -40,8 +40,9 @@ public class CartCell extends ListCell<Item> {
             sampleNameLabel.setText(item.getName() + " - " + formatMoney().format(item.getPrice()));
             if (item.getDiscount() != null) {
                 discountLabel.setText("-" + formatMoney().format(item.getDiscount()));
+                discountLabel.setVisible(true);
             } else {
-                discountLabel.setText("");
+                discountLabel.setVisible(false);
             }
 
             setGraphic(root);

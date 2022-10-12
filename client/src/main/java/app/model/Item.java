@@ -46,11 +46,4 @@ public class Item {
         return MonetaryFormats.getAmountFormat(AmountFormatQueryBuilder.of(Locale.US).set(CurrencyStyle.SYMBOL).build());
     }
 
-    public void addDiscount(Money discount) {
-        if (this.discount == null) {
-            this.discount = discount;
-        } else {
-            this.discount = this.discount.add(discount);
-        }
-    }
 }

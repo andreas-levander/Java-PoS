@@ -46,7 +46,11 @@ public class Cart {
         var discount = item.getPrice().subtract(newPrice);
         System.out.println("discount: " + discount);
         //item.setPrice(newPrice);
-        item.addDiscount(discount);
+        if (item.getDiscount() != null) {
+            var oldDiscount = item.getDiscount();
+            totalPrice = totalPrice.add(oldDiscount);
+        }
+        item.setDiscount(discount);
         totalPrice = totalPrice.subtract(discount);
         observableTotalPrice.set(totalPrice.getNumber().doubleValue());
     }
