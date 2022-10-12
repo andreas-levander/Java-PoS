@@ -39,12 +39,15 @@ public class Cart {
         }
     }
 
-    public void recalculateTotalValue(){
-        Money newPrice = Money.of(0,  currency);
-        for(int i = 0; i < items.size(); i++){
-            newPrice = newPrice.add(items.get(i).getPrice());
-        }
-        totalPrice = newPrice;
+    public void discountItem(Integer index, Double percent) {
+        var item = items.get(index);
+        var newPrice = item.getPrice().multiply((100 - percent) / 100);
+        System.out.println("newPrice: " + newPrice);
+        var discount = item.getPrice().subtract(newPrice);
+        System.out.println("discount: " + discount);
+        //item.setPrice(newPrice);
+        item.addDiscount(discount);
+        totalPrice = totalPrice.subtract(discount);
         observableTotalPrice.set(totalPrice.getNumber().doubleValue());
     }
 

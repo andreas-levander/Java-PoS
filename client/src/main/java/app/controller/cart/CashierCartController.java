@@ -4,7 +4,9 @@ import app.model.Cart;
 import app.model.Item;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.util.Callback;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +26,13 @@ public class CashierCartController {
 //        listView.getSelectionModel().selectedItemProperty().addListener(((observableValue, item, t1) -> {
 //
 //        }));
+
+        cashierCartListView.setCellFactory(new Callback<>() {
+            @Override
+            public ListCell<Item> call(ListView<Item> itemListView) {
+                return new CartCell();
+            }
+        });
     }
 
     public void bind(Cart cart) {

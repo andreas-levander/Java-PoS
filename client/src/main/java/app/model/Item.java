@@ -1,5 +1,6 @@
 package app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,9 +23,22 @@ public class Item {
     private final String barCode;
     private final List<String> keywords;
     private Money price;
+    @JsonIgnore
+    private Money discount;
+
+    public Item(String name, String id, String barCode, List<String> keywords, Money price) {
+        this.name = name;
+        this.id = id;
+        this.barCode = barCode;
+        this.keywords = keywords;
+        this.price = price;
+    }
 
     @Override
     public String toString() {
+        if (discount != null) {
+            return name + " - " + formatMoney().format(price) + "  -" + formatMoney().format(discount);
+        }
         return name + " - " + formatMoney().format(price);
     }
 
@@ -32,7 +46,11 @@ public class Item {
         return MonetaryFormats.getAmountFormat(AmountFormatQueryBuilder.of(Locale.US).set(CurrencyStyle.SYMBOL).build());
     }
 
-    public void discount(Double percentage){
-        this.setPrice(this.getPrice().multiply(percentage));
+    public void addDiscount(Money discount) {
+        if (this.discount == null) {
+            this.discount = discount;
+        } else {
+            this.discount = this.discount.add(discount);
+        }
     }
 }
