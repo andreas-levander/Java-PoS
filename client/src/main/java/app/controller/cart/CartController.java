@@ -42,4 +42,10 @@ public class CartController {
         currentCart.addItem(item);
     }
 
+    public void discountItem(int index, Double percent) {
+        currentCart.discountItem(index, percent);
+        cashierCartController.getListView().refresh();
+        customerCartController.refresh();
+    }
+
 }

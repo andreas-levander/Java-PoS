@@ -59,6 +59,9 @@
                         <Button fx:id="saveCart" mnemonicParsing="false" text="Save Cart" />
                         <Button fx:id="getSavedCart" mnemonicParsing="false" text="Show Saved Carts" />
                         <Button fx:id="checkout" layoutX="426.0" layoutY="10.0" mnemonicParsing="false" text="Checkout" />
+
+                  <Button fx:id="discountButton" mnemonicParsing="false" text="Discount" />
+
                     </buttons>
                 </ButtonBar>
             </bottom>

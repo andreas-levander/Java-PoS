@@ -1,9 +1,6 @@
 package app.controller;
 
-import app.controller.cart.AddItemDialogController;
-import app.controller.cart.CartController;
-import app.controller.cart.SavedCartsController;
-import app.controller.cart.SavedCartsDialogController;
+import app.controller.cart.*;
 import app.controller.sale.SaleController;
 import javafx.fxml.FXML;
 import net.rgielen.fxweaver.core.FxWeaver;
@@ -21,7 +18,7 @@ public class MainController {
     private final FxWeaver fxWeaver;
 
     @FXML
-    private Button addItemByBarcode, clearButton, getSavedCart, saveCart, removeItem, checkout;
+    private Button addItemByBarcode, clearButton, getSavedCart, saveCart, removeItem, checkout, discountButton;
 
 
     public MainController(FxWeaver fxWeaver, CartController cartController, SavedCartsController savedCartsController,
@@ -59,6 +56,10 @@ public class MainController {
             toggleCheckoutButton();
             customerController.toggleSaleButtons();
         });
+
+        discountButton.setOnAction(
+                actionEvent -> fxWeaver.loadController(DiscountDialogController.class).show()
+        );
 
     }
 
