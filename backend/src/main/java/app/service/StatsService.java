@@ -32,4 +32,9 @@ public class StatsService {
         // adding one day to include end day in result
         return soldRepository.findWorstProducts(Date.valueOf(start), Date.valueOf(end.plusDays(1)), PageRequest.of(0, 10));
     }
+
+    public List<ProductStat> getProductStat(String barCode) {
+        return soldRepository.findProductStats(barCode);
+    }
+
 }

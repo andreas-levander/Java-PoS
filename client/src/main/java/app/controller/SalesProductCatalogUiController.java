@@ -2,13 +2,13 @@ package app.controller;
 
 import app.controller.cart.ItemController;
 import app.model.Item;
+import app.model.TotalSoldProductStatistic;
 import app.service.PriceService;
+import app.service.StatisticService;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import net.rgielen.fxweaver.core.FxmlView;
@@ -16,29 +16,36 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.javamoney.moneta.Money;
 import org.springframework.stereotype.Controller;
 
+import java.util.Date;
+
 @Controller
 @FxmlView("/adminUI/sales/BrowseProductCatalog.fxml")
 public class SalesProductCatalogUiController {
     private final ItemController itemController;
     private final PriceService priceService;
+    private final StatisticService statsService;
 
     @FXML
-    private Button search, changePrice;
+    private Button search, changePrice, getStats;
     @FXML
     private TextField searchTextField, setPriceField;
     @FXML
-    private Label notif;
+    private Label notif, tableLabel;
     @FXML
     private ListView<Item> searchList;
+    @FXML
+    private TableView<TotalSoldProductStatistic> table;
 
-    public SalesProductCatalogUiController(ItemController itemController, PriceService priceService) {
+    public SalesProductCatalogUiController(ItemController itemController, PriceService priceService, StatisticService statsService) {
         this.itemController = itemController;
         this.priceService = priceService;
+        this.statsService = statsService;
     }
 
     @FXML
     public void initialize() {
         changePrice.setDisable(true);
+        getStats.setDisable(true);
         changePrice.setOnAction(actionEvent -> {
             var item = searchList.getSelectionModel().getSelectedItem();
             var price = setPriceField.getText();
@@ -59,7 +66,22 @@ public class SalesProductCatalogUiController {
 
         });
 
-        searchList.getSelectionModel().selectedItemProperty().addListener((observableValue, item, t1) -> changePrice.setDisable(t1 == null));
+        setupTable();
+
+        getStats.setOnAction(actionEvent -> {
+            var selected = searchList.getSelectionModel().getSelectedItem();
+            var stats = statsService.getProductStats(selected.getBarCode());
+            System.out.println(stats.get(0).getDate());
+            table.getItems().setAll(stats);
+            tableLabel.setText(selected.toString());
+        });
+
+
+        searchList.getSelectionModel().selectedItemProperty().addListener((observableValue, item, t1) -> {
+            changePrice.setDisable(t1 == null);
+            getStats.setDisable(t1 == null);
+        });
+
         search.setOnAction(actionEvent -> {
             try {
                 var items = itemController.searchForItem(searchTextField.getText());
@@ -78,5 +100,15 @@ public class SalesProductCatalogUiController {
         PauseTransition delay = new PauseTransition(Duration.seconds(2));
         delay.setOnFinished(e -> notif.setText(""));
         delay.playFromStart();
+    }
+
+    private void setupTable() {
+        var column1 = new TableColumn<TotalSoldProductStatistic, Date>("date");
+        var column2 = new TableColumn<TotalSoldProductStatistic, Long>("sold");
+        column1.setCellValueFactory(new PropertyValueFactory<>("date"));
+        column2.setCellValueFactory(new PropertyValueFactory<>("sold"));
+
+        table.getColumns().add(column1);
+        table.getColumns().add(column2);
     }
 }

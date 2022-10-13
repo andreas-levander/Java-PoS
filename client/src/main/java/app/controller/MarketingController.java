@@ -2,7 +2,7 @@ package app.controller;
 
 
 import app.controller.sale.StatisticsController;
-import app.model.ProductStatistic;
+import app.model.TotalSoldProductStatistic;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +13,6 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
-import java.sql.Date;
 
 /** Class responsible for managing the Marketing UI */
 
@@ -28,7 +27,7 @@ public class MarketingController {
     @FXML
     private BorderPane smBorderPane;
     @FXML
-    private ListView<ProductStatistic> marketingList;
+    private ListView<TotalSoldProductStatistic> marketingList;
     @FXML
     private ChoiceBox<String> choiceBox;
     @FXML
@@ -59,12 +58,12 @@ public class MarketingController {
                 case "MOST SOLD" -> {
                     var mostSold = statisticsController.getTopProducts(startDate, endDate);
                     marketingList.getItems().setAll(mostSold);
-                    if (mostSold.isEmpty()) showNotification("No Items sold in that time period", Color.YELLOW);
+                    if (mostSold.isEmpty()) showNotification("No Items sold in that time period", Color.ORANGE);
                 }
                 case "LEAST SOLD" -> {
                     var leastSold = statisticsController.getLeastSoldProducts(startDate, endDate);
                     marketingList.getItems().setAll(leastSold);
-                    if (leastSold.isEmpty()) showNotification("No Items sold in that time period", Color.YELLOW);
+                    if (leastSold.isEmpty()) showNotification("No Items sold in that time period", Color.ORANGE);
                 }
             }
         });

@@ -63,4 +63,8 @@ public class StatsController {
     public List<ProductStat> getLeastSoldProducts(LocalDate start, LocalDate end) {
         return statsService.getLeastSoldProducts(start, end);
     }
+
+    public List<ProductStat> getProductStat(String barCode) {
+        return statsService.getProductStat(barCode);
+    }
 }
