@@ -13,6 +13,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+/** Class responsible for managing the UI element for the cash payment */
 @Component
 @FxmlView("/adminUI/payments/CashPaymentUi.fxml")
 public class CashUiController {

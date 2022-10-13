@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+/** Class responsible saving finished sales and getting stats for marketing ui */
 @Controller
 public class StatisticsController {
     private final StatisticService statisticService;

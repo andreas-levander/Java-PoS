@@ -11,6 +11,8 @@ import javax.money.format.MonetaryAmountFormat;
 import javax.money.format.MonetaryFormats;
 import java.util.Locale;
 
+/** Class responsible for the look of the cell items in both carts */
+
 public class CartCell extends ListCell<Item> {
 
     // Here we create the reusable layout for each cell. We will use an HBox for the root and labels

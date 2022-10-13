@@ -61,11 +61,18 @@ public class CardPayment implements PaymentInterface {
 
     private void showResultOfCardTransaction() {
         var result = paymentService.getResult();
+        paymentsUiController.showCardTransactionResult(result);
+
         if (Objects.equals(result.getPaymentState(), "ACCEPTED")) {
             sale.setSaleStatus(SaleStatus.DONE);
+            if (Objects.equals(result.getBonusState(), "ACCEPTED")) {
+                System.out.println(result.getPaymentCardNumber() + " - " + result.getBonusCardNumber());
+                var bonusCard = new BonusCard(result.getBonusCardNumber(), result.getGoodThruMonth(), result.getGoodThruYear());
+                sale.setBonusCard(bonusCard);
+            }
             publisher.publishEvent(new SaleFinishedEvent(sale));
         }
-        paymentsUiController.showCardTransactionResult(result);
+
     }
 
     @Override

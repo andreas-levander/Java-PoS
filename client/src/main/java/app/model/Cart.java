@@ -42,10 +42,9 @@ public class Cart {
     public void discountItem(Integer index, Double percent) {
         var item = items.get(index);
         var newPrice = item.getPrice().multiply((100 - percent) / 100);
-        System.out.println("newPrice: " + newPrice);
         var discount = item.getPrice().subtract(newPrice);
-        System.out.println("discount: " + discount);
         //item.setPrice(newPrice);
+        // if we already discounted the item remove old discount
         if (item.getDiscount() != null) {
             var oldDiscount = item.getDiscount();
             totalPrice = totalPrice.add(oldDiscount);

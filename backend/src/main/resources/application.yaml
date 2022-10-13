@@ -3,6 +3,8 @@ server:
 
 productCatalog:
   baseurl: http://localhost:9003
+bonusRegister:
+  baseurl: http://localhost:9004
 
 spring:
   datasource:

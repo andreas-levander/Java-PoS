@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Class responsible for managing the UI element for the card payment */
 @Component
 @FxmlView("/adminUI/payments/CardUi.fxml")
 public class CardUiController {
-
     @FXML
     private AnchorPane cardUiAnchorPane;
     @FXML

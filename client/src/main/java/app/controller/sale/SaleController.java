@@ -9,6 +9,7 @@ import app.model.sale.SaleStatus;
 import lombok.Getter;
 import org.springframework.stereotype.Controller;
 
+/** Class responsible for controlling the sales when you checkout */
 @Controller @Getter
 public class SaleController {
     private final PaymentController paymentController;

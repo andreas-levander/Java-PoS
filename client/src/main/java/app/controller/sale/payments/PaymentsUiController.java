@@ -13,7 +13,7 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-
+/** Class responsible for managing the UI element for payments */
 @Component
 @FxmlView("/adminUI/payments/PaymentsUiBase.fxml")
 public class PaymentsUiController {

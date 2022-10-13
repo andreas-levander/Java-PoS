@@ -13,6 +13,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/** Class responsible for creating and saving the receipt */
+
 @Component
 public class ReceiptController {
     private final ApplicationContext ctx;

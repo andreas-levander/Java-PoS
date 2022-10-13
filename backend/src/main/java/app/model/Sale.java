@@ -13,6 +13,6 @@ import java.util.UUID;
 public class Sale {
     private final Cart cart;
     private final UUID id;
-    private String bonusId;
+    private BonusCard bonusCard;
     private final Date date;
 }

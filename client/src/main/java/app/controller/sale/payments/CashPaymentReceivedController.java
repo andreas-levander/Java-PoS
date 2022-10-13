@@ -12,7 +12,7 @@ import javafx.util.Duration;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 
-
+/** Class responsible for managing the UI element for cash payment Money received dialog */
 @FxmlView("/adminUI/payments/CashPaymentDialog.fxml")
 @Component
 public class CashPaymentReceivedController {

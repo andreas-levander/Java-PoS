@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="dialog" alignment="CENTER" prefHeight="288.0" prefWidth="346.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.cart.AddItemDialogController">
+<VBox fx:id="dialog" alignment="CENTER" prefHeight="288.0" prefWidth="346.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" >
    <Label fx:id="notif" textFill="#f50606">
       <font>
          <Font size="18.0" />

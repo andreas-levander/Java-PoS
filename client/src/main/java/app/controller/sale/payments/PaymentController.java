@@ -3,7 +3,7 @@ package app.controller.sale.payments;
 import app.model.payment.PaymentInterface;
 import org.springframework.stereotype.Component;
 
-
+/** General controller for payments */
 @Component
 public class PaymentController {
     private PaymentInterface currentPayment;

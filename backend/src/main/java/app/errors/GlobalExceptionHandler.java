@@ -25,11 +25,11 @@ public class GlobalExceptionHandler {
         return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
     }
 
-    @ExceptionHandler({JsonMappingException.class, JsonProcessingException.class})
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public @ResponseBody ErrorResponse handleJsonProcessingException(RuntimeException ex) {
-        return new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
-    }
+//    @ExceptionHandler({JsonMappingException.class, JsonProcessingException.class})
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//    public @ResponseBody ErrorResponse handleJsonProcessingException(RuntimeException ex) {
+//        return new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
+//    }
 
 //    @ExceptionHandler({InvalidFormatException.class, MismatchedInputException.class})
 //    public void handlerIllegalArgumentException(JsonProcessingException exception,

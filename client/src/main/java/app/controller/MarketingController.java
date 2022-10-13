@@ -50,6 +50,7 @@ public class MarketingController {
             var selected = choiceBox.getSelectionModel().getSelectedItem();
             var startDate = startDateBox.getValue();
             var endDate = endDateBox.getValue();
+
             if (startDate == null || endDate == null) {
                 showNotification("Please select start date and end date", Color.RED);
                 return;

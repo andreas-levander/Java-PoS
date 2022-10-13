@@ -1,6 +1,7 @@
 package app.model.sale;
 
 import app.model.Cart;
+import app.model.payment.BonusCard;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +15,7 @@ public class Sale {
     private final UUID id;
     @JsonIgnore
     private SaleStatus saleStatus;
-    private String bonusId;
+    private BonusCard bonusCard;
     private final Date date;
 
     public Sale(Cart cart, SaleStatus saleStatus) {
