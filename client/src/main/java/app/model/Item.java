@@ -19,14 +19,14 @@ import java.util.Locale;
 @Jacksonized @Builder
 public class Item {
     private final String name;
-    private final String id;
+    private final Integer id;
     private final String barCode;
     private final List<String> keywords;
     private Money price;
     @JsonIgnore
     private Money discount;
 
-    public Item(String name, String id, String barCode, List<String> keywords, Money price) {
+    public Item(String name, Integer id, String barCode, List<String> keywords, Money price) {
         this.name = name;
         this.id = id;
         this.barCode = barCode;

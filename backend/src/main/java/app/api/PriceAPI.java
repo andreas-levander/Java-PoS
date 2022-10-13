@@ -26,10 +26,11 @@ public class PriceAPI {
 //        return price.getPrice();
 //    }
 
-    @PostMapping(path = "/save/")
+    @PostMapping(path = "/save")
     public void savePrice(@RequestBody Item item) {
         var price = new Price();
-        price.setProductId(Integer.parseInt(item.getId()));
+        System.out.println("save price request " + item.getName() + " id " + item.getId() + " price " + item.getPrice());
+        price.setProductId(item.getId());
         price.setPrice(item.getPrice());
         priceService.save(price);
     }

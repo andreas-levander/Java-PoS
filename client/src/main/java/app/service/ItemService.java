@@ -61,6 +61,6 @@ public class ItemService {
     }
 
     public List<Item> getByBarcodeForTest(String barCode) {
-        return new ArrayList<>(List.of(new Item(barCode, "1", "123", new ArrayList<>(), Money.of((double) Math.round(((Math.random() * 100) * 1000) / 1000), "EUR"))));
+        return new ArrayList<>(List.of(new Item(barCode, 1, "123", new ArrayList<>(), Money.of((double) Math.round(((Math.random() * 100) * 1000) / 1000), "EUR"))));
     }
 }

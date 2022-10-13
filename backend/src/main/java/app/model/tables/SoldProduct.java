@@ -21,12 +21,12 @@ public class SoldProduct {
             generator = "sold_sequence"
     )
     private Integer id;
-    private String productId;
+    private Integer productId;
     private String name;
     private String barCode;
     private Date date;
 
-    public SoldProduct(String productId, String barCode, String name, Date date) {
+    public SoldProduct(Integer productId, String barCode, String name, Date date) {
         this.productId = productId;
         this.barCode = barCode;
         this.name = name;

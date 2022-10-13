@@ -73,7 +73,7 @@
     <Tab closable="false" text="marketing">
         <fx:include source="marketing/MarketingUi.fxml" />
     </Tab>
-   <Tab text="sales">
+   <Tab closable="false" text="sales">
        <fx:include source="sales/SalesUI.fxml" />
    </Tab>
 </TabPane>

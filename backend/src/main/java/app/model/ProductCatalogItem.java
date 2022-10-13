@@ -12,7 +12,7 @@ import java.util.List;
 @JacksonXmlRootElement(localName = "product")
 public class ProductCatalogItem {
     private String optLockVersion;
-    private String id;
+    private Integer id;
     private String name;
     private String barCode;
     private String vat;

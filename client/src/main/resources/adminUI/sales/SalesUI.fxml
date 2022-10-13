@@ -9,7 +9,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="smBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="632.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.SalesController">
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<TabPane fx:id="salesTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.SalesManUiController">
+   <Tab closable="false" text="sales">
+   <BorderPane>
    <top>
       <VBox fx:id="salesMarketingVbox" prefHeight="31.0" prefWidth="632.0" BorderPane.alignment="CENTER">
          <HBox prefHeight="23.0" prefWidth="600.0">
@@ -27,4 +31,10 @@
    <bottom>
       <Button mnemonicParsing="false" text="Browse product catalog" BorderPane.alignment="CENTER" />
    </bottom>
-</BorderPane>
+      </BorderPane>
+   </Tab>
+   <Tab closable="false" text="Product catalog">
+      <fx:include source="BrowseProductCatalog.fxml" />
+   </Tab>
+
+      </TabPane>
