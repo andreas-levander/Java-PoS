@@ -15,16 +15,16 @@ public class PriceAPI {
         this.priceService = priceService;
     }
 
-    @GetMapping(path = "/{id}", produces = {"application/json"})
-    public Money getPriceById(@PathVariable(name = "id") String id) {
-
-        var price = priceService.get(Integer.parseInt(id));
-        System.out.println(price.getPrice().toString());
-        System.out.println(price.getPrice().getNumber());
-        System.out.println(price.getPrice().getNumber().doubleValueExact());
-
-        return price.getPrice();
-    }
+//    @GetMapping(path = "/{id}", produces = {"application/json"})
+//    public Money getPriceById(@PathVariable(name = "id") String id) {
+//
+//        var price = priceService.get(Integer.parseInt(id));
+//        System.out.println(price.getPrice().toString());
+//        System.out.println(price.getPrice().getNumber());
+//        System.out.println(price.getPrice().getNumber().doubleValueExact());
+//
+//        return price.getPrice();
+//    }
 
     @PostMapping(path = "/save/")
     public void savePrice(@RequestBody Item item) {

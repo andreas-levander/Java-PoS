@@ -31,8 +31,8 @@ public class CardPayment implements PaymentInterface {
 
         id = UUID.randomUUID();
 
-        timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> updateStatus()));
-        timeline.setCycleCount(100);
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateStatus()));
+        timeline.setCycleCount(1000);
     }
 
     @Override

@@ -73,9 +73,14 @@ public class MainController {
         getSavedCart.setDisable(!getSavedCart.isDisable());
     }
 
+    private void toggleDiscountButton() {
+        discountButton.setDisable(!discountButton.isDisable());
+    }
+
     public void toggleCheckoutButton() {
         toggleAddRemoveButtons();
         toggleSaveCartButtons();
+        toggleDiscountButton();
         checkout.setDisable(!checkout.isDisable());
     }
 

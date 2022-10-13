@@ -55,14 +55,8 @@ public class BonusService {
         }
     }
 
-    public void saveBonus(Bonus bonus) {
-        var bonusPoints = getBonus(bonus.getCustomerId());
-        if (bonusPoints.isPresent()) {
-            var existing = bonusPoints.get().getBonusPoints();
-            bonus.setBonusPoints(bonus.getBonusPoints() + existing);
-        }
-        repository.save(bonus);
-
+    public void saveBonus(Integer id, Long bonusPoints) {
+        repository.updateBonus(id, bonusPoints);
     }
 
     public Optional<Bonus> getBonus(Integer id) {

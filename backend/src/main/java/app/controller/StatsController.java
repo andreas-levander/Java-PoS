@@ -45,7 +45,7 @@ public class StatsController {
             return;
         }
         var bonusPoints = Math.round(sale.getCart().getTotalPrice().getNumber().doubleValue() * 0.1);
-        bonusService.saveBonus(new Bonus(customer.getCustomerNo(), bonusPoints));
+        bonusService.saveBonus(customer.getCustomerNo(), bonusPoints);
 
     }
 
