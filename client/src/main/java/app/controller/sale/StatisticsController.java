@@ -1,6 +1,6 @@
 package app.controller.sale;
 
-import app.model.TotalSoldProductStatistic;
+import app.model.ProductStatistic;
 import app.model.sale.SaleFinishedEvent;
 import app.service.StatisticService;
 import org.springframework.context.event.EventListener;
@@ -24,11 +24,15 @@ public class StatisticsController {
         statisticService.saveSale(event.sale());
     }
 
-    public List<TotalSoldProductStatistic> getTopProducts(LocalDate start, LocalDate end) {
+    public List<ProductStatistic> getTopProducts(LocalDate start, LocalDate end) {
         return statisticService.getMostSoldProducts(start,end);
     }
 
-    public List<TotalSoldProductStatistic> getLeastSoldProducts(LocalDate start, LocalDate end) {
+    public List<ProductStatistic> getLeastSoldProducts(LocalDate start, LocalDate end) {
         return statisticService.getLeastSoldProducts(start,end);
+    }
+
+    public List<ProductStatistic> getCustomerStats(String id) {
+        return statisticService.getCustomerStats(id);
     }
 }

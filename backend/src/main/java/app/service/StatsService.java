@@ -37,4 +37,10 @@ public class StatsService {
         return soldRepository.findProductStats(barCode);
     }
 
+    public List<ProductStat> getCustomerStat(Integer id) {
+        return soldRepository.findCustomerStats(id);
+    }
+
+
+
 }

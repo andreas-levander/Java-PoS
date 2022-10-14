@@ -8,6 +8,7 @@ import app.service.BonusService;
 import app.service.StatsService;
 import org.springframework.stereotype.Controller;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,17 +23,17 @@ public class StatsController {
     }
 
     public void saveSaleStats(Sale sale) {
-        saveBonus(sale);
-        saveProducts(sale);
+        var customerNr = saveBonus(sale);
+        saveProducts(sale, customerNr);
     }
 
-    private void saveBonus(Sale sale) {
+    private Integer saveBonus(Sale sale) {
         var bonusCard = sale.getBonusCard();
-        if (bonusCard == null) return;
+        if (bonusCard == null) return -1;
 
         System.out.println(bonusCard.getNumber());
         var resp = bonusService.findCustomerByBonusCard(bonusCard.getNumber(), bonusCard.getGoodThruMonth(), bonusCard.getGoodThruYear());
-        if (resp.isEmpty()) return;
+        if (resp.isEmpty()) return - 1;
 
         var customer = resp.get();
         System.out.println(customer.getCustomerNo());
@@ -42,17 +43,18 @@ public class StatsController {
         System.out.println(customer.getBonusCard().getBlocked());
         System.out.println(customer.getBonusCard().getExpired());
         if (customer.getBonusCard().getBlocked() || customer.getBonusCard().getExpired()) {
-            return;
+            return -1;
         }
         var bonusPoints = Math.round(sale.getCart().getTotalPrice().getNumber().doubleValue() * 0.1);
         bonusService.saveBonus(customer.getCustomerNo(), bonusPoints);
 
+        return customer.getCustomerNo();
     }
 
-    private void saveProducts(Sale sale) {
+    private void saveProducts(Sale sale, int customerNr) {
         var items = sale.getCart().getItems();
         var soldProducts = items.stream().map(item ->
-                new SoldProduct(item.getId(), item.getBarCode(), item.getName(), sale.getDate())).toList();
+                new SoldProduct(item.getId(), customerNr, item.getBarCode(), item.getName(), sale.getDate())).toList();
         statsService.saveSoldProducts(soldProducts);
     }
 
@@ -67,4 +69,9 @@ public class StatsController {
     public List<ProductStat> getProductStat(String barCode) {
         return statsService.getProductStat(barCode);
     }
+
+    public List<ProductStat> getCustomerStat(String id) {
+        return statsService.getCustomerStat(Integer.parseInt(id));
+    }
+
 }

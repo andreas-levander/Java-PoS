@@ -2,7 +2,7 @@ package app.controller;
 
 import app.controller.cart.ItemController;
 import app.model.Item;
-import app.model.TotalSoldProductStatistic;
+import app.model.ProductStatistic;
 import app.service.PriceService;
 import app.service.StatisticService;
 import javafx.animation.PauseTransition;
@@ -19,8 +19,8 @@ import org.springframework.stereotype.Controller;
 import java.util.Date;
 
 @Controller
-@FxmlView("/adminUI/sales/BrowseProductCatalog.fxml")
-public class SalesProductCatalogUiController {
+@FxmlView("/adminUI/sales/SalesUI.fxml")
+public class SalesUiController {
     private final ItemController itemController;
     private final PriceService priceService;
     private final StatisticService statsService;
@@ -34,9 +34,9 @@ public class SalesProductCatalogUiController {
     @FXML
     private ListView<Item> searchList;
     @FXML
-    private TableView<TotalSoldProductStatistic> table;
+    private TableView<ProductStatistic> table;
 
-    public SalesProductCatalogUiController(ItemController itemController, PriceService priceService, StatisticService statsService) {
+    public SalesUiController(ItemController itemController, PriceService priceService, StatisticService statsService) {
         this.itemController = itemController;
         this.priceService = priceService;
         this.statsService = statsService;
@@ -61,6 +61,7 @@ public class SalesProductCatalogUiController {
             } catch (Exception e) {
                 item.setPrice(oldPrice);
                 showNotification("Error setting price", Color.RED);
+                throw new RuntimeException(e);
             }
             searchList.refresh();
 
@@ -71,7 +72,6 @@ public class SalesProductCatalogUiController {
         getStats.setOnAction(actionEvent -> {
             var selected = searchList.getSelectionModel().getSelectedItem();
             var stats = statsService.getProductStats(selected.getBarCode());
-            System.out.println(stats.get(0).getDate());
             table.getItems().setAll(stats);
             tableLabel.setText(selected.toString());
         });
@@ -103,12 +103,15 @@ public class SalesProductCatalogUiController {
     }
 
     private void setupTable() {
-        var column1 = new TableColumn<TotalSoldProductStatistic, Date>("date");
-        var column2 = new TableColumn<TotalSoldProductStatistic, Long>("sold");
+        var column1 = new TableColumn<ProductStatistic, Date>("date");
+        var column2 = new TableColumn<ProductStatistic, Long>("sold");
         column1.setCellValueFactory(new PropertyValueFactory<>("date"));
         column2.setCellValueFactory(new PropertyValueFactory<>("sold"));
 
+        column1.setPrefWidth(200);
+
         table.getColumns().add(column1);
         table.getColumns().add(column2);
+
     }
 }

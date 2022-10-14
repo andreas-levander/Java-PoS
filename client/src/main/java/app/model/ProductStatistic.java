@@ -5,12 +5,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.jackson.Jacksonized;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 @AllArgsConstructor @Getter
 @Jacksonized @Builder
-public class TotalSoldProductStatistic {
+public class ProductStatistic {
     private final Date date;
     private final String name;
     private final String barCode;

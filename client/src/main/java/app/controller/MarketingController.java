@@ -2,7 +2,7 @@ package app.controller;
 
 
 import app.controller.sale.StatisticsController;
-import app.model.TotalSoldProductStatistic;
+import app.model.ProductStatistic;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Component;
 
 /** Class responsible for managing the Marketing UI */
@@ -27,15 +28,17 @@ public class MarketingController {
     @FXML
     private BorderPane smBorderPane;
     @FXML
-    private ListView<TotalSoldProductStatistic> marketingList;
+    private ListView<ProductStatistic> marketingList;
     @FXML
     private ChoiceBox<String> choiceBox;
     @FXML
     private DatePicker startDateBox, endDateBox;
     @FXML
-    private Button searchButton;
+    private Button searchButton, getCustomerStatsBtn;
     @FXML
     private Label notification;
+    @FXML
+    private TextField customerIdTextBox;
 
     public void initialize() {
         ObservableList<String> availableChoices = FXCollections.observableArrayList("MOST SOLD", "LEAST SOLD");
@@ -44,6 +47,17 @@ public class MarketingController {
         // sets list not selectable
         marketingList.setMouseTransparent(true);
         marketingList.setFocusTraversable(false);
+
+        getCustomerStatsBtn.setOnAction(actionEvent -> {
+            var idString = customerIdTextBox.getText();
+            if (!NumberUtils.isParsable(idString)) {
+                showNotification("customer id must be a number", Color.RED);
+                return;
+            }
+            var stats = statisticsController.getCustomerStats(idString);
+            if (stats.isEmpty()) showNotification("No purchases found", Color.RED);
+            marketingList.getItems().setAll(stats);
+        });
 
         searchButton.setOnAction(actionEvent -> {
             var selected = choiceBox.getSelectionModel().getSelectedItem();

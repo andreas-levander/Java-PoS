@@ -5,23 +5,25 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="smBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="632.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.MarketingController">
-   <top>
-      <VBox fx:id="salesMarketingVbox" prefHeight="22.0" prefWidth="632.0" BorderPane.alignment="CENTER">
-         <HBox prefHeight="23.0" prefWidth="600.0">
-            <DatePicker fx:id="startDateBox" promptText="START DATE"/>
-            <DatePicker fx:id="endDateBox" promptText="END DATE"/>
-            <ChoiceBox fx:id="choiceBox" prefHeight="25.0" prefWidth="150.0"/>
-            <Button fx:id="searchButton" mnemonicParsing="false" text="GET"/>
-         </HBox>
-         <Label fx:id="notification" layoutX="500.0"/>
-      </VBox>
-   </top>
    <center>
       <ListView fx:id="marketingList" prefHeight="77.0" prefWidth="632.0" BorderPane.alignment="CENTER" />
    </center>
+   <top>
+      <AnchorPane prefHeight="58.0" prefWidth="632.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="notification" layoutX="14.0" layoutY="50.0" prefHeight="17.0" prefWidth="279.0" />
+            <Button fx:id="getCustomerStatsBtn" layoutX="498.0" layoutY="27.0" mnemonicParsing="false" text="Get customer stats" />
+            <TextField fx:id="customerIdTextBox" layoutX="349.0" layoutY="27.0" promptText="customer id" />
+            <DatePicker fx:id="startDateBox" promptText="START DATE" />
+            <DatePicker fx:id="endDateBox" layoutX="174.0" promptText="END DATE" />
+            <ChoiceBox fx:id="choiceBox" layoutX="349.0" prefHeight="25.0" prefWidth="150.0" />
+            <Button fx:id="searchButton" layoutX="498.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Get product stats" />
+         </children>
+      </AnchorPane>
+   </top>
 </BorderPane>

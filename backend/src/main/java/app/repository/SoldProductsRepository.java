@@ -37,4 +37,13 @@ public interface SoldProductsRepository extends JpaRepository<SoldProduct, Integ
     )
     List<ProductStat> findProductStats(String barCode);
 
+    @Query(value =  "SELECT new app.model.ProductStat(s.name, s.barCode, count(s)) "+
+            "FROM SoldProduct s " +
+            "WHERE s.bonusCustomerId = :id " +
+            "GROUP BY s.name, s.barCode " +
+            "order by count(s) " +
+            "DESC "
+    )
+    List<ProductStat> findCustomerStats(Integer id);
+
 }

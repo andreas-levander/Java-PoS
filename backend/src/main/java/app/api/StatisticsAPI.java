@@ -20,9 +20,14 @@ public class StatisticsAPI {
         this.statsController = statsController;
     }
 
-    @GetMapping(path = "/{barCode}")
+    @GetMapping(path = "/barCode/{barCode}")
     public List<ProductStat> getProductStat(@PathVariable(name = "barCode") String barCode) {
         return statsController.getProductStat(barCode);
+    }
+
+    @GetMapping(path = "/customer/{id}")
+    public List<ProductStat> getCustomerStats(@PathVariable(name = "id") String id) {
+        return statsController.getCustomerStat(id);
     }
 
     @PostMapping(path = "/save/sale")
