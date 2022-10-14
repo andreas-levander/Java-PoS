@@ -3,10 +3,10 @@ package app.errors;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class NoItemInProductCatalog extends RuntimeException {
+public class NotFoundException extends RuntimeException {
     private String message;
 
-    public NoItemInProductCatalog(String message) {
+    public NotFoundException(String message) {
         super(message);
         this.message = message;
     }

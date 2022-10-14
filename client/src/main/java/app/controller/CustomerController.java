@@ -3,8 +3,10 @@ package app.controller;
 import app.controller.sale.ReceiptController;
 import app.controller.sale.SaleController;
 import app.controller.sale.payments.PaymentsUiController;
+import app.model.payment.BonusPayment;
 import app.model.payment.CardPayment;
 import app.model.payment.CashPayment;
+import app.service.BonusService;
 import app.service.PaymentService;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -34,7 +36,7 @@ public class CustomerController {
     @FXML
     private BorderPane customerPane;
     @FXML
-    private Button cardButton, cashButton, receiptBtn;
+    private Button cardButton, cashButton, receiptBtn, bonusButton;
     @FXML
     private Label paymentLabel;
     @FXML
@@ -46,6 +48,7 @@ public class CustomerController {
         cardButton.setDisable(true);
         cashButton.setDisable(true);
         receiptBtn.setDisable(true);
+        bonusButton.setDisable(true);
         paymentLabel.setVisible(false);
 
         cardButton.setOnAction(actionEvent -> {
@@ -63,6 +66,15 @@ public class CustomerController {
             saleController.pay(cashPayment);
         });
 
+        bonusButton.setOnAction(actionEvent -> {
+            toggleSaleButtons();
+            var paymentService = applicationContext.getBean(PaymentService.class);
+            var paymentsUiController = applicationContext.getBean(PaymentsUiController.class);
+            var bonusService = applicationContext.getBean(BonusService.class);
+            var bonusPayment = new BonusPayment(paymentsUiController, paymentService, bonusService);
+            saleController.pay(bonusPayment);
+        });
+
         receiptBtn.setOnAction(actionEvent -> {
             receiptController.printReceipt();
             receiptBtn.setDisable(true);
@@ -77,6 +89,7 @@ public class CustomerController {
         paymentLabel.setVisible(!paymentLabel.isVisible());
         cashButton.setDisable(!cashButton.isDisable());
         cardButton.setDisable(!cardButton.isDisable());
+        bonusButton.setDisable(!bonusButton.isDisable());
         receiptBtn.setDisable(true);
     }
     public void disableSaleButtons() {
@@ -84,6 +97,7 @@ public class CustomerController {
         cashButton.setDisable(true);
         cardButton.setDisable(true);
         receiptBtn.setDisable(true);
+        bonusButton.setDisable(true);
     }
 
     public void toggleReceiptButton() {

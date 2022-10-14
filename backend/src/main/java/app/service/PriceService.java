@@ -1,6 +1,5 @@
 package app.service;
 
-import app.errors.NoItemInProductCatalog;
 import app.model.tables.Price;
 import app.repository.PriceRepository;
 import org.springframework.stereotype.Service;

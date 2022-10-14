@@ -62,4 +62,9 @@ public class BonusService {
     public Optional<Bonus> getBonus(Integer id) {
         return repository.findById(id);
     }
+
+    public void useBonus(Integer id, Long amount) {
+        System.out.println(id + " " + amount);
+        repository.useBonus(id, amount);
+    }
 }

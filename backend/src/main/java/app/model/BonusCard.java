@@ -13,4 +13,10 @@ public class BonusCard {
     private String goodThruYear;
     private Boolean blocked;
     private Boolean expired;
+
+    public BonusCard(String number, String goodThruMonth, String goodThruYear) {
+        this.number = number;
+        this.goodThruMonth = goodThruMonth;
+        this.goodThruYear = goodThruYear;
+    }
 }

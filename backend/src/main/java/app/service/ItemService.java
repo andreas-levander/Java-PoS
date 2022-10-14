@@ -1,6 +1,6 @@
 package app.service;
 
-import app.errors.NoItemInProductCatalog;
+import app.errors.NotFoundException;
 import app.model.ProductCatalogItem;
 import app.model.ProductCatalogItemList;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -34,7 +34,7 @@ public class ItemService {
                     if (clientResponse.statusCode().equals(HttpStatus.OK)) {
                         return clientResponse.bodyToMono(String.class);
                     } else if (clientResponse.statusCode().is4xxClientError()) {
-                        throw new NoItemInProductCatalog("Item with barcode: " + barCode +  " not found in ProductCatalog");
+                        throw new NotFoundException("Item with barcode: " + barCode +  " not found in ProductCatalog");
                     } else {
                         return clientResponse.createException()
                                 .flatMap(Mono::error);
@@ -56,7 +56,7 @@ public class ItemService {
                     if (clientResponse.statusCode().equals(HttpStatus.OK)) {
                         return clientResponse.bodyToMono(String.class);
                     } else if (clientResponse.statusCode().is4xxClientError()) {
-                        throw new NoItemInProductCatalog("Item with name: " + name +  " not found in ProductCatalog");
+                        throw new NotFoundException("Item with name: " + name +  " not found in ProductCatalog");
                     } else {
                         return clientResponse.createException()
                                 .flatMap(Mono::error);
@@ -66,7 +66,7 @@ public class ItemService {
         try {
             var itemlist = xmlMapper.readValue(response, ProductCatalogItemList.class);
             if (itemlist.getProducts() == null) {
-                throw new NoItemInProductCatalog("Item with name: " + name +  " not found in ProductCatalog");
+                throw new NotFoundException("Item with name: " + name +  " not found in ProductCatalog");
             }
             return itemlist;
         } catch (JsonProcessingException e) {

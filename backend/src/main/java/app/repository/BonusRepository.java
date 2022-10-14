@@ -16,4 +16,12 @@ public interface BonusRepository extends JpaRepository<Bonus, Integer> {
             "ON CONFLICT (customer_id) DO UPDATE SET bonus_points = bonus.bonus_points + :bonusPoints"
             , nativeQuery = true)
     void updateBonus(Integer id, Long bonusPoints);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Bonus " +
+            "SET bonusPoints = bonusPoints - :bonusPoints " +
+            "WHERE customerId = :id"
+            )
+    void useBonus(Integer id, Long bonusPoints);
 }

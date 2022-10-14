@@ -2,6 +2,7 @@ package app.controller.sale.payments;
 
 import app.controller.CustomerController;
 import app.controller.MainController;
+import app.model.Bonus;
 import app.model.payment.CardTransactionResult;
 import app.model.sale.Sale;
 import javafx.fxml.FXML;
@@ -12,6 +13,8 @@ import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 /** Class responsible for managing the UI element for payments */
 @Component
@@ -33,12 +36,14 @@ public class PaymentsUiController {
     private Button abort;
     private CardUiController cardUiController;
     private CashUiController cashUiController;
+    private BonusUiController bonusUiController;
 
     @FXML
     public void initialize() {
         waitingLabel.setVisible(false);
         cardUiController = fxWeaver.loadController(CardUiController.class);
         cashUiController = fxWeaver.loadController(CashUiController.class);
+        bonusUiController = fxWeaver.loadController(BonusUiController.class);
 
         abort.setVisible(false);
         abort.setOnAction(e -> {
@@ -70,6 +75,11 @@ public class PaymentsUiController {
 
     public void showCardTransactionResult(CardTransactionResult cardTransactionResult) {
         cardUiController.showCardTransactionResult(cardTransactionResult);
+    }
+
+    public void showBonusInfo(Optional<Bonus> bonus, Sale sale) {
+        bonusUiController.showBonus(bonus, sale);
+        pane.setCenter(bonusUiController.getBonusUiAnchorPane());
     }
 
     public void reset() {

@@ -36,12 +36,6 @@ public class StatsController {
         if (resp.isEmpty()) return - 1;
 
         var customer = resp.get();
-        System.out.println(customer.getCustomerNo());
-        System.out.println(customer.getBonusCard().getNumber());
-        System.out.println(customer.getFirstName());
-        System.out.println(customer.getLastName());
-        System.out.println(customer.getBonusCard().getBlocked());
-        System.out.println(customer.getBonusCard().getExpired());
         if (customer.getBonusCard().getBlocked() || customer.getBonusCard().getExpired()) {
             return customer.getCustomerNo();
         }

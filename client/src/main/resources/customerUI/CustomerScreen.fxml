@@ -13,17 +13,17 @@
     </left>
     <bottom>
         <Pane prefHeight="50.0" prefWidth="200.0">
-            <ButtonBar layoutX="288.0" layoutY="5.0" prefHeight="40.0" prefWidth="298.0">
+            <ButtonBar layoutX="160.0" layoutY="5.0" prefHeight="40.0" prefWidth="434.0">
                 <buttons>
-                    <Button fx:id="cashButton" mnemonicParsing="false" text="Cash"/>
-                    <Button fx:id="cardButton" layoutX="535.0" layoutY="10.0" mnemonicParsing="false" text="Card"/>
-                    <Button fx:id="receiptBtn" layoutX="50.0" layoutY="18.0" mnemonicParsing="false"
-                            text="Print receipt"/>
+                    <Button fx:id="cashButton" mnemonicParsing="false" text="Cash" />
+                    <Button fx:id="cardButton" layoutX="535.0" layoutY="10.0" mnemonicParsing="false" text="Card" />
+               <Button fx:id="bonusButton" layoutX="45.0" layoutY="18.0" mnemonicParsing="false" text="Bonus Points" />
+                    <Button fx:id="receiptBtn" layoutX="50.0" layoutY="18.0" mnemonicParsing="false" text="Print receipt" />
                 </buttons>
             </ButtonBar>
-            <Label fx:id="paymentLabel" layoutX="315.0" layoutY="-9.0" text="Please select payment">
+            <Label fx:id="paymentLabel" layoutX="280.0" layoutY="-9.0" text="Please select payment">
                 <font>
-                    <Font name="System Bold" size="18.0"/>
+                    <Font name="System Bold" size="18.0" />
                 </font>
             </Label>
         </Pane>
