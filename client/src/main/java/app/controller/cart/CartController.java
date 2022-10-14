@@ -48,4 +48,12 @@ public class CartController {
         customerCartController.refresh();
     }
 
+    public void addMultipleOfSelectedItem(int n) {
+        var selected = cashierCartController.getSelectedItem();
+        if (selected == null) return;
+        for (int i = 0; i < n; i++) {
+            addToCart(selected);
+        }
+    }
+
 }

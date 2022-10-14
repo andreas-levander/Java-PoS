@@ -43,7 +43,7 @@ public class StatsController {
         System.out.println(customer.getBonusCard().getBlocked());
         System.out.println(customer.getBonusCard().getExpired());
         if (customer.getBonusCard().getBlocked() || customer.getBonusCard().getExpired()) {
-            return -1;
+            return customer.getCustomerNo();
         }
         var bonusPoints = Math.round(sale.getCart().getTotalPrice().getNumber().doubleValue() * 0.1);
         bonusService.saveBonus(customer.getCustomerNo(), bonusPoints);

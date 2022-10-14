@@ -35,14 +35,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <TabPane fx:id="mainPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.MainController">
     <Tab closable="false" text="cashier">
@@ -51,19 +48,22 @@
                 <fx:include source="cart/CashierCart.fxml" />
             </left>
             <bottom>
-                <ButtonBar prefHeight="40.0" prefWidth="200.0">
-                    <buttons>
-                        <Button fx:id="addItemByBarcode" layoutX="127.0" layoutY="18.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" text="Add Product" />
-                        <Button fx:id="removeItem" mnemonicParsing="false" text="Remove Product" />
-                        <Button fx:id="clearButton" mnemonicParsing="false" text="New Cart" />
-                        <Button fx:id="saveCart" mnemonicParsing="false" text="Save Cart" />
-                        <Button fx:id="getSavedCart" mnemonicParsing="false" text="Show Saved Carts" />
-                        <Button fx:id="checkout" layoutX="426.0" layoutY="10.0" mnemonicParsing="false" text="Checkout" />
-
-                  <Button fx:id="discountButton" mnemonicParsing="false" text="Discount" />
-
-                    </buttons>
-                </ButtonBar>
+                <AnchorPane prefHeight="270.0" prefWidth="800.0">
+                    <ButtonBar layoutY="216.0" prefHeight="40.0" prefWidth="800.0">
+                        <buttons>
+                            <Button fx:id="clearButton" mnemonicParsing="false" text="New Cart" />
+                            <Button fx:id="saveCart" mnemonicParsing="false" text="Save Cart" />
+                            <Button fx:id="getSavedCart" mnemonicParsing="false" text="Show Saved Carts" />
+                            <Button fx:id="checkout" layoutX="426.0" layoutY="10.0" mnemonicParsing="false" text="Checkout" />
+                        </buttons>
+                    </ButtonBar>
+                      <Button fx:id="addItemByBarcode" layoutX="13.0" layoutY="16.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" text="Add Product" />
+                      <Button fx:id="removeItem" layoutX="96.0" layoutY="16.0" mnemonicParsing="false" text="Remove Product" />
+                      <Button fx:id="discountButton" layoutX="200.0" layoutY="16.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Discount" />
+                   <Button fx:id="multiplyBtn" layoutX="200.0" layoutY="41.0" mnemonicParsing="false" text="Add multiple" />
+                   <TextField fx:id="multiplyTextField" layoutX="162.0" layoutY="41.0" prefHeight="25.0" prefWidth="37.0" />
+                   <Label fx:id="error" layoutX="14.0" layoutY="45.0" prefHeight="17.0" prefWidth="143.0" />
+                </AnchorPane>
             </bottom>
             <center>
                 <fx:include source="payments/PaymentsUiBase.fxml" />

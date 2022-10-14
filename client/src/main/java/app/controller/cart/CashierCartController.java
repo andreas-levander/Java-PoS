@@ -22,10 +22,6 @@ public class CashierCartController {
 
     @FXML
     public void initialize() {
-        //TODO maybe disable button depending on selection (if null)
-//        listView.getSelectionModel().selectedItemProperty().addListener(((observableValue, item, t1) -> {
-//
-//        }));
 
         cashierCartListView.setCellFactory(new Callback<>() {
             @Override
@@ -43,6 +39,8 @@ public class CashierCartController {
     public int getSelectedIndex() {
         return cashierCartListView.getSelectionModel().getSelectedIndex();
     }
+
+    public Item getSelectedItem() { return cashierCartListView.getSelectionModel().getSelectedItem(); }
 
     public ListView<Item> getListView() {
         return cashierCartListView;

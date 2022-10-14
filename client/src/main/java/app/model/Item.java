@@ -23,7 +23,6 @@ public class Item {
     private final String barCode;
     private final List<String> keywords;
     private Money price;
-    @JsonIgnore
     private Money discount;
 
     public Item(String name, Integer id, String barCode, List<String> keywords, Money price) {
