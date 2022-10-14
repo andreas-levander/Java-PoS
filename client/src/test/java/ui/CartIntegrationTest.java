@@ -43,7 +43,7 @@ class CartIntegrationTest {
         Mockito.when(itemService.getByBarcode(Mockito.anyString())).thenAnswer(i ->
         {
             var arg = i.getArguments()[0].toString();
-            return new ArrayList<>((List.of(new Item(arg, arg, arg, new ArrayList<>(), Money.of(2.0, "EUR")))));
+            return new ArrayList<>((List.of(new Item(arg, 1, arg, new ArrayList<>(), Money.of(2.0, "EUR")))));
         });
         FxWeaver fxWeaver = applicationContext.getBean(FxWeaver.class);
         stage.setScene(new Scene(fxWeaver.loadView(MainController.class), 600, 400));

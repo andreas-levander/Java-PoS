@@ -47,7 +47,7 @@ class CartControllerTest {
         Mockito.when(cashierCartController.getSelectedIndex()).thenReturn(0);
 
         cartController.newCart();
-        var newItem = new Item("test","1","123", List.of("asd"),Money.of(2.5, "EUR"));
+        var newItem = new Item("test",1,"123", List.of("asd"),Money.of(2.5, "EUR"));
         cartController.addToCart(newItem);
 
         Assertions.assertThat(cartController.getCurrentCart().getItems()).contains(newItem);
@@ -61,7 +61,7 @@ class CartControllerTest {
 
     @Test
     void addToCart() {
-        var newItem = new Item("test","1","123", List.of("asd"), Money.of(2.5, "EUR"));
+        var newItem = new Item("test",1,"123", List.of("asd"), Money.of(2.5, "EUR"));
         cartController.newCart();
         cartController.addToCart(newItem);
         var cart = cartController.getCurrentCart();
