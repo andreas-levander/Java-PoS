@@ -99,10 +99,16 @@ public class MainController {
         discountButton.setDisable(!discountButton.isDisable());
     }
 
+    private void toggleMultipleButton() {
+        multiplyBtn.setDisable(!multiplyBtn.isDisable());
+        multiplyTextField.setDisable(!multiplyTextField.isDisable());
+    }
+
     public void toggleCheckoutButton() {
         toggleAddRemoveButtons();
         toggleSaveCartButtons();
         toggleDiscountButton();
+        toggleMultipleButton();
         checkout.setDisable(!checkout.isDisable());
     }
 
