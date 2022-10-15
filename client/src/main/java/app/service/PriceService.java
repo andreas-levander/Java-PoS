@@ -9,6 +9,8 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+
+/** Class responsible for doing network calls for saving prices */
 @Service
 public class PriceService {
     private final WebClient webClient;

@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 import java.util.List;
 
+/** Service responsible for saving/getting stats from database  */
 @Service
 public class StatsService {
     private final SoldProductsRepository soldRepository;

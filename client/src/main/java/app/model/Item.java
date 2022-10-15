@@ -1,6 +1,5 @@
 package app.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,13 +7,13 @@ import lombok.Setter;
 import lombok.extern.jackson.Jacksonized;
 import org.javamoney.moneta.Money;
 import org.javamoney.moneta.format.CurrencyStyle;
-
 import javax.money.format.AmountFormatQueryBuilder;
 import javax.money.format.MonetaryAmountFormat;
 import javax.money.format.MonetaryFormats;
 import java.util.List;
 import java.util.Locale;
 
+/** Model for a single item/product */
 @AllArgsConstructor @Setter @Getter
 @Jacksonized @Builder
 public class Item {

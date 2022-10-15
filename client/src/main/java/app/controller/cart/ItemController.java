@@ -6,6 +6,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ItemController {
@@ -15,7 +16,7 @@ public class ItemController {
         this.itemService = itemService;
     }
 
-    public List<Item> searchForItem(String searchString) {
+    public Optional<List<Item>> searchForItem(String searchString) {
         if(NumberUtils.isParsable(searchString)) {
             // set to local call for testing without needing to run backend
             return itemService.getByBarcodeForTest(searchString);

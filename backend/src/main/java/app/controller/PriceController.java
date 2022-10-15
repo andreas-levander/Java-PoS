@@ -12,12 +12,12 @@ public class PriceController {
         this.priceService = priceService;
     }
 
+    /** @return the price for an item
+     * @param id of the item */
     public Money getPrice(Integer id) {
-        System.out.println("Getting price for id" +id);
         var price = priceService.get(id);
         // if price not set we return price of 0
         if (price.isEmpty()) return Money.of(0.0,"EUR");
-        System.out.println(price.get().getPrice());
         return price.get().getPrice();
     }
 }

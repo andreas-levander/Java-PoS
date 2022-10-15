@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+/** Class responsible for doing network calls for statistics */
 @Service
 public class StatisticService {
     private final WebClient webClient;
@@ -22,7 +23,8 @@ public class StatisticService {
     public StatisticService(WebClient webClient) {
         this.webClient = webClient;
     }
-    // to be used for saving a price to the backend
+
+    // to be used for saving sale related stats to the backend
     public void saveSale(Sale sale) {
         webClient.post()
                 .uri(backendBaseUrl +"/api/v1/stats/save/sale")
@@ -38,6 +40,7 @@ public class StatisticService {
                 }).block();
     }
 
+    // gets the 10 most sold products from backend in the date range, should always get a response (empty array on no products)
     public List<ProductStatistic> getMostSoldProducts(LocalDate start, LocalDate end) {
         var response = webClient.get()
                 .uri(backendBaseUrl +"/api/v1/stats/mostSold" + "?start=" + start +"&end=" + end)
@@ -55,6 +58,7 @@ public class StatisticService {
         return Arrays.asList(response);
     }
 
+    // gets the 10 least sold products from backend in the date range, should always get a response (empty array on no products)
     public List<ProductStatistic> getLeastSoldProducts(LocalDate start, LocalDate end) {
         var response = webClient.get()
                 .uri(backendBaseUrl +"/api/v1/stats/leastSold" + "?start=" + start +"&end=" + end)
@@ -72,6 +76,7 @@ public class StatisticService {
         return Arrays.asList(response);
     }
 
+    // gets stats for a single product (amount sold per date), should always get a response (empty array on no sales)
     public List<ProductStatistic> getProductStats(String barCode) {
         var response = webClient.get()
                 .uri(backendBaseUrl +"/api/v1/stats/barCode/" + barCode)
@@ -89,6 +94,7 @@ public class StatisticService {
         return Arrays.asList(response);
     }
 
+    // gets all purchases made by the customer, should always get a response (empty array on no purchases)
     public List<ProductStatistic> getCustomerStats(String id) {
         var response = webClient.get()
                 .uri(backendBaseUrl +"/api/v1/stats/customer/" + id)

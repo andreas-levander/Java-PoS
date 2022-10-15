@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 import java.util.List;
 
+/** Database methods for SoldProduct table  */
 @Repository
 public interface SoldProductsRepository extends JpaRepository<SoldProduct, Integer> {
     @Query(value = "SELECT new app.model.ProductStat(s.name, s.barCode, count(s)) " +

@@ -12,21 +12,24 @@ import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.util.List;
 
+/** Class responsible for controlling saving statistics and bonus points */
 @Controller
 public class StatsController {
     private final StatsService statsService;
     private final BonusService bonusService;
+    private final double bonusPointsPercentOfSale = 0.1;
 
     public StatsController(StatsService statsService, BonusService bonusService) {
         this.statsService = statsService;
         this.bonusService = bonusService;
     }
 
+    /** Saves stats form the sale */
     public void saveSaleStats(Sale sale) {
         var customerNr = saveBonus(sale);
         saveProducts(sale, customerNr);
     }
-
+    /** @return id of the customer if found and saves bonus points if card is valid */
     private Integer saveBonus(Sale sale) {
         var bonusCard = sale.getBonusCard();
         if (bonusCard == null) return -1;
@@ -39,12 +42,13 @@ public class StatsController {
         if (customer.getBonusCard().getBlocked() || customer.getBonusCard().getExpired()) {
             return customer.getCustomerNo();
         }
-        var bonusPoints = Math.round(sale.getCart().getTotalPrice().getNumber().doubleValue() * 0.1);
+        var bonusPoints = Math.round(sale.getCart().getTotalPrice().getNumber().doubleValue() * bonusPointsPercentOfSale);
         bonusService.saveBonus(customer.getCustomerNo(), bonusPoints);
 
         return customer.getCustomerNo();
     }
 
+    /** Saves stats of every product in the sale */
     private void saveProducts(Sale sale, int customerNr) {
         var items = sale.getCart().getItems();
         var soldProducts = items.stream().map(item ->

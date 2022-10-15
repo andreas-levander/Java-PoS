@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 
 import java.util.Date;
 
+/** Class responsible for managing the SalesMan UI */
 @Controller
 @FxmlView("/adminUI/sales/SalesUI.fxml")
 public class SalesUiController {
@@ -83,14 +84,13 @@ public class SalesUiController {
         });
 
         search.setOnAction(actionEvent -> {
-            try {
                 var items = itemController.searchForItem(searchTextField.getText());
-                searchList.getItems().setAll(items);
-            } catch (Exception e) {
-                // show error in ui ?
-                showNotification("product not found", Color.RED);
-                throw new RuntimeException(e);
-            }
+                if (items.isEmpty()) {
+                    showNotification("product not found", Color.RED);
+                    return;
+                }
+                searchList.getItems().setAll(items.get());
+
         });
     }
 

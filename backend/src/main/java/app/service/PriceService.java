@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/** Service responsible for saving/getting prices from database  */
 @Service
 public class PriceService {
     private final PriceRepository repository;

@@ -10,6 +10,7 @@ import lombok.Getter;
 import org.javamoney.moneta.Money;
 import java.util.UUID;
 
+/** Model for a cart of items */
 @Getter
 public class Cart {
     private final ObservableList<Item> items;
@@ -30,6 +31,7 @@ public class Cart {
         objectMapper = new ObjectMapper().findAndRegisterModules();
     }
 
+    /** Adds a deep copy of the item to the cart and updates the total price */
     public void addItem(Item item) {
         try {
             Item deepCopy = objectMapper
@@ -48,6 +50,7 @@ public class Cart {
         }
     }
 
+    /** Removes an item from the cart and updates the total price */
     public void removeItem(int index) {
         if (index >= 0 && index < items.size()) {
             var item = items.get(index);
@@ -62,6 +65,7 @@ public class Cart {
         }
     }
 
+    /** Discounts an item in the cart and updates the total price */
     public void discountItem(Integer index, Double percent) {
         var item = items.get(index);
         var newPrice = item.getPrice().multiply((100 - percent) / 100);

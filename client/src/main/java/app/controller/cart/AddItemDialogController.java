@@ -49,14 +49,12 @@ public class AddItemDialogController {
         stage.setTitle("Add Item Dialog");
 
         search.setOnAction(actionEvent -> {
-            try {
-                var items = itemController.searchForItem(textField.getText());
-                searchList.getItems().setAll(items);
-            } catch (Exception e) {
-                // show error in ui ?
+            var items = itemController.searchForItem(textField.getText());
+            if (items.isEmpty()) {
                 showNotification("product not found", Color.RED);
-                throw new RuntimeException(e);
+                return;
             }
+            searchList.getItems().setAll(items.get());
         });
         searchList.getSelectionModel().selectedItemProperty().addListener((observableValue, sale, t1) -> addToCart.setDisable(t1 == null));
         addToCart.setDisable(true);

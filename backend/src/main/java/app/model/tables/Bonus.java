@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+
+/** Database table for bonus points */
 @AllArgsConstructor @NoArgsConstructor
 @Setter @Getter
 @Entity @Table

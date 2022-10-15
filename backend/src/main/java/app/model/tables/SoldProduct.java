@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Date;
 
+/** Database table and model for sold products/items */
 @Setter @Getter @NoArgsConstructor
 @Entity @Table
 public class SoldProduct {

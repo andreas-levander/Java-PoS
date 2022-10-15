@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+/** Class responsible getting items from the product catalog */
 @Service
 public class ItemService {
     @Value("${productCatalog.baseurl}")
@@ -26,6 +27,8 @@ public class ItemService {
         xmlMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
     }
 
+    /** @return the item with the given barcode
+     * @throws NotFoundException if an item is not found in the product catalog */
     public ProductCatalogItem findProductByBarcode(String barCode) {
         var response = client.get()
                 .uri(baseUrl +"/rest/findByBarCode/" + barCode)
@@ -48,6 +51,8 @@ public class ItemService {
         }
     }
 
+    /** @return the item with the given name
+     * @throws NotFoundException if an item is not found in the product catalog */
     public ProductCatalogItemList findProductByName(String name) {
         var response = client.get()
                 .uri(baseUrl +"/rest/findByName/" + name)
@@ -65,12 +70,12 @@ public class ItemService {
 
         try {
             var itemlist = xmlMapper.readValue(response, ProductCatalogItemList.class);
+            // needed because product catalog returns status 200 even if no results are found
             if (itemlist.getProducts() == null) {
                 throw new NotFoundException("Item with name: " + name +  " not found in ProductCatalog");
             }
             return itemlist;
         } catch (JsonProcessingException e) {
-
             throw new RuntimeException(e);
         }
     }

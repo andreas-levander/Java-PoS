@@ -1,6 +1,5 @@
 package app.service;
 
-import app.errors.ItemNotFoundException;
 import app.model.payment.CardTransactionResult;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -8,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -28,9 +26,9 @@ public class PaymentService {
         xmlMapper = new XmlMapper();
     }
 
-    public String waitForPayment(String amount) {
-        System.out.println(amount);
-        return webClient.post()
+    // calls the card reader to start a payment
+    public void waitForPayment(String amount) {
+        webClient.post()
                 .uri(cardReaderBaseUrl +"/cardreader/waitForPayment")
                 .body(BodyInserters.fromFormData("amount", amount))
                 .accept(MediaType.TEXT_PLAIN)
@@ -44,6 +42,7 @@ public class PaymentService {
                 }).block();
     }
 
+    // gets the card reader status
     public String getStatus() {
         return webClient.get()
                 .uri(cardReaderBaseUrl +"/cardreader/status")
@@ -58,6 +57,7 @@ public class PaymentService {
                 }).block();
     }
 
+    // gets the result of a card transaction from the card reader
     public CardTransactionResult getResult() {
         var response = webClient.get()
                 .uri(cardReaderBaseUrl +"/cardreader/result")
@@ -76,8 +76,9 @@ public class PaymentService {
         }
     }
 
-    public String abortCardPayment(){
-        return webClient.post()
+    // aborts a card payment
+    public void abortCardPayment(){
+        webClient.post()
                 .uri(cardReaderBaseUrl +"/cardreader/abort")
                 .accept(MediaType.TEXT_PLAIN)
                 .exchangeToMono(clientResponse -> {
@@ -90,8 +91,9 @@ public class PaymentService {
                 }).block();
     }
 
-    public String openCashBox(){
-        return webClient.post()
+    // opens the cash box
+    public void openCashBox(){
+        webClient.post()
                 .uri(cashBoxBaseUrl +"/cashbox/open")
                 .accept(MediaType.TEXT_PLAIN)
                 .exchangeToMono(clientResponse -> {
@@ -104,8 +106,9 @@ public class PaymentService {
                 }).block();
     }
 
-    public String resetCardReader(){
-        return webClient.post()
+    // resets the card reader
+    public void resetCardReader(){
+        webClient.post()
                 .uri(cardReaderBaseUrl +"/cardreader/reset")
                 .accept(MediaType.TEXT_PLAIN)
                 .exchangeToMono(clientResponse -> {

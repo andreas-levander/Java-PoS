@@ -1,16 +1,13 @@
 package app.api;
 
-
 import app.controller.StatsController;
 import app.model.ProductStat;
 import app.model.Sale;
 import org.springframework.web.bind.annotation.*;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 
+/** Class responsible for the statistics endpoints */
 @RestController
 @RequestMapping(path = "api/v1/stats")
 public class StatisticsAPI {

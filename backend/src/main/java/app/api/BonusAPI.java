@@ -5,6 +5,7 @@ import app.model.BonusCard;
 import app.model.tables.Bonus;
 import org.springframework.web.bind.annotation.*;
 
+/** Class responsible for the bonus endpoints */
 @RestController
 @RequestMapping(path = "api/v1/bonus")
 public class BonusAPI {

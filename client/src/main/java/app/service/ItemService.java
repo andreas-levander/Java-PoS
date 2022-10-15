@@ -1,6 +1,5 @@
 package app.service;
 
-import app.errors.ItemNotFoundException;
 import app.model.Item;
 import org.javamoney.moneta.Money;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +11,7 @@ import reactor.core.publisher.Mono;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /** Class responsible for calling the backend for Items */
 @Service
@@ -24,7 +24,8 @@ public class ItemService {
         this.webClient = webClient;
     }
 
-    public List<Item> getByBarcode(String barCode) {
+    // gets the item with specific bar code from the backend
+    public Optional<List<Item>> getByBarcode(String barCode) {
         var response = webClient.get()
                 .uri(backendBaseUrl +"/api/v1/item/barcode/" + barCode)
                 .accept(MediaType.APPLICATION_JSON)
@@ -32,17 +33,18 @@ public class ItemService {
                     if (clientResponse.statusCode().equals(HttpStatus.OK)) {
                         return clientResponse.bodyToMono(Item[].class);
                     } else if (clientResponse.statusCode().is4xxClientError()) {
-                        throw new ItemNotFoundException("Item with barcode: " + barCode +  " not found");
+                        return Mono.empty();
                     } else {
                         return clientResponse.createException()
                                 .flatMap(Mono::error);
                     }
                 }).block();
-        assert response != null;
-        return Arrays.asList(response);
+        if (response == null) return Optional.empty();
+        return Optional.of(Arrays.asList(response));
     }
 
-    public List<Item> getByName(String name) {
+    // gets the item(s) with specific name from the backend
+    public Optional<List<Item>> getByName(String name) {
         var response = webClient.get()
                 .uri(backendBaseUrl +"/api/v1/item/name/" + name)
                 .accept(MediaType.APPLICATION_JSON)
@@ -50,17 +52,18 @@ public class ItemService {
                     if (clientResponse.statusCode().equals(HttpStatus.OK)) {
                         return clientResponse.bodyToMono(Item[].class);
                     } else if (clientResponse.statusCode().is4xxClientError()) {
-                        throw new ItemNotFoundException("Item with name: " + name +  " not found");
+                        return Mono.empty();
                     } else {
                         return clientResponse.createException()
                                 .flatMap(Mono::error);
                     }
                 }).block();
-        assert response != null;
-        return Arrays.asList(response);
+        if (response == null) return Optional.empty();
+        return Optional.of(Arrays.asList(response));
     }
 
-    public List<Item> getByBarcodeForTest(String barCode) {
-        return new ArrayList<>(List.of(new Item(barCode, 1, "123", new ArrayList<>(), Money.of((double) Math.round(((Math.random() * 100) * 1000) / 1000), "EUR"))));
+    public Optional<List<Item>> getByBarcodeForTest(String barCode) {
+        return Optional.of(new ArrayList<>(List.of(
+                new Item(barCode, 1, "123", new ArrayList<>(), Money.of((double) Math.round(((Math.random() * 100) * 1000) / 1000), "EUR")))));
     }
 }

@@ -7,6 +7,7 @@ import lombok.extern.jackson.Jacksonized;
 
 import java.util.Date;
 
+/** Model for a product statistic */
 @AllArgsConstructor @Getter
 @Jacksonized @Builder
 public class ProductStatistic {
