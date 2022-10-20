@@ -13,6 +13,11 @@ This is a project made for the course Software Engineering at Åbo Akademi Unive
 
 ## Table of Contents <!-- omit in toc -->  
 
+- [Setup](#setup)
+    - [Requirements](#requirements)
+    - [Quick Start](#quick-start)
+    - [Configuration](#configuration)
+
 ## Setup  
 
 ### Requirements  
@@ -25,9 +30,9 @@ This is a project made for the course Software Engineering at Åbo Akademi Unive
 
 1. Setup a PostgreSQL database wherever you like, you can use the [provided docker compose](/backend/database/compose.yaml) if you have docker and you can use `docker compose up` to start it.    
 2. Modify the database info in the [application.yaml](/backend/src/main/resources/application.yaml) with your database info. (this step can be ignored if you use the provided docker compose)
-3. Start all the [external jars](/Jars/), you can use the provided batch file by first editing it and setting the location to java8/10 then you can run it and it should start all of them.
+3. Start all the [external jars](/Jars/), you can use the [provided batch file](/Jars/startall.bat) by first editing it and setting the location to java8/10 then you can run it and it should start all of them.
 
 ### Configuration  
 
-[Backend](/docs/backend.md)
-[Client](/docs/client.md)
+[Backend](/docs/backend.md)  
+[Client](/docs/client.md)  
