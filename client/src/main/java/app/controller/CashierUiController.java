@@ -26,7 +26,7 @@ public class CashierUiController {
     private final CustomerController customerController;
 
     @FXML
-    private Button addItemByBarcode, clearButton, getSavedCart, saveCart, removeItem, checkout, discountButton, multiplyBtn;
+    private Button addItemBtn, clearButton, getSavedCart, saveCart, removeItem, checkout, discountButton, multiplyBtn;
     @FXML
     private Label error;
     @FXML
@@ -44,7 +44,7 @@ public class CashierUiController {
 
     @FXML
     public void initialize() {
-        addItemByBarcode.setOnAction(
+        addItemBtn.setOnAction(
                 actionEvent -> fxWeaver.loadController(AddItemDialogController.class).show()
         );
 
@@ -86,7 +86,7 @@ public class CashierUiController {
     }
 
     private void toggleAddRemoveButtons() {
-        addItemByBarcode.setDisable(!addItemByBarcode.isDisable());
+        addItemBtn.setDisable(!addItemBtn.isDisable());
         removeItem.setDisable(!removeItem.isDisable());
     }
 

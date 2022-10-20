@@ -20,7 +20,7 @@
                     <Button fx:id="checkout" layoutX="426.0" layoutY="10.0" mnemonicParsing="false" text="Checkout" />
                 </buttons>
             </ButtonBar>
-            <Button fx:id="addItemByBarcode" layoutX="13.0" layoutY="16.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" text="Add Product" />
+            <Button fx:id="addItemBtn" layoutX="13.0" layoutY="16.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" text="Add Product" />
             <Button fx:id="removeItem" layoutX="96.0" layoutY="16.0" mnemonicParsing="false" text="Remove Product" />
             <Button fx:id="discountButton" layoutX="200.0" layoutY="16.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Discount" />
             <Button fx:id="multiplyBtn" layoutX="200.0" layoutY="41.0" mnemonicParsing="false" text="Add multiple" />

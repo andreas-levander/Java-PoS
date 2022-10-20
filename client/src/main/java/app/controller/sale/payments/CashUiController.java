@@ -40,7 +40,7 @@ public class CashUiController {
     @FXML
     public void initialize() {
         cashPaymentDialog = fxWeaver.loadController(CashPaymentReceivedController.class);
-        anchorPane.getChildren().setAll(cashPaymentDialog.getDialog());
+        anchorPane.getChildren().setAll(cashPaymentDialog.getCashDialog());
 
         cashPaymentDialog.getConfirmButton().setOnAction(e ->{
             var amountReceived = cashPaymentDialog.getAmountReceivedField().textProperty().get();
@@ -78,7 +78,7 @@ public class CashUiController {
     }
 
     public void showDialogPane() {
-        anchorPane.getChildren().setAll(cashPaymentDialog.getDialog());
+        anchorPane.getChildren().setAll(cashPaymentDialog.getCashDialog());
     }
 }
 

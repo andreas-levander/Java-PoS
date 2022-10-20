@@ -22,7 +22,7 @@ public class CashPaymentReceivedController {
     @FXML
     private Button confirmButton;
     @FXML
-    private AnchorPane dialog;
+    private AnchorPane cashDialog;
     @FXML
     private Label totalLabel, errorLabel;
 
@@ -34,8 +34,8 @@ public class CashPaymentReceivedController {
         totalLabel.textProperty().bind(sale.getCart().getObservableTotalPrice().asString());
     }
 
-    public AnchorPane getDialog() {
-        return dialog;
+    public AnchorPane getCashDialog() {
+        return cashDialog;
     }
 
     public TextField getAmountReceivedField() {

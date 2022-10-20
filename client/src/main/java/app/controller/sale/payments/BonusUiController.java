@@ -14,6 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import java.util.Optional;
 
+/** Class responsible for managing the UI element for the bonus payment*/
 @Component
 @FxmlView("/adminUI/payments/BonusUi.fxml")
 public class BonusUiController {
@@ -38,6 +39,7 @@ public class BonusUiController {
     @FXML
     public void initialize() {
         confirmBtn.setOnAction(actionEvent -> {
+            // set bonus to used bonus points
             bonus.setBonusPoints((long)Math.ceil(sale.getCart().getTotalPrice().getNumber().doubleValue()));
             ctx.getBean(BonusService.class).useBonus(bonus);
             ctx.publishEvent(new SaleFinishedEvent(sale));

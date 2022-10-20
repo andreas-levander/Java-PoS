@@ -8,10 +8,10 @@
     <Tab closable="false" text="cashier">
         <fx:include source="CashierUi.fxml"/>
     </Tab>
-    <Tab closable="false" text="marketing">
+    <Tab fx:id="marketingTab" closable="false" text="marketing">
         <fx:include source="marketing/MarketingUi.fxml" />
     </Tab>
-   <Tab closable="false" text="sales">
+   <Tab fx:id="salesTab" closable="false" text="sales">
        <fx:include source="sales/SalesUI.fxml" />
    </Tab>
 </TabPane>

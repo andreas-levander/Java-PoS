@@ -44,6 +44,7 @@ public class CustomerController {
         this.stage = new Stage();
         stage.setScene(new Scene(customerPane));
         stage.setTitle("Customer Screen");
+        stage.setX(20);
 
         cardButton.setDisable(true);
         cashButton.setDisable(true);
