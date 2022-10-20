@@ -36,11 +36,11 @@ public class StatsController {
 
         System.out.println(bonusCard.getNumber());
         var resp = bonusService.findCustomerByBonusCard(bonusCard.getNumber(), bonusCard.getGoodThruMonth(), bonusCard.getGoodThruYear());
-        if (resp.isEmpty()) return - 1;
+        if (resp.isEmpty()) return -1;
 
         var customer = resp.get();
         if (customer.getBonusCard().getBlocked() || customer.getBonusCard().getExpired()) {
-            return customer.getCustomerNo();
+            return -1;
         }
         var bonusPoints = Math.round(sale.getCart().getTotalPrice().getNumber().doubleValue() * bonusPointsPercentOfSale);
         bonusService.saveBonus(customer.getCustomerNo(), bonusPoints);

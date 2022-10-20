@@ -19,7 +19,6 @@ public class PriceAPI {
     @PostMapping(path = "/save")
     public void savePrice(@RequestBody Item item) {
         var price = new Price(item.getId(), item.getPrice());
-        System.out.println("save price request " + item.getName() + " id " + item.getId() + " price " + item.getPrice());
         priceService.save(price);
     }
 
