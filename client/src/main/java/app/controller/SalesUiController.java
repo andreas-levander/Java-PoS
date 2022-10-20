@@ -27,13 +27,13 @@ public class SalesUiController {
     private final StatisticService statsService;
 
     @FXML
-    private Button search, changePrice, getStats;
+    private Button salesSearch, changePrice, getStats;
     @FXML
     private TextField searchTextField, setPriceField;
     @FXML
     private Label notif, tableLabel;
     @FXML
-    private ListView<Item> searchList;
+    private ListView<Item> salesSearchList;
     @FXML
     private TableView<ProductStatistic> table;
 
@@ -48,7 +48,7 @@ public class SalesUiController {
         changePrice.setDisable(true);
         getStats.setDisable(true);
         changePrice.setOnAction(actionEvent -> {
-            var item = searchList.getSelectionModel().getSelectedItem();
+            var item = salesSearchList.getSelectionModel().getSelectedItem();
             var price = setPriceField.getText();
             var oldPrice = item.getPrice();
 
@@ -64,32 +64,32 @@ public class SalesUiController {
                 showNotification("Error setting price", Color.RED);
                 throw new RuntimeException(e);
             }
-            searchList.refresh();
+            salesSearchList.refresh();
 
         });
 
         setupTable();
 
         getStats.setOnAction(actionEvent -> {
-            var selected = searchList.getSelectionModel().getSelectedItem();
+            var selected = salesSearchList.getSelectionModel().getSelectedItem();
             var stats = statsService.getProductStats(selected.getBarCode());
             table.getItems().setAll(stats);
             tableLabel.setText(selected.toString());
         });
 
 
-        searchList.getSelectionModel().selectedItemProperty().addListener((observableValue, item, t1) -> {
+        salesSearchList.getSelectionModel().selectedItemProperty().addListener((observableValue, item, t1) -> {
             changePrice.setDisable(t1 == null);
             getStats.setDisable(t1 == null);
         });
 
-        search.setOnAction(actionEvent -> {
+        salesSearch.setOnAction(actionEvent -> {
                 var items = itemController.searchForItem(searchTextField.getText());
                 if (items.isEmpty()) {
                     showNotification("product not found", Color.RED);
                     return;
                 }
-                searchList.getItems().setAll(items.get());
+                salesSearchList.getItems().setAll(items.get());
 
         });
     }

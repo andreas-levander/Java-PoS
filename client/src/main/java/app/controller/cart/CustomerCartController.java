@@ -25,16 +25,17 @@ public class CustomerCartController {
         // sets list not selectable
         customerListView.setMouseTransparent(true);
         customerListView.setFocusTraversable(false);
-    }
 
-
-    public void bind(Cart cart) {
         customerListView.setCellFactory(new Callback<>() {
             @Override
             public ListCell<Item> call(ListView<Item> itemListView) {
                 return new CartCell();
             }
         });
+    }
+
+
+    public void bind(Cart cart) {
         customerListView.setItems(cart.getItems());
         customerTotalPrice.textProperty().bind(cart.getObservableTotalPrice().asString());
     }

@@ -19,8 +19,8 @@ public class ItemController {
     public Optional<List<Item>> searchForItem(String searchString) {
         if(NumberUtils.isParsable(searchString)) {
             // set to local call for testing without needing to run backend
-            return itemService.getByBarcodeForTest(searchString);
-            //return itemService.getByBarcode(searchString);
+            //return itemService.getByBarcodeForTest(searchString);
+            return itemService.getByBarcode(searchString);
         } else {
             // search by name
             //items = itemService.getByBarcodeForTest(searchString);

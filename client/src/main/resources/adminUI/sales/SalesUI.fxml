@@ -17,8 +17,8 @@
 
     <Label layoutX="14.0" layoutY="96.0" prefHeight="17.0" prefWidth="242.0" text="Search item by entering barcode or name" />
    <TextField fx:id="searchTextField" layoutX="14.0" layoutY="113.0" prefHeight="25.0" prefWidth="149.0" promptText="enter barcode or name" />
-   <Button fx:id="search" layoutX="164.0" layoutY="113.0" mnemonicParsing="false" text="search" />
-   <ListView fx:id="searchList" layoutX="14.0" layoutY="138.0" prefHeight="200.0" prefWidth="200.0" />
+   <Button fx:id="salesSearch" layoutX="164.0" layoutY="113.0" mnemonicParsing="false" text="search" />
+   <ListView fx:id="salesSearchList" layoutX="14.0" layoutY="138.0" prefHeight="200.0" prefWidth="200.0" />
    <TextField fx:id="setPriceField" layoutX="54.0" layoutY="347.0" minWidth="56.0" prefHeight="25.0" prefWidth="56.0" promptText="price" />
  <Button fx:id="changePrice" contentDisplay="CENTER" layoutX="110.0" layoutY="347.0" minWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Set price" />
    <TableView fx:id="table" layoutX="313.0" layoutY="113.0" prefHeight="290.0" prefWidth="391.0" />

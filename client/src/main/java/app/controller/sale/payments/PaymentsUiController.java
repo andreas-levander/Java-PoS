@@ -1,7 +1,7 @@
 package app.controller.sale.payments;
 
 import app.controller.CustomerController;
-import app.controller.MainController;
+import app.controller.CashierUiController;
 import app.model.Bonus;
 import app.model.payment.CardTransactionResult;
 import app.model.sale.Sale;
@@ -48,7 +48,7 @@ public class PaymentsUiController {
         abort.setVisible(false);
         abort.setOnAction(e -> {
             applicationContext.getBean(PaymentController.class).abort();
-            applicationContext.getBean(MainController.class).toggleCheckoutButton();
+            applicationContext.getBean(CashierUiController.class).toggleCheckoutButton();
         });
     }
 

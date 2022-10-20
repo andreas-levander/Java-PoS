@@ -50,12 +50,12 @@ class CartControllerTest {
         var newItem = new Item("test",1,"123", List.of("asd"),Money.of(2.5, "EUR"));
         cartController.addToCart(newItem);
 
-        Assertions.assertThat(cartController.getCurrentCart().getItems()).contains(newItem);
+        Assertions.assertThat(cartController.getCurrentCart().getItems().get(0)).usingRecursiveComparison().isEqualTo(newItem);
 
         cartController.removeSelectedItem();
         Mockito.verify(cashierCartController).getSelectedIndex();
 
-        Assertions.assertThat(cartController.getCurrentCart().getItems()).doesNotContain(newItem);
+        Assertions.assertThat(cartController.getCurrentCart().getItems()).isEmpty();
     }
 
 
@@ -65,6 +65,6 @@ class CartControllerTest {
         cartController.newCart();
         cartController.addToCart(newItem);
         var cart = cartController.getCurrentCart();
-        Assertions.assertThat(cart.getItems()).contains(newItem);
+        Assertions.assertThat(cart.getItems().get(0)).usingRecursiveComparison().isEqualTo(newItem);
     }
 }

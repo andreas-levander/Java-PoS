@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane fx:id="cashierPane" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="app.controller.CashierUiController"
+            prefHeight="400.0" prefWidth="600.0">
+    <left>
+        <fx:include source="cart/CashierCart.fxml" />
+    </left>
+    <bottom>
+        <AnchorPane prefHeight="270.0" prefWidth="800.0">
+            <ButtonBar layoutY="216.0" prefHeight="40.0" prefWidth="800.0">
+                <buttons>
+                    <Button fx:id="clearButton" mnemonicParsing="false" text="New Cart" />
+                    <Button fx:id="saveCart" mnemonicParsing="false" text="Save Cart" />
+                    <Button fx:id="getSavedCart" mnemonicParsing="false" text="Show Saved Carts" />
+                    <Button fx:id="checkout" layoutX="426.0" layoutY="10.0" mnemonicParsing="false" text="Checkout" />
+                </buttons>
+            </ButtonBar>
+            <Button fx:id="addItemByBarcode" layoutX="13.0" layoutY="16.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" text="Add Product" />
+            <Button fx:id="removeItem" layoutX="96.0" layoutY="16.0" mnemonicParsing="false" text="Remove Product" />
+            <Button fx:id="discountButton" layoutX="200.0" layoutY="16.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Discount" />
+            <Button fx:id="multiplyBtn" layoutX="200.0" layoutY="41.0" mnemonicParsing="false" text="Add multiple" />
+            <TextField fx:id="multiplyTextField" layoutX="162.0" layoutY="41.0" prefHeight="25.0" prefWidth="37.0" />
+            <Label fx:id="error" layoutX="14.0" layoutY="45.0" prefHeight="17.0" prefWidth="143.0" />
+        </AnchorPane>
+    </bottom>
+    <center>
+        <fx:include source="payments/PaymentsUiBase.fxml" />
+    </center>
+</BorderPane>
+
