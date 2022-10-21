@@ -12,11 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.testfx.api.FxRobot;
+import org.testfx.api.FxToolkit;
 import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+import org.testfx.framework.junit5.Stop;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeoutException;
 
 
 @SpringBootTest(classes = AdminClientApplication.class)
@@ -30,6 +33,11 @@ class SavedCartsIntegrationTest {
         applicationContext.publishEvent(new javaFXclass.StageReadyEvent(stage));
         //add an item to the cart
         applicationContext.getBean(CartController.class).addToCart(new Item("test item", 1, "123", new ArrayList<>(), Money.of(2.0, "EUR")));
+    }
+
+    @Stop
+    void stop() throws TimeoutException {
+        FxToolkit.cleanupStages();
     }
 
     @Test

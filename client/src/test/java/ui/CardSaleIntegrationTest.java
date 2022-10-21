@@ -18,11 +18,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationContext;
 import org.testfx.api.FxRobot;
+import org.testfx.api.FxToolkit;
 import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+import org.testfx.framework.junit5.Stop;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeoutException;
 
 import static org.mockito.Mockito.timeout;
 
@@ -47,6 +50,11 @@ class CardSaleIntegrationTest {
         Mockito.when(paymentService.getResult()).thenReturn(new CardTransactionResult(
                 "123", "ACCEPTED", "123","ACCEPTED",
                 "Debit", "1", "2022"));
+    }
+
+    @Stop
+    void stop() throws TimeoutException {
+        FxToolkit.cleanupStages();
     }
 
     @Test

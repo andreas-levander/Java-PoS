@@ -13,11 +13,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationContext;
 import org.testfx.api.FxRobot;
+import org.testfx.api.FxToolkit;
 import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+import org.testfx.framework.junit5.Stop;
+
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 
 @SpringBootTest(classes = AdminClientApplication.class)
@@ -35,6 +39,11 @@ class MarketingIntegrationTest {
 
         stat = new ProductStatistic(new Date(),"test", "123", 20L);
         Mockito.when(statisticService.getCustomerStats("1")).thenReturn(List.of(stat));
+    }
+
+    @Stop
+    void stop() throws TimeoutException {
+        FxToolkit.cleanupStages();
     }
 
 

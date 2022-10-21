@@ -15,19 +15,20 @@ import javafx.stage.Stage;
 import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationContext;
 import org.testfx.api.FxRobot;
+import org.testfx.api.FxToolkit;
 import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
-
+import org.testfx.framework.junit5.Stop;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.concurrent.TimeoutException;
 
 import static org.mockito.Mockito.timeout;
 
@@ -60,6 +61,12 @@ class BonusSaleIntegrationTest {
         testBonus = new Bonus(1, 100L);
         Mockito.when(bonusService.getBonus(Mockito.any(BonusCard.class))).thenReturn(Optional.of(testBonus));
     }
+
+    @Stop
+    void stop() throws TimeoutException {
+        FxToolkit.cleanupStages();
+    }
+
 
     @Test
     void buying_with_bonus_works(FxRobot robot) {

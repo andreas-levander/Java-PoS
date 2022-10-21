@@ -14,14 +14,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationContext;
 import org.testfx.api.FxRobot;
+import org.testfx.api.FxToolkit;
 import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import javafx.stage.Stage;
+import org.testfx.framework.junit5.Stop;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeoutException;
 
 @SpringBootTest(classes = AdminClientApplication.class)
 @ExtendWith(ApplicationExtension.class)
@@ -48,6 +51,11 @@ class CartIntegrationTest {
         applicationContext.publishEvent(new javaFXclass.StageReadyEvent(stage));
     }
 
+    @Stop
+    void stop() throws TimeoutException {
+        FxToolkit.cleanupStages();
+    }
+
     /**
      * @param robot - Will be injected by the test runner.
      */
@@ -67,7 +75,7 @@ class CartIntegrationTest {
     @Test
     void product_added_with_addProduct_dialog_is_shown_in_GUI(FxRobot robot) {
         // when:
-        robot.clickOn("#addItemByBarcode");
+        robot.clickOn("#addItemBtn");
         //add item dialg is visible
         var test = robot.lookup("#dialog").query();
         Assertions.assertThat(test).isVisible();
