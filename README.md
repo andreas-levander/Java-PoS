@@ -30,12 +30,12 @@ This is a project made for the course Software Engineering at Åbo Akademi Unive
 
 1. Setup a PostgreSQL database wherever you like, you can use the [provided docker compose](/backend/database/compose.yaml) if you have docker and you can use `docker compose up` to start it.    
 2. Modify the database settings (this step can be ignored if you use the provided docker compose or same settings).  
-    2.1 Modify the database info in the [application.yaml](/backend/src/main/resources/application.yaml) with your database info if you plan on starting the backend with an IDE.
-    2.2 Create a application.yaml file in the same directory as the backend-1.0.0.jar and it will override default settings when you run the jar file.  
+    - Modify the database info in the [application.yaml](/backend/src/main/resources/application.yaml) with your database info if you plan on starting the backend with an IDE.  
+    - Create a application.yaml file in the same directory as the backend-1.0.0.jar and it will override default settings when you run the jar file.  
 3. Start all the [external jars](/Jars/), you can use the [provided batch file](/Jars/startall.bat) by first editing it and setting the location to java8/10 then you can run it and it should start all of them.
 4. Start the client and backend, there are multiple ways to start these you can:  
-    4.1 Load the project with an IDE and maven should install all dependencies and then you can run the main classes [BackendApplication.java](/backend/src/main/java/app/BackendApplication.java) and [AdminClientApplication.java](/client/src/main/java/app/AdminClientApplication.java).  
-    4.2 Start the provided jar files using Java 18 using `<path to Java 18 java.exe> -jar <jar name>.jar`.  
+    - Load the project with an IDE and maven should install all dependencies and then you can run the main classes [BackendApplication.java](/backend/src/main/java/app/BackendApplication.java) and [AdminClientApplication.java](/client/src/main/java/app/AdminClientApplication.java).  
+    - Start the provided jar files using Java 18 using `<path to Java 18 java.exe> -jar <jar name>.jar`.  
 
 ### Configuration  
 
