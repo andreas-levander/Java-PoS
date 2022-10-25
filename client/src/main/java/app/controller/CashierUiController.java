@@ -26,7 +26,7 @@ public class CashierUiController {
     private final CustomerController customerController;
 
     @FXML
-    private Button addItemBtn, clearButton, getSavedCart, saveCart, removeItem, checkout, discountButton, multiplyBtn;
+    private Button addItemBtn, clearButton, getSavedCart, saveCart, removeItem, checkout, discountButton, multiplyBtn, scanBtn;
     @FXML
     private Label error;
     @FXML
@@ -83,6 +83,7 @@ public class CashierUiController {
             cartController.addMultipleOfSelectedItem(Integer.parseInt(times));
         });
 
+        scanBtn.setOnAction(actionEvent -> fxWeaver.loadController(ScanDialogController.class).show());
     }
 
     private void toggleAddRemoveButtons() {

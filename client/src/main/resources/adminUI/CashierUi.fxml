@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="cashierPane" xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="app.controller.CashierUiController"
-            prefHeight="400.0" prefWidth="600.0">
+<BorderPane fx:id="cashierPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.CashierUiController">
     <left>
         <fx:include source="cart/CashierCart.fxml" />
     </left>
@@ -26,10 +27,10 @@
             <Button fx:id="multiplyBtn" layoutX="200.0" layoutY="41.0" mnemonicParsing="false" text="Add multiple" />
             <TextField fx:id="multiplyTextField" layoutX="162.0" layoutY="41.0" prefHeight="25.0" prefWidth="37.0" />
             <Label fx:id="error" layoutX="14.0" layoutY="45.0" prefHeight="17.0" prefWidth="143.0" />
+         <Button fx:id="scanBtn" layoutX="14.0" layoutY="41.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Scan" />
         </AnchorPane>
     </bottom>
     <center>
         <fx:include source="payments/PaymentsUiBase.fxml" />
     </center>
 </BorderPane>
-
