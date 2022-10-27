@@ -10,27 +10,27 @@
          <Font size="15.0" />
       </font>
    </Label>
-   <Label fx:id="bonusCardNumber" layoutX="77.0" layoutY="25.0" prefHeight="21.0" prefWidth="182.0">
+   <Label fx:id="bonusCardNumber" layoutX="77.0" layoutY="25.0" prefHeight="21.0" prefWidth="288.0">
       <font>
          <Font size="15.0" />
       </font>
    </Label>
-   <Label fx:id="bonusState" layoutX="76.0" layoutY="46.0" prefHeight="21.0" prefWidth="233.0" text="asd">
+   <Label fx:id="bonusState" layoutX="76.0" layoutY="46.0" prefHeight="21.0" prefWidth="304.0" text="asd">
       <font>
          <Font size="15.0" />
       </font>
    </Label>
-   <Label fx:id="paymentCardNumber" layoutX="76.0" layoutY="67.0" prefHeight="21.0" prefWidth="233.0" text="asd">
+   <Label fx:id="paymentCardNumber" layoutX="76.0" layoutY="67.0" prefHeight="21.0" prefWidth="298.0" text="asd">
       <font>
          <Font size="15.0" />
       </font>
    </Label>
-   <Label fx:id="paymentState" layoutX="76.0" layoutY="88.0" prefHeight="21.0" prefWidth="233.0" text="asd">
+   <Label fx:id="paymentState" layoutX="76.0" layoutY="88.0" prefHeight="21.0" prefWidth="304.0" text="asd">
       <font>
          <Font size="15.0" />
       </font>
    </Label>
-   <Label fx:id="paymentCardType" layoutX="76.0" layoutY="104.0" prefHeight="21.0" prefWidth="233.0" text="asd">
+   <Label fx:id="paymentCardType" layoutX="76.0" layoutY="104.0" prefHeight="21.0" prefWidth="304.0" text="asd">
       <font>
          <Font size="15.0" />
       </font>

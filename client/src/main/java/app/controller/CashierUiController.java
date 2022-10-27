@@ -89,6 +89,7 @@ public class CashierUiController {
     private void toggleAddRemoveButtons() {
         addItemBtn.setDisable(!addItemBtn.isDisable());
         removeItem.setDisable(!removeItem.isDisable());
+        scanBtn.setDisable(!scanBtn.isDisable());
     }
 
     private void toggleSaveCartButtons() {
