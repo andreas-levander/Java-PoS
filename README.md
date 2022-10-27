@@ -35,7 +35,7 @@ This is a project made for the course Software Engineering at Åbo Akademi Unive
 3. Start all the [external jars](/Jars/), you can use the [provided batch file](/Jars/startall.bat) by first editing it and setting the location to java8/10 then you can run it and it should start all of them.
 4. Start the client and backend, there are multiple ways to start these you can:  
     - Load the project with an IDE and maven should install all dependencies and then you can run the main classes [BackendApplication.java](/backend/src/main/java/app/BackendApplication.java) and [AdminClientApplication.java](/client/src/main/java/app/AdminClientApplication.java).  
-    - Start the provided jar files using Java 18 using `<path to Java 18 java.exe> -jar <jar name>.jar`.  
+    - Start the provided [client](/Jars/client-1.0.0/client-1.0.0.jar) and [backend](/Jars/backend-1.0.0/backend-1.0.0.jar) jar files using Java 18 using `<path to Java 18 java.exe> -jar <jar name>.jar`.  
 
 ### Configuration  
 
